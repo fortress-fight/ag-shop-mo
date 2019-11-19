@@ -1,0 +1,77 @@
+{
+    "name": "pc-template",
+    "version": "0.1.0",
+    "private": true,
+    "scripts": {
+        "serve": "vue-cli-service serve",
+        "build": "vue-cli-service build",
+        "lint": "vue-cli-service lint"
+    },
+    "dependencies": {
+        "@types/jquery": "^3.3.31",
+        "animejs": "^3.1.0",
+        "axios": "^0.19.0",
+        "bignumber.js": "^9.0.0",
+        "core-js": "^2.6.5",
+        "cssnano": "^4.1.10",
+        "element-ui": "^2.4.5",
+        "handlebars": "^4.3.3",
+        "handlebars-loader": "^1.7.1",
+        "jquery": "^3.4.1",
+        "normalize.css": "^8.0.1",
+        "postcss-aspect-ratio-mini": "^1.0.1",
+        "postcss-cssnext": "^3.1.0",
+        "postcss-px-to-viewport": "^1.1.1",
+        "postcss-viewport-units": "^0.1.6",
+        "postcss-write-svg": "^3.0.1",
+        "slick-carousel": "^1.8.1",
+        "sly-js": "^1.0.0",
+        "swiper": "^5.0.4",
+        "vue": "^2.6.10",
+        "vue-class-component": "^7.0.2",
+        "vue-property-decorator": "^8.1.0",
+        "vue-router": "^3.0.3",
+        "vuedraggable": "^2.23.2",
+        "vuex": "^3.0.1"
+    },
+    "devDependencies": {
+        "@commitlint/cli": "^8.2.0",
+        "@commitlint/config-angular": "^8.2.0",
+        "@commitlint/config-conventional": "^8.2.0",
+        "@vue/cli-plugin-babel": "^3.1.1",
+        "@vue/cli-plugin-eslint": "^3.1.1",
+        "@vue/cli-plugin-typescript": "^3.1.1",
+        "@vue/cli-service": "^3.1.1",
+        "@vue/eslint-config-prettier": "^5.0.0",
+        "@vue/eslint-config-typescript": "^4.0.0",
+        "babel-eslint": "^10.0.1",
+        "babel-plugin-component": "^1.1.1",
+        "eslint": "^5.16.0",
+        "eslint-plugin-prettier": "^3.1.0",
+        "eslint-plugin-vue": "^5.0.0",
+        "glob": "^7.1.4",
+        "gulp": "^4.0.2",
+        "html-loader": "^0.5.5",
+        "husky": "^3.0.5",
+        "node-sass": "^4.9.0",
+        "node-static": "^0.7.11",
+        "prettier": "^1.18.2",
+        "sass-loader": "^7.1.0",
+        "sockjs": "^0.3.19",
+        "terser-webpack-plugin": "^2.1.0",
+        "typescript": "^3.4.3",
+        "vue-cli-plugin-element": "^1.0.1",
+        "vue-template-compiler": "^2.6.10"
+    },
+    "config": {
+        "commitizen": {
+            "path": "cz-customizable"
+        }
+    },
+    "husky": {
+        "hooks": {
+            "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
+            "post-commit": "git-branch-is master && git push origin master"
+        }
+    }
+}
