@@ -63,14 +63,14 @@ function get_pages_data(file_path) {
         }
     });
     if (entry_ts.length) {
-        fs.writeFileSync("./src/app.ts", entry_ts);
+        // fs.writeFileSync("./src/app.ts", entry_ts);
     }
     return result;
 }
 function generate_html_entry(file_path) {
     let result = {};
     if (process.env.NODE_ENV !== "development") return result;
-    let import_str = ``;
+    let import_str = "/* eslint-disable */ \n";
 
     analysis_path(file_path + "**/*.html").map(v => {
         import_str += `import "${path
@@ -98,10 +98,7 @@ function generate_html_entry(file_path) {
 }
 
 module.exports = {
-    // publicPath:
-    //     process.env.NODE_ENV === "production"
-    //         ? "/views/13450/pc/"
-    //         : "/views/13450/pc/",
+    publicPath: process.env.NODE_ENV === "production" ? "./" : "/",
     filenameHashing: false,
     pluginOptions: {
         webpackBundleAnalyzer: {
@@ -136,14 +133,24 @@ module.exports = {
 
         config.module
             .rule("handlebars")
-            .test(/\.handlebars$/)
+            .test(/\.(handlebars|hbs)$/)
             .use("handlebars-loader")
             .loader("handlebars-loader")
             .options({
-                inlineRequires: "/assets/"
+                helperDirs: path.resolve(__dirname, "./hbs_helpers"),
+                inlineRequires: "@/asset/"
             })
             .end();
 
+        // config.module
+        //     .rule("handlebars")
+        //     .use("html-loader")
+        //     .loader("html-loader")
+        //     .options({
+        //         interpolate: true,
+        //         attrs: ["img:src", "video:src", "video:poster", ":data-src"]
+        //     })
+        //     .end();
         config.resolve.alias
             .set("@", path.resolve(__dirname, "./src"))
             .set("@assets", path.resolve(__dirname, "./src/assets"))
@@ -222,7 +229,7 @@ module.exports = {
                 axios: "axios",
                 slick: "slick-carousel"
             }),
-            ...get_pages_data("./src/pages/"),
+            ...get_pages_data("./src/pages/")
             // new CompilerCallback()
         ]
     }
