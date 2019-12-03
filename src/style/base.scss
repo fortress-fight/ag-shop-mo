@@ -6,21 +6,74 @@ html {
     height: 100%;
 }
 p {
-    font-size: 13px;
+    font-size: inherit;
 }
 body {
     font-family: MTTMILANO-REGULAR, Arial, "微软雅黑";
-    font-size: 13px;
-    line-height: 20px;
+    font-size: 29px;
+    line-height: 50px;
 
     overflow: auto;
 
     height: 100%;
 }
+
+/*     
+去除iphone 的默认样式
+
+    border-radius: 0;
+    -webkit-appearance: none;
+    
+*/
+input {
+    font-size: inherit;
+    line-height: inherit;
+
+    box-sizing: border-box;
+    width: 100%;
+
+    color: inherit;
+    border: none;
+    border-radius: 0;
+    outline: none;
+
+    -webkit-appearance: none;
+}
+// 占位符样式
+// input[type=search]::-webkit-input-placeholder{
+//     color: blue;
+// }
 input::placeholder {
     color: #666 !important;
 }
 
+input[type="search"]::-webkit-search-cancel-button {
+    -webkit-appearance: none; //此处只是去掉默认的小×
+}
+
+// 可以覆盖样式
+// input[type="search"]::-webkit-search-cancel-button {
+//     position: relative;
+
+//     width: 30px;
+//     height: 30px;
+
+//     border-radius: 50%;
+//     background-color: #ebebeb;
+// }
+
+// input[type="search"]::-webkit-search-cancel-button:after {
+//     font-size: 30px;
+
+//     position: absolute;
+//     z-index: 10;
+//     top: 0;
+//     left: 0;
+
+//     content: "x";
+
+//     color: red;
+// }
 input:active,
 input:focus {
     border: none;
@@ -65,6 +118,13 @@ li {
 .flex-yc {
     display: flex;
 
+    align-items: center;
+}
+
+.flex-cc {
+    display: flex;
+
+    justify-content: center;
     align-items: center;
 }
 

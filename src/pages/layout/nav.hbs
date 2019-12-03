@@ -1,13 +1,71 @@
 <div class="page_nav">
     <div class="container w flex-yc flex-sb">
-        <div class="nav-menu_btn">
+        <div class="button nav-menu_btn">
             <i class="ic ag-icon ag-menu"></i>
         </div>
-        <div class="nav-logo">
-            <img src="@/asset/image/logo.png" alt="">
+        <div class="nav-logo  flex-cc">
+            <a href="/" class="">
+                <img src="@/asset/image/logo.png" alt="">
+            </a>
         </div>
-        <div class="nav-carts_btn">
+        <div class="button nav-carts_btn">
             <i class="ic ag-icon ag-cart"></i>
+        </div>
+    </div>
+    <div class="nav-container">
+        <div class="nan-close_btn button flex-cc">
+            <i class="ic ag-icon ag-close_1"></i>
+        </div>
+        <div class="nav-search_bar w">
+            <form action="/" method="get">
+                <i class="ic ag-icon ag-search"></i>
+                <input type="search" name="search" class="nav-search_input" id="search_input">
+            </form>
+        </div>
+        <div class="nav-items_container w">
+            <div class="scroll_box">
+                <div class="nav-items">
+                    {{#nav}}
+                    <div class="nav-item  {{#if @first}}active{{/if}}">
+                        {{#if subtitle}}
+                        <span class="text">{{name}}</span>
+                        {{else}}
+                        <a href="/" class=""><span class="text">{{name}}</span></a>
+                        {{/if}}
+                        <div class="sub-nav">
+                            {{#if subtitle}}
+                            {{#each subtitle}}
+                            <div class="sub-nav_item">
+                                <a href="/"><span class="text">{{name}}</span></a>
+                            </div>
+                            {{/each}}
+                            {{/if}}
+                        </div>
+                    </div>
+                    {{/nav}}
+                </div>
+                <div class="nav-items">
+                    {{#login}}
+                    <div class="nav-item">
+                        <a href="/" class=""><span class="text">LOGOUT</span></a>
+                        <a href="/" class=""><span class="text">MY PAGE</span></a>
+                    </div>
+                    {{else}}
+                    <div class="nav-item">
+                        <a href="/" class=""><span class="text">LOGIN</span></a>
+                    </div>
+                    {{/login}}
+                    <!-- 当前为英文时存在 -->
+                    <div class="nav-item">
+                        <a href="/" class=""><img src="@/asset/image/zh.png" alt=""><span class="text">ZH</span></a>
+                    </div>
+                    <!-- 当前为中文时存在 -->
+                    <div class="nav-item">
+                        <a href="/" class=""><img src="@/asset/image/en.png" alt=""><span class="text">EN</span></a>
+                    </div>
+
+                </div>
+            </div>
         </div>
     </div>
 </div>
