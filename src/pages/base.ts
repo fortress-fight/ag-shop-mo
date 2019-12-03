@@ -1,4 +1,6 @@
+import V_CARTS from "@/components/carts.vue";
 import { BASE_PAGE } from "@/unit/unit";
+import V_APP from "@/unit/vue";
 
 class U_PAGE extends BASE_PAGE {
     constructor() {
@@ -51,8 +53,14 @@ class U_PAGE extends BASE_PAGE {
             }
         });
     }
+    carts_handle() {
+        V_APP(V_CARTS).$mount("#carts");
+        $(".nav-carts_btn").on("click", function() {
+            window.V.$store.dispatch("carts/open");
+        });
+    }
 }
 
-U_PAGE.add_loaded_callback(["nav_handle", "search_handle"]);
+U_PAGE.add_loaded_callback(["nav_handle", "search_handle", "carts_handle"]);
 
 export default U_PAGE;

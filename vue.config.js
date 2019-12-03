@@ -105,20 +105,28 @@ module.exports = {
             openAnalyzer: false
         }
     },
-    // devServer: {
-    //     port: 80,
-    //     disableHostCheck: true,
-    //     proxy: {
-    //         "/service": {
-    //             target: "http://www.a-agender.com/",
-    //             changeOrigin: true, // target是域名的话，需要这个参数，
-    //             secure: false // 设置支持https协议的代理
-    //             // pathRewrite: {
-    //             //     "^/service": ""
-    //             // }
-    //         }
-    //     }
-    // },
+    devServer: {
+        port: 80,
+        disableHostCheck: true,
+        proxy: {
+            "/uploads/13450": {
+                target: "http://cdn.agender.com/",
+                changeOrigin: true, // target是域名的话，需要这个参数，
+                secure: false // 设置支持https协议的代理
+                // pathRewrite: {
+                //     "^/service": ""
+                // }
+            },
+            "/api": {
+                target: "http://www.agender.com/",
+                changeOrigin: true, // target是域名的话，需要这个参数，
+                secure: false // 设置支持https协议的代理
+                // pathRewrite: {
+                //     "^/service": ""
+                // }
+            }
+        }
+    },
     chainWebpack: config => {
         config.module
             .rule("html")
