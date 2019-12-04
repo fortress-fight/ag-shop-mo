@@ -16,9 +16,9 @@ const nav_data = [
             { name: "Discount" }
         ]
     },
-    { name: "collection" },
+    { name: "collection", href: "./collection.html" },
     { name: "editorial", subtitle: [{ name: "Images" }, { name: "Video" }] },
-    { name: "agender" },
+    { name: "agender", href: "./about.html" },
     { name: "community" },
     { name: "stockist" },
     { name: "billboard" },
