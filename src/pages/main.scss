@@ -378,11 +378,10 @@
     .page_footer {
         display: none;
     }
-    .page_container {
-        font-size: 34px;
-    }
+
     .post_header {
         font-family: MTTMILANO-BOLD;
+        font-size: 34px;
 
         margin-bottom: 40px;
         padding-top: 40px;
@@ -467,6 +466,89 @@
             color: #fff;
             border-radius: 50%;
             background: #000;
+        }
+    }
+}
+
+.page-stockists {
+    .stockist_list {
+        padding-bottom: 50px;
+    }
+    .post_header {
+        font-family: MTTMILANO-BOLD;
+        font-size: 34px;
+
+        margin-bottom: 32px;
+        padding-top: 40px;
+
+        text-transform: uppercase;
+
+        color: #000;
+    }
+    .stockist_list {
+        .title {
+            font-family: MTTMILANO-BOLD;
+            font-size: 28px;
+            line-height: 32px;
+
+            padding-bottom: 18px;
+
+            color: #000;
+        }
+        .item {
+            font-size: 28px;
+            line-height: 32px;
+
+            padding-top: 46px;
+            padding-bottom: 38px;
+
+            color: #999;
+            border-bottom: 1px solid #eaeaea;
+            &:last-child {
+                border: none;
+            }
+        }
+        .address {
+            margin-bottom: 15px;
+        }
+    }
+    .preview_image {
+        position: fixed;
+        top: 80px;
+        right: 0;
+
+        display: flex;
+        visibility: hidden;
+
+        box-sizing: border-box;
+        width: 100%;
+        height: 100%;
+        padding-top: 100px;
+
+        transition: 0.36s ease;
+        text-align: right;
+
+        opacity: 0;
+        background-color: rgba(255, 255, 255, 0.8);
+
+        align-items: flex-start;
+        justify-content: flex-end;
+        &.show {
+            visibility: visible;
+
+            opacity: 1;
+            img {
+                transform: translateX(0);
+            }
+        }
+
+        img {
+            width: 90%;
+
+            transition: 0.36s ease;
+            transform: translateX(100%);
+
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
         }
     }
 }

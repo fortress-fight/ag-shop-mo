@@ -20,7 +20,7 @@ const nav_data = [
     { name: "editorial", subtitle: [{ name: "Images" }, { name: "Video" }] },
     { name: "agender", href: "./about.html" },
     { name: "community" },
-    { name: "stockist" },
+    { name: "stockist", href: "./stockists.html" },
     { name: "billboard", href: "./notice.html" },
     { name: "contact", href: "./contact.html" }
 ];
