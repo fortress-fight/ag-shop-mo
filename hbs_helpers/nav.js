@@ -22,7 +22,7 @@ const nav_data = [
     { name: "community" },
     { name: "stockist" },
     { name: "billboard", href: "./notice.html" },
-    { name: "contact" }
+    { name: "contact", href: "./contact.html" }
 ];
 
 export default function(options) {

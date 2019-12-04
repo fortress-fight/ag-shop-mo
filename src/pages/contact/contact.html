@@ -1,0 +1,47 @@
+${require("@/pages/layout/body.hbs")({data:{page: 'page-contact'}, content:`
+<div class="page_container w">
+    <div class="post_header">
+        <span class="text">Contact</span>
+    </div>
+    <div class="post_body">
+        <div class="logo">
+            <img src="${require('@/asset/image/logo.png')}" alt="" class="">
+        </div>
+        <div class="contact-info">
+            <p class="text address">
+                Address: No. 1108, Level 1, 33 Sanlitun Road, Chaoyang District, Beijing
+            </p>
+            <p class="text telephone">
+                Telephone:4008000424
+            </p>
+            <p class="text e-mail">
+                E-mail:agender@163.com
+            </p>
+        </div>
+        <div class="share_list flex  mouse_hover-wrapper">
+            <a href="./" class="share">
+                <i class="ic ag-icon ag-instagram"></i>
+            </a>
+            <a href="./" class="share">
+                <i class="ic ag-icon ag-weibo"></i>
+            </a>
+            <a href="./" class="share">
+                <i class="ic ag-icon ag-weixin"></i>
+            </a>
+        </div>
+        <div class="message-board">
+            <div class="title-input item require">
+                <input type="text" name="title" placeholder="title">
+            </div>
+            <div class="describe-input item  require">
+
+                <textarea resize="false" name="describe" id="" placeholder="describe"></textarea>
+            </div>
+            <div class="submit-button item button">
+                <span class="text">submit</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+`})}
