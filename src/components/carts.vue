@@ -17,7 +17,7 @@
                                 <div class="container flex flex-sb">
                                     <div class="left">
                                         <div class="preview_image">
-                                            <img :src="item.img" alt class />
+                                            <img :src="item.img| upload_resource_link" alt class />
                                         </div>
                                     </div>
                                     <div class="right">

@@ -1,6 +1,7 @@
 import V_CARTS from "@/components/carts.vue";
 import { BASE_PAGE } from "@/unit/unit";
 import V_APP from "@/unit/vue";
+import anime from "animejs";
 
 class U_PAGE extends BASE_PAGE {
     constructor() {
@@ -8,10 +9,34 @@ class U_PAGE extends BASE_PAGE {
     }
     nav_handle() {
         $(".nav-menu_btn").on("click", function() {
-            $(".nav-container").addClass("show");
+            anime({
+                targets: $(".nav-container")[0],
+                opacity: 1,
+                translateY: ["10.667vw", 0],
+                translateX: ["8vw", 0],
+                begin() {
+                    $(".nav-container").css({
+                        display: "block"
+                    });
+                },
+                duration: 360,
+                easing: "cubicBezier(0.25, 0.1, 0.25, 1)"
+            });
         });
         $(".nan-close_btn").on("click", function() {
-            $(".nav-container").removeClass("show");
+            anime({
+                targets: $(".nav-container")[0],
+                opacity: 0,
+                translateY: [0, "10.667vw"],
+                translateX: [0, "8vw"],
+                easing: "cubicBezier(0.25, 0.1, 0.25, 1)",
+                duration: 360,
+                complete() {
+                    $(".nav-container").css({
+                        display: "none"
+                    });
+                }
+            });
         });
         $(".nav-items_container .nav-item").on("click", function() {
             if (this.tagName.toLowerCase() != "a") {
