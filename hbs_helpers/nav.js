@@ -21,7 +21,7 @@ const nav_data = [
     { name: "agender", href: "./about.html" },
     { name: "community" },
     { name: "stockist" },
-    { name: "billboard" },
+    { name: "billboard", href: "./notice.html" },
     { name: "contact" }
 ];
 

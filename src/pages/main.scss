@@ -128,10 +128,120 @@
     width: 690px;
     margin: 0 auto;
 }
+.page_container {
+    min-height: calc(100vh - 470px);
+}
+.page_tab_bar {
+    font-family: MTTMILANO-BOLD;
+
+    padding: 60px 0 40px;
+
+    text-align: center;
+
+    color: #000;
+    .pagination {
+        display: inline-block;
+        &:after {
+            display: block;
+            clear: both;
+
+            content: "";
+        }
+        & > li {
+            float: left;
+
+            margin: 0 4px;
+
+            color: #8c8c8c;
+            &:first-child {
+                margin-right: 24px;
+            }
+            &:last-child {
+                margin-left: 24px;
+
+                text-align: right;
+            }
+        }
+    }
+    .page_tab_bar-item_list {
+        display: inline-block;
+    }
+    &:after {
+        display: block;
+        clear: both;
+
+        content: "";
+    }
+    .item {
+        float: left;
+
+        width: 20px;
+        margin: 0 4px;
+
+        transition: 0.36s ease;
+
+        color: #8c8c8c;
+    }
+    .next {
+        margin-left: 24px;
+    }
+    .prev {
+        margin-right: 24px;
+    }
+}
+.page_tab_bar .pagination > li.disabled a,
+.page_tab_bar .pagination > li.disabled span {
+    cursor: default;
+}
+.page_tab_bar .pagination > li.active a,
+.page_tab_bar .pagination > li.active span {
+    cursor: default;
+
+    color: #000;
+}
+.page_tab_bar .pagination > li a,
+.page_tab_bar .pagination > li span {
+    line-height: 40px;
+
+    display: inline-block;
+
+    width: 40px;
+
+    transition: 0.36s ease;
+    text-align: center;
+}
+.page_tab_bar .pagination > li a:hover,
+.page_tab_bar .pagination > li span:hover {
+    color: #030303;
+}
+.page_tab_bar .pagination > li:first-child,
+.page_tab_bar .pagination > li:last-child {
+    font-family: ag-icon !important;
+    font-style: normal;
+
+    transform: scale(0.7);
+}
+.page_tab_bar .pagination > li:first-child a:before,
+.page_tab_bar .pagination > li:first-child span:before {
+    content: "\E62C";
+}
+.page_tab_bar .pagination > li:last-child a:before,
+.page_tab_bar .pagination > li:last-child span:before {
+    content: "\E742";
+}
+.page_tab_bar .item.active,
+.page_tab_bar .item:hover {
+    color: #030303;
+}
+.page_tab_bar .next,
+.page_tab_bar .prev {
+    transform: scale(0.7);
+}
 
 @import "@/pages/layout/nav.scss";
 @import "@/pages/layout/index.scss";
 @import "@/pages/layout/collection.scss";
+@import "@/pages/layout/notice.scss";
 
 .page-about {
     .page_container {
