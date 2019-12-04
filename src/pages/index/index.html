@@ -1,1 +1,5 @@
-${require("@/pages/layout/body.hbs")({data:{page: 'page-project'}, content: ""})}
+${require("@/pages/layout/body.hbs")({data:{page: 'page-project'}, content: `
+<div class="page_container">
+    ${require("@/pages/layout/index.hbs")()}
+</div>
+`})}

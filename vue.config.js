@@ -106,7 +106,8 @@ module.exports = {
         }
     },
     devServer: {
-        port: 80,
+        // port: 80,
+        // sockPort: 81,
         disableHostCheck: true,
         proxy: {
             "/uploads/13450": {

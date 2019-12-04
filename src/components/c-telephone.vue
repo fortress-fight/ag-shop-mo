@@ -293,7 +293,7 @@ export default Vue.extend({
         }
     },
     methods: {
-        value_change(value) {
+        value_change(value: any) {
             this.$emit("input", value);
         }
     }

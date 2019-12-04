@@ -11,12 +11,23 @@
         vertical-align: middle;
     }
 }
+body {
+    padding-top: 80px;
+}
+.page_nav {
+    position: fixed;
+    top: 0;
+    left: 0;
 
-.page_nav .container {
-    .button {
-        font-size: 32px;
+    width: 100%;
 
-        color: #000;
+    background: #fff;
+    .container {
+        .button {
+            font-size: 32px;
+
+            color: #000;
+        }
     }
 }
 
