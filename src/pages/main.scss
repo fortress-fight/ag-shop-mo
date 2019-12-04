@@ -552,3 +552,55 @@
         }
     }
 }
+
+.page-video {
+    .video_list {
+        padding-bottom: 50px;
+        .item {
+            margin-bottom: 10px;
+            &.state_play {
+                .play_button {
+                    display: none;
+                }
+            }
+
+            video,
+            img {
+                width: 100%;
+            }
+        }
+    }
+    .image_wrapper {
+        position: relative;
+        .play_button {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+
+            display: flex;
+
+            width: 80px;
+            height: 80px;
+            margin-top: -40px;
+            margin-left: -40px;
+
+            border-radius: 50%;
+            background: #000;
+
+            align-items: center;
+            justify-content: center;
+            svg {
+                width: 36px;
+                height: 36px;
+                margin-right: -8px;
+
+                path {
+                    stroke: #fff;
+                    stroke-width: 8px;
+                    fill: none;
+                    fill-rule: evenodd;
+                }
+            }
+        }
+    }
+}

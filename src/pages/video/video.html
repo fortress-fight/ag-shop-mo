@@ -1,0 +1,25 @@
+${require("@/pages/layout/body.hbs")({data:{page: 'page-video'}, content:`
+<div class="page_container w">
+    <div class="video_list">
+
+        ${Array(10).fill(1).map(function (v,i) {
+        return `
+        <div class="item">
+            <div class="image_wrapper">
+                <!-- <img src="${process.env.BASE_URL}image/video_${i%4}.jpg" alt=""
+                    data-src="${process.env.BASE_URL}medias/video_${i%4}.mp4"> -->
+                <video src="${process.env.BASE_URL}medias/video_${i%4}.mp4"
+                    poster="${process.env.BASE_URL}image/video_${i%4}.jpg"></video>
+                <div class="play_button">
+                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                        preserveAspectRatio="xMidYMid" width="37.156" height="46.312" viewBox="0 0 37.156 46.312">
+                        <path d="M2.000,1.993 L35.163,23.156 L2.000,44.319 L2.000,1.993 Z" class="cls-1" />
+                    </svg>
+                </div>
+            </div>
+        </div>
+        `
+        }).join('')}
+    </div>
+</div>
+`})}

@@ -17,7 +17,10 @@ const nav_data = [
         ]
     },
     { name: "collection", href: "./collection.html" },
-    { name: "editorial", subtitle: [{ name: "Images" }, { name: "Video" }] },
+    {
+        name: "editorial",
+        subtitle: [{ name: "Images" }, { name: "Video", href: "./video.html" }]
+    },
     { name: "agender", href: "./about.html" },
     { name: "community" },
     { name: "stockist", href: "./stockists.html" },
