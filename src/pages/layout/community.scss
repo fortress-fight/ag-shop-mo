@@ -1,0 +1,19 @@
+.page-community_list {
+    .community_list {
+        margin-right: -12px;
+        margin-bottom: -12px;
+        &:after {
+            display: block;
+            clear: both;
+
+            content: "";
+        }
+    }
+    .item {
+        float: left;
+
+        width: calc(50% - 12px);
+        margin-right: 12px;
+        margin-bottom: 12px;
+    }
+}

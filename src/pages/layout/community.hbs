@@ -1,0 +1,28 @@
+<div class="page_container  w">
+    <div class="community_list">
+        {{#list 6}}
+        <div class="item">
+            <div class="preview_image">
+                <img src="{{base_url}}image/community-{{@index}}.jpg" alt="">
+            </div>
+            <div class="detail" style="display: none">
+                <div class="title">
+                    <span class="text">AFHGAH</span>
+                </div>
+                <div class="des">
+                    <span class="text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+                        tempor incididunt ut labore et dolore magna
+                        aliqua. Quis ipsum suspendisse ultrices gravida. Risus commodo viverra maecenas accumsan
+                        lacus vel facilisis.</span>
+                </div>
+                <div class="images_wrapper">
+                    {{#list 6}}
+                    <div data-img="{{base_url}}image/community-{{@index}}.jpg"></div>
+                    {{/list}}
+                </div>
+            </div>
+        </div>
+        {{/list}}
+    </div>
+    <div id="community_list"></div>
+</div>
