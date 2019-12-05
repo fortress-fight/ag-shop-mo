@@ -1,5 +1,6 @@
 import U_PAGE from "@/pages/base";
 import COLLECTION_PAGE from "@/pages/collection/collection";
+import IMAGES_PAGE from "@/pages/images/images";
 import NOTICE_PAGE from "@/pages/notice/notice";
 import STOCKISTS_PAGE from "@/pages/stockists/stockists";
 import VIDEO_PAGE from "@/pages/video/video";
@@ -17,6 +18,8 @@ if ($("body").hasClass("page-collection")) {
     new STOCKISTS_PAGE();
 } else if ($("body").hasClass("page-video")) {
     new VIDEO_PAGE();
+} else if ($("body").hasClass("page-images_list")) {
+    new IMAGES_PAGE();
 } else {
     new U_PAGE();
 }
