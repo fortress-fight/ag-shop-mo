@@ -1,0 +1,89 @@
+${require("@/pages/layout/body.hbs")({data:{page: 'page-project_post'},
+content:`
+<div class="page_container">
+    <div class="project_detail  w">
+        <div class="project-images_list">
+            <div class="slider-item">
+                <img src="${process.env.BASE_URL}image/project_detail-1.jpg" alt="" class="item">
+            </div>
+            <div class="slider-item">
+                <img src="${process.env.BASE_URL}image/project_detail-2.jpg" alt="" class="item">
+            </div>
+        </div>
+        <div class="project_detail-header">
+            <div class="title"><span class="text">Form logo sweatshirt</span></div>
+            <div class="price"><span class="text">$285.65</span></div>
+        </div>
+        <div class="project_detail-spec">
+            <div class="spec-color_list">
+                <div class="item_wrapper">
+                    <div class="item" style="background: url(${process.env.BASE_URL}image/brown_color.png)"></div>
+                    <div class="item select" style="background: url(${process.env.BASE_URL}image/black_color.png)">
+                    </div>
+                    <div class="item disable" style="background: url(${process.env.BASE_URL}image/brown_color.png)">
+                    </div>
+                </div>
+            </div>
+            <div class="spec-size_list">
+                <div class="item_wrapper">
+                    <div class="item"><span class="text">155/76A(xxs)</span></div>
+                    <div class="item select"><span class="text">155/82A(xxs)</span></div>
+                    <div class="item disable"><span class="text">155/76A(xxs)</span></div>
+                </div>
+            </div>
+        </div>
+        <div class="project_detail-des">
+            <div class="buttons-tab_detail">
+                <span class="button text select" data-value="description">description</span>
+                <span class="line">-</span>
+                <span class="button text" data-value="details">details</span>
+                <span class="line">-</span>
+                <span class="button text" data-value="delivery">delivery&payment</span>
+            </div>
+            <div class="des-detail_container select" data-type="description">
+                <p>Oversize Sanitary Clothing, Previous Season Art Printing, Back wing details, Oversized up
+                    hood,Seasonal artwork print on
+                    the font Back Flap</p>
+                <p></p>
+                <p>The model is 171 cm and wears size s.</p>
+            </div>
+            <div class="des-detail_container" data-type="details">
+                <p>Oversize Sanitary Clothing, Previous Season Art Printing, Back wing details, Oversized up
+                    hood,Seasonal artwork print on
+                    the font Back Flap</p>
+            </div>
+            <div class="des-detail_container" data-type="delivery">
+
+                <p>The model is 171 cm and wears size s.</p>
+            </div>
+        </div>
+        <div class="project_detail-buy flex flex-sb">
+            <div class="button add_cart">
+                <span class="text">Add to cart</span>
+            </div>
+            <div class="button buy">
+                <span class="text">Buy now</span>
+            </div>
+        </div>
+    </div>
+    <div class="related-items_list w">
+        <div class="list_header">
+            <span class="text">you may also like</span>
+        </div>
+        <div class="list_wrapper">
+            ${Array(8).fill(1).map((v, i) => {
+            return `<a href="./project-post.html" class="item">
+                <div class="image_wrapper">
+                    <img src="${process.env.BASE_URL + 'image/relate_project-'+ (i % 4) +'.jpg'}" alt="" class="">
+                </div>
+                <div class="des">
+                    <div class="title"><span class="text">A kitsune cap</span></div>
+                    <div class="price"><span class="text">$120.87</span></div>
+                </div>
+            </a>`
+            }).join('')}
+        </div>
+        <div class="slider-arrows_wrapper"></div>
+    </div>
+</div>
+`})}

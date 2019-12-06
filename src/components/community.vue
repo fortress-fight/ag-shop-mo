@@ -83,7 +83,8 @@ export default Vue.extend({
                 slider.slick({
                     infinite: false,
                     slidesToShow: 1,
-                    arrows: false
+                    arrows: false,
+                    dots: true
                 });
             });
         }

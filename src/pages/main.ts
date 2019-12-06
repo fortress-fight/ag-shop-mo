@@ -3,6 +3,7 @@ import COLLECTION_PAGE from "@/pages/collection/collection";
 import COMMUNITY_PAGE from "@/pages/community/community";
 import IMAGES_PAGE from "@/pages/images/images";
 import NOTICE_PAGE from "@/pages/notice/notice";
+import PROJECT_POST from "@/pages/project-post/project-post";
 import STOCKISTS_PAGE from "@/pages/stockists/stockists";
 import VIDEO_PAGE from "@/pages/video/video";
 
@@ -23,6 +24,8 @@ if ($("body").hasClass("page-collection")) {
     new IMAGES_PAGE();
 } else if ($("body").hasClass("page-community_list")) {
     new COMMUNITY_PAGE();
+} else if ($("body").hasClass("page-project_post")) {
+    new PROJECT_POST();
 } else {
     new U_PAGE();
 }
