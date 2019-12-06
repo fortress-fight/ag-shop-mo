@@ -14,6 +14,8 @@ export default Vue.extend({
 <style lang="scss">
 body {
     .c_input {
+        font-size: 28px;
+
         width: 100%;
 
         color: #666;
@@ -28,19 +30,18 @@ body {
         width: 100%;
         .el-input__inner {
             font-size: inherit;
-            font-size: inherit;
-            line-height: 46px;
+            line-height: 94px;
 
             display: inline-block;
 
             box-sizing: border-box;
             width: 100%;
-            height: 46px;
-            padding: 12px 20px;
+            height: 94px;
+            padding: 0 42px;
 
             transition: border-color 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
 
-            color: #666;
+            color: #7a7a7a;
             border: 1px solid #eaeaea;
             border-radius: 0;
             outline: 0;
@@ -48,7 +49,7 @@ body {
         }
     }
     .el-textarea__inner {
-        color: #666;
+        color: #7a7a7a;
         border-color: #dcdfe6;
         border-radius: 0;
     }

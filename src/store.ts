@@ -28,9 +28,26 @@ const carts: Module<any, any> = {
         }
     }
 };
+const login: Module<any, any> = {
+    namespaced: true,
+    state() {
+        return {
+            show: false
+        };
+    },
+    actions: {
+        open({ state }) {
+            state.show = true;
+        },
+        close({ state }) {
+            state.show = false;
+        }
+    }
+};
 
 export default new Vuex.Store({
     modules: {
-        carts
+        carts,
+        login
     }
 });

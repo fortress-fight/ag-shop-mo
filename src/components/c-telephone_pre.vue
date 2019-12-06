@@ -309,12 +309,15 @@ export default Vue.extend({
 .c_select {
     flex: 0 0 auto;
 
-    width: 102px;
+    width: 182px;
     margin-right: 14px;
 }
 body {
     .el-select .el-input .el-input__inner {
-        padding: 12px 24px;
+        padding: 24px 36px;
+    }
+    .el-input__suffix {
+        right: 18px;
     }
     .el-select .el-input.is-focus .el-input__inner {
         border-color: #000;
@@ -322,6 +325,12 @@ body {
     .el-select .el-input__inner:focus,
     .el-select:hover .el-input__inner {
         border-color: #eaeaea;
+    }
+    .el-select-dropdown__item {
+        font-size: inherit;
+        line-height: inherit;
+
+        height: auto;
     }
     .el-select-dropdown__item.selected {
         color: #000;

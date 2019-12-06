@@ -304,7 +304,7 @@ export default Vue.extend({
         }
 
         .check_order {
-            font-family: MTTMILANO-BOLD;
+            font-family: $FM;
             font-size: 24px;
             font-weight: bold;
             line-height: 89px;
@@ -330,7 +330,7 @@ export default Vue.extend({
         top: 80px;
     }
     .empty_panel {
-        font-family: MTTMILANO-BOLD;
+        font-family: $FM;
 
         height: calc(100vh - 90px);
 
@@ -357,7 +357,7 @@ export default Vue.extend({
             padding: 38px 0;
         }
         .title {
-            font-family: MTTMILANO-BOLD;
+            font-family: $FM;
             font-size: 21px;
             font-weight: bold;
             line-height: 31px;
@@ -365,7 +365,7 @@ export default Vue.extend({
             text-transform: uppercase;
         }
         .price {
-            font-family: MTTMILANO-BOLD;
+            font-family: $FM;
             font-size: 19px;
             line-height: 27px;
 

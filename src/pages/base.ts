@@ -1,4 +1,5 @@
 import V_CARTS from "@/components/carts.vue";
+import V_LOGIN from "@/components/login.vue";
 import { BASE_PAGE } from "@/unit/unit";
 import V_APP from "@/unit/vue";
 import anime from "animejs";
@@ -38,14 +39,21 @@ class U_PAGE extends BASE_PAGE {
                 }
             });
         });
-        $(".nav-items_container .nav-item").on("click", function() {
-            if (this.tagName.toLowerCase() != "a") {
-                $(this)
-                    .siblings()
-                    .removeClass("active");
-                $(this).addClass("active");
-            }
+        $(".nav-items_container .login_panel-open_btn").on("click", function() {
+            window.V.$store.dispatch("login/open");
+            return false;
         });
+        $(".nav-items_container .nav-items:first-child .nav-item").on(
+            "click",
+            function() {
+                if (this.tagName.toLowerCase() != "a") {
+                    $(this)
+                        .siblings()
+                        .removeClass("active");
+                    $(this).addClass("active");
+                }
+            }
+        );
     }
     search_handle() {
         let $search_form = $(".nav-search_bar").find("form");
@@ -84,8 +92,19 @@ class U_PAGE extends BASE_PAGE {
             window.V.$store.dispatch("carts/open");
         });
     }
+    login_handle() {
+        this.make_login_panel();
+    }
+    make_login_panel() {
+        V_APP(V_LOGIN).$mount("#login");
+    }
 }
 
-U_PAGE.add_loaded_callback(["nav_handle", "search_handle", "carts_handle"]);
+U_PAGE.add_loaded_callback([
+    "nav_handle",
+    "search_handle",
+    "carts_handle",
+    "login_handle"
+]);
 
 export default U_PAGE;

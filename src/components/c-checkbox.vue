@@ -16,7 +16,7 @@ export default Vue.extend({
 <style lang="scss">
 body {
     .el-checkbox__input.is-focus .el-checkbox__inner {
-        border-color: #eaeaea;
+        border-color: #eee;
         background-color: #fff;
     }
     .el-checkbox,
@@ -29,16 +29,20 @@ body {
         background-color: #000;
     }
     .el-checkbox__inner {
-        width: 16px;
-        height: 16px;
+        width: 32px;
+        height: 32px;
 
         border-color: #eaeaea;
         border-radius: 0;
     }
     .el-checkbox__inner::after {
         top: 1px;
-        left: 5px;
-        border-width: 2px;
+        left: 8px;
+
+        width: 10px;
+        height: 16px;
+
+        border-width: 1px;
         border-color: #fff;
     }
     .el-checkbox__inner:hover {

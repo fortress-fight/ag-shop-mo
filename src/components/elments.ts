@@ -4,10 +4,25 @@ import C_InputNumber from "@/components/c-input-number.vue";
 import C_Input from "@/components/c-input.vue";
 import C_Radio from "@/components/c-radio.vue";
 import C_Select from "@/components/c-select.vue";
+import C_Send_Code from "@/components/c-send-code.vue";
+import C_Tab_Card_Box from "@/components/c-tab-card-box.vue";
 import C_Telephone from "@/components/c-telephone.vue";
 import C_Telephone_Pre from "@/components/c-telephone_pre.vue";
 import mask_handle from "@/components/mask_handle";
-import { Button, Checkbox, Form, FormItem, Input, InputNumber, Option, Radio, Select, Upload } from "element-ui";
+import {
+    Button,
+    Checkbox,
+    Form,
+    FormItem,
+    Input,
+    InputNumber,
+    Option,
+    Radio,
+    Select,
+    Upload
+} from "element-ui";
+import locale from "element-ui/lib/locale";
+import lang from "element-ui/lib/locale/lang/en";
 import Vue from "vue";
 
 Vue.use(Input);
@@ -29,5 +44,10 @@ Vue.component("c-button", C_Button);
 Vue.component("c-telephone", C_Telephone);
 Vue.component("c-telephone-pre", C_Telephone_Pre);
 Vue.component("c-input-number", C_InputNumber);
+Vue.component("c-tab-card-box", C_Tab_Card_Box);
+Vue.component("c-send-code", C_Send_Code);
+
+// 设置语言
+locale.use(lang);
 
 Vue.prototype.$mask = mask_handle;

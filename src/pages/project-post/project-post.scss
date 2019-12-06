@@ -1,6 +1,11 @@
 .page-project_post {
+    .project_detail-spec .msg {
+        margin-top: 20px;
+
+        color: #f56c6c;
+    }
     .project_detail-header {
-        font-family: MTTMILANO-BOLD;
+        font-family: $FM;
         font-size: 34px;
         line-height: 54px;
 
@@ -62,7 +67,7 @@
         .spec-size_list {
             margin-bottom: 20px;
             .item {
-                font-family: MTTMILANO-BOLD;
+                font-family: $FM;
                 font-size: 24px;
                 line-height: 68px;
 
@@ -117,7 +122,7 @@
     .project_detail-des {
         margin-bottom: 80px;
         .buttons-tab_detail {
-            font-family: MTTMILANO-BOLD;
+            font-family: $FM;
             font-size: 24px;
             line-height: 39px;
 
@@ -165,11 +170,18 @@
         }
     }
     .project_detail-buy {
-        font-family: MTTMILANO-BOLD;
+        font-family: $FM;
 
         padding-bottom: 62px;
 
+        transition: 0.36s ease;
+
         border-bottom: 1px solid #eaeaea;
+        &.enable {
+            .add_cart {
+                color: #000;
+            }
+        }
         .button {
             font-size: 28px;
             line-height: 89px;
@@ -179,7 +191,7 @@
             text-align: center;
         }
         .add_cart {
-            color: #000;
+            color: #c8c8c8;
             background-color: #f3f3f3;
         }
         .buy {
@@ -188,7 +200,7 @@
         }
     }
     .related-items_list {
-        font-family: MTTMILANO-BOLD;
+        font-family: $FM;
         font-size: 24px;
 
         padding-top: 40px;

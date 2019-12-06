@@ -161,7 +161,7 @@ export default Vue.extend({
             opacity: 1;
         }
         .title {
-            font-family: MTTMILANO-BOLD;
+            font-family: $FM;
             font-size: 34px;
             line-height: 50px;
 

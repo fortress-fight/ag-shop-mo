@@ -1,6 +1,7 @@
 import "@/components/elments";
 import store from "@/store";
 import router from "@/unit/router";
+import { reg_test } from "@/unit/unit";
 import BigNumber from "bignumber.js";
 import Vue from "vue";
 
@@ -33,3 +34,54 @@ export default function(createElement: typeof Vue.prototype.$createElement) {
     window.V = Instance;
     return Instance;
 }
+
+export const v_form_test = {
+    username: [
+        {
+            required: true,
+            message: " ",
+            trigger: "submit"
+        }
+    ],
+    code: [{ required: true, message: " ", trigger: "submit" }],
+    confirm_password: [{ required: true, message: " ", trigger: "submit" }],
+    new_password: [{ required: true, message: " ", trigger: "submit" }],
+    old_password: [{ required: true, message: " ", trigger: "submit" }],
+    password: [{ required: true, message: " ", trigger: "submit" }],
+    agree_policy: [
+        {
+            validator: (rule: any, value: any, callback: Function) => {
+                if (!value) {
+                    callback(new Error(" "));
+                } else {
+                    callback();
+                }
+            },
+            trigger: "submit"
+        }
+    ],
+    phone: [
+        {
+            validator: (rule: any, value: any, callback: Function) => {
+                if (!value.code || !value.number.trim()) {
+                    callback(new Error(" "));
+                } else {
+                    callback();
+                }
+            },
+            trigger: "submit"
+        }
+    ],
+    email: [
+        {
+            validator: (rule: any, value: string = "", callback: Function) => {
+                if (reg_test(value, "email")) {
+                    callback(new Error(" "));
+                } else {
+                    callback();
+                }
+            },
+            trigger: "submit"
+        }
+    ]
+};
