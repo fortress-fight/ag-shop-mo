@@ -44,6 +44,8 @@ export const v_form_test = {
         }
     ],
     code: [{ required: true, message: " ", trigger: "submit" }],
+    e_mail_code: [{ required: true, message: " ", trigger: "submit" }],
+    phone_code: [{ required: true, message: " ", trigger: "submit" }],
     confirm_password: [{ required: true, message: " ", trigger: "submit" }],
     new_password: [{ required: true, message: " ", trigger: "submit" }],
     old_password: [{ required: true, message: " ", trigger: "submit" }],
@@ -75,7 +77,23 @@ export const v_form_test = {
     email: [
         {
             validator: (rule: any, value: string = "", callback: Function) => {
-                if (reg_test(value, "email")) {
+                if (!reg_test("email", value)) {
+                    callback(new Error(" "));
+                } else {
+                    callback();
+                }
+            },
+            trigger: "submit"
+        }
+    ],
+    e_mail: [
+        {
+            validator: (
+                rule: any,
+                value: any = { value: "" },
+                callback: Function
+            ) => {
+                if (!reg_test("email", value.value)) {
                     callback(new Error(" "));
                 } else {
                     callback();

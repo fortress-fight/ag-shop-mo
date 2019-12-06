@@ -45,16 +45,15 @@
                     {{/nav}}
                 </div>
                 <div class="nav-items">
-                    {{#login}}
                     <div class="nav-item">
                         <a href="/" class=""><span class="text">LOGOUT</span></a>
-                        <a href="/" class=""><span class="text">MY PAGE</span></a>
                     </div>
-                    {{else}}
+                    <div class="nav-item">
+                        <a href="/my-page.html" class=""><span class="text">MY PAGE</span></a>
+                    </div>
                     <div class="nav-item   login_panel-open_btn">
                         <a href="/" class=""><span class="text">LOGIN</span></a>
                     </div>
-                    {{/login}}
                     <!-- 当前为英文时存在 -->
                     <div class="nav-item">
                         <a href="/" class=""><img src="@/asset/image/zh.png" alt=""><span class="text">ZH</span></a>

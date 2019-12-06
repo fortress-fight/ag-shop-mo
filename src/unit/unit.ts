@@ -259,7 +259,7 @@ export function make_range(num: number, max = 1, min = 0) {
     return Math.max(min, Math.min(num, max));
 }
 
-export function reg_test(name: string, value: any) {
+export function reg_test(name: string, value: any = "") {
     let test_reg: {
         [prompt: string]: RegExp;
     } = {
