@@ -225,7 +225,7 @@
     </div>
 </template>
 
-<script>
+<script lang="ts">
 import Vue from "vue";
 import { v_form_test } from "@/unit/vue";
 import { login, register, send_code, login_by_code } from "@/api/api";
@@ -275,12 +275,12 @@ export default Vue.extend({
         };
     },
     methods: {
-        form_submit(type) {
+        form_submit(this: any, type: string) {
             switch (type) {
                 case "login":
-                    this.$refs.form_login.validate(valid => {
+                    this.$refs.form_login.validate((valid: any) => {
                         if (valid) {
-                            login(this.login_form).then(data => {
+                            login(this.login_form).then((data: any) => {
                                 this.login_error_message = data.msg;
                             });
                         } else {
@@ -291,9 +291,9 @@ export default Vue.extend({
                     });
                     break;
                 case "forgot_password":
-                    this.$refs.forgot_password.validate(valid => {
+                    this.$refs.forgot_password.validate((valid: any) => {
                         if (valid) {
-                            login(this.login_form).then(data => {
+                            login(this.login_form).then((data: any) => {
                                 this.login_error_message = data.msg;
                             });
                         } else {
@@ -304,7 +304,7 @@ export default Vue.extend({
                     });
                     break;
                 case "register":
-                    this.$refs.form_register.validate(valid => {
+                    this.$refs.form_register.validate((valid: any) => {
                         if (valid) {
                             if (
                                 this.regist_form.confirm_password !==
@@ -326,7 +326,7 @@ export default Vue.extend({
                     break;
             }
         },
-        tab_cards_change() {
+        tab_cards_change(this: any) {
             this.$refs.form_login.resetFields();
             this.$refs.forgot_password.resetFields();
             this.login_error_message = "";
@@ -344,6 +344,25 @@ export default Vue.extend({
                     this.$store.dispatch("login/close");
                 }
             }
+        }
+    },
+    mounted(this: any) {
+        let search_str = window.location.search.slice(1);
+        let search_str_arr = [];
+        let search_str_data: any = {};
+        if (search_str) {
+            search_str_arr = search_str.split("&");
+            search_str_arr.forEach(item => {
+                if (item) {
+                    let arr = item.split("=");
+                    search_str_data[arr[0]] = arr[1];
+                }
+            });
+        }
+        if (search_str_data.tab == "login") {
+            setTimeout(() => {
+                this.is_open = true;
+            });
         }
     }
 });

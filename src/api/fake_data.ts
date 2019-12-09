@@ -263,3 +263,36 @@ export const order_detail_data = {
         }
     ]
 };
+
+export const address_data = [
+    {
+        id: 13,
+        user_id: 3,
+        country_id: 0,
+        country_name: "",
+        state_id: 0,
+        state_name: "",
+        city_id: 0,
+        city_name: "",
+        address: "beijin",
+        zip_code: "100000",
+        mobile: "2147483647",
+        is_default: 1,
+        username: "fu fei1"
+    },
+    {
+        id: 11,
+        user_id: 3,
+        country_id: 1,
+        country_name: "中国",
+        state_id: 4,
+        state_name: "河北省",
+        city_id: 40,
+        city_name: "唐山市",
+        address: "beijin",
+        zip_code: "0",
+        mobile: "2147483647",
+        is_default: 0,
+        username: "fu fei"
+    }
+];

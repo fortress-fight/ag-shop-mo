@@ -134,6 +134,25 @@ body {
         margin-bottom: 0;
     }
 }
+
+body {
+    .c_telephone,
+    .c_input,
+    .el-select {
+        &.mini {
+            .el-input .el-input__inner {
+                line-height: 67px;
+
+                height: 67px;
+                padding: 0 30px;
+            }
+        }
+    }
+    .c_address-popper {
+        font-size: 24px;
+    }
+}
+
 .slick-list,
 .slick-slider {
     line-height: 0;

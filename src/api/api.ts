@@ -27,10 +27,16 @@ axios_instance.interceptors.response.use(
         return Promise.reject(error);
     }
 );
+
 export function login(data: any) {
     return axios.post("/service/login.html", data).then((response: any) => {
         if (response.data.code == 0) {
-            window.location.reload();
+            let search_str = window.location.search;
+            if (search_str && search_str.includes("tab=login")) {
+                window.location.search = search_str.replace("tab=login", "");
+            } else {
+                window.location.reload();
+            }
         } else {
             return new Promise((resolve, reject) => {
                 resolve(response.data);
@@ -62,10 +68,10 @@ export function get_cart(data?: any): Promise<{ data: any }> {
 export function add_address(data: any) {
     return axios_instance.post("/api/add_address.html", data);
 }
-export function get_region(data: any) {
+export function get_region(data?: any) {
     return axios_instance.post("/api/get_region.html", data);
 }
-export function get_address(data: any) {
+export function get_address(data?: any) {
     return axios_instance.post("/api/get_address.html", data);
 }
 

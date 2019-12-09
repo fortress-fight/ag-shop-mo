@@ -110,6 +110,14 @@ module.exports = {
         // sockPort: 81,
         disableHostCheck: true,
         proxy: {
+            "/shop": {
+                target: "http://localhost:8080/",
+                changeOrigin: true, // target是域名的话，需要这个参数，
+                secure: false, // 设置支持https协议的代理
+                pathRewrite: {
+                    "^/shop": ""
+                }
+            },
             "/uploads/13450": {
                 target: "http://cdn.agender.com/",
                 changeOrigin: true, // target是域名的话，需要这个参数，

@@ -560,10 +560,59 @@
                 </transition-group>
             </div>
 
-            <div class="my_page-container address_panel" v-if="sidebar_active == 'address'"></div>
+            <div class="my_page-container address_panel" v-if="sidebar_active == 'address'">
+                <div class="container-header">
+                    <span class="text">Stored Receiving Address</span>
+                </div>
+                <div class="container-body">
+                    <div class="address_list">
+                        <div
+                            class="address_list-body row"
+                            v-for="(address) in address_list"
+                            :key="address.id"
+                        >
+                            <div class="col flex-yc flex-sb">
+                                <div class="left flex flex-yc">
+                                    <span class="name text">{{ address.username }}</span>
+
+                                    <div
+                                        class="is_default button"
+                                        :class="{ select: address.is_default == 1 }"
+                                        @click="set_address_default(address.id, address)"
+                                    ></div>
+                                </div>
+                                <div class="right flex">
+                                    <div class="button" @click="edit_address(address)">Edit</div>
+                                    <div class="button" @click="del_address(address)">Delete</div>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <span class="text">{{ address.mobile }}</span>
+                            </div>
+                            <div class="col">
+                                <span
+                                    class="text"
+                                >{{address.country_name}}{{address.city_name}}{{address.state_name}}{{address.address}}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div
+                        class="button button-effect button-add_address"
+                        @click="add_address_dialog_show = true"
+                    >
+                        <span class="text">Creative</span>
+                    </div>
+                </div>
+            </div>
 
             <div class="my_page-container comment_panel" v-if="sidebar_active == 'comment'"></div>
         </div>
+
+        <add-address-dialog
+            :show="add_address_dialog_show"
+            v-on:close="close_add_address_dialog"
+            :address="edit_address_data"
+        ></add-address-dialog>
     </div>
 </template>
 <script lang="ts">
@@ -582,12 +631,13 @@ import {
     user_info_bind,
     change_pwdt
 } from "@/api/api";
-import { order_data, order_detail_data } from "@/api/fake_data";
+import { order_data, order_detail_data, address_data } from "@/api/fake_data";
 import anime from "animejs";
+import dialog_add_address from "@/components/dialog-add_address";
 export default Vue.extend({
     data() {
         return {
-            sidebar_active: "order",
+            sidebar_active: "address",
             setting_panel: "base",
             setting: {
                 alias: "",
@@ -644,8 +694,47 @@ export default Vue.extend({
             order_detail: {
                 show: false,
                 data: order_detail_data
-            }
+            },
+            address_list: address_data,
+            add_address_dialog_show: false,
+            edit_address_data: {}
         };
+    },
+    components: {
+        "add-address-dialog": dialog_add_address
+    },
+    watch: {
+        sidebar_active(new_value) {
+            switch (new_value) {
+                case "security":
+                    get_user().then(res => {
+                        this.user_info = {
+                            alias: res.data.alias || "",
+                            mobile: res.data.mobile || "",
+                            email: res.data.email || ""
+                        };
+                    });
+                    break;
+                case "order":
+                    order_list().then(response => {
+                        this.order_list = response.data;
+                    });
+                    break;
+                case "address":
+                    // get_address().then(response => {
+                    //     this.address_list = response.data;
+                    // });
+                    break;
+                case "comment":
+                    // user_picture_list().then(response => {
+                    //     this.comment_list = response.data;
+                    // });
+                    break;
+
+                default:
+                    break;
+            }
+        }
     },
     methods: {
         enter(el: HTMLElement, done: Function) {
@@ -691,6 +780,12 @@ export default Vue.extend({
                         this.setting_panel = "base";
                     });
                 }
+            });
+        },
+        close_add_address_dialog() {
+            this.add_address_dialog_show = false;
+            get_address().then(response => {
+                this.address_list = response.data;
             });
         },
         submit_phone(this: any) {
@@ -767,6 +862,32 @@ export default Vue.extend({
             // order_detail({ id: id }).then(response => {
             //     this.order_detail.data = response.data;
             // });
+        },
+        set_address_default(index: number, address: any) {
+            add_address({
+                act: "set_default",
+                id: address.id
+            }).then(response => {
+                get_address().then(response => {
+                    this.address_list = response.data;
+                });
+            });
+        },
+
+        edit_address(address: any) {
+            this.edit_address_data = address;
+
+            this.add_address_dialog_show = true;
+        },
+        del_address(address: any) {
+            add_address({
+                act: "del",
+                id: address.id
+            }).then(response => {
+                get_address().then(response => {
+                    this.address_list = response.data;
+                });
+            });
         }
     },
     created() {
@@ -776,8 +897,10 @@ export default Vue.extend({
         if (search_str) {
             search_str_arr = search_str.split("&");
             search_str_arr.forEach(item => {
-                let arr = item.split("=");
-                search_str_data[arr[0]] = arr[1];
+                if (item) {
+                    let arr = item.split("=");
+                    search_str_data[arr[0]] = arr[1];
+                }
             });
         }
 
@@ -1016,7 +1139,7 @@ export default Vue.extend({
             font-size: 26px;
             line-height: 80px;
 
-// margin-bottom: 26px;
+            // margin-bottom: 26px;
 
             padding: 0 20px;
         }
@@ -1173,6 +1296,65 @@ export default Vue.extend({
         text-transform: uppercase;
 
         color: #f56c6c;
+    }
+    &.address_panel {
+        .address_list-body {
+            line-height: 34px;
+            font-size: 24px;
+            color: #666666;
+
+            padding-bottom: 25px;
+            border-bottom: 1px solid #eaeaea;
+            margin-bottom: 20px;
+            &:last-child {
+                margin-bottom: 0;
+            }
+            .col:first-child {
+                color: #000;
+                font-size: 34px;
+                font-family: $FM;
+                height: 60px;
+                .is_default {
+                    font-size: 24px;
+                    color: #fff;
+                    background: #000;
+                    text-align: center;
+                    line-height: 36px;
+                    width: 86px;
+                    &:before {
+                        content: "default";
+                        display: inline-block;
+                        transform: scale(0.8);
+                    }
+                }
+                .name {
+                    margin-right: 16px;
+                }
+                .right {
+                    .button {
+                        font-size: 24px;
+                        margin-right: 28px;
+                        &:last-child {
+                            margin-right: 0;
+                        }
+                    }
+                }
+            }
+            .col:nth-child(2) {
+            }
+        }
+
+        .button-add_address {
+            margin-top: 50px;
+            color: #fff;
+            background-color: #000;
+            text-transform: uppercase;
+            font-family: $FM;
+            line-height: 80px;
+            width: 290px;
+            text-align: center;
+            font-size: 28px;
+        }
     }
 }
 </style>

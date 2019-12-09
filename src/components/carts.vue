@@ -229,8 +229,11 @@ export default Vue.extend({
         if (search_str) {
             search_str_arr = search_str.split("&");
             search_str_arr.forEach((item: any) => {
-                let arr: string[0] = item.split("=");
-                search_str_data[arr[0]] = arr[1];
+                if (item) {
+
+                    let arr: string[0] = item.split("=");
+                    search_str_data[arr[0]] = arr[1];
+                }
             });
         }
 
