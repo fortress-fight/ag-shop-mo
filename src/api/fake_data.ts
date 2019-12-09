@@ -296,3 +296,42 @@ export const address_data = [
         username: "fu fei"
     }
 ];
+
+export const comment_list_data = [
+    {
+        id: 31,
+        user_id: 3,
+        title: "TEST",
+        desc: "",
+        create_time: "2019-11-29 16:01:41",
+        update_time: "2019-11-29 16:01:41",
+        is_pass: 0,
+        order_id: null,
+        goods_id: null,
+        imgs: ["/uploads/13450/fb9cdea1af746776d1186a1e280b0c48.jpg"]
+    },
+    {
+        id: 2,
+        user_id: 3,
+        title: "first",
+        desc: "",
+        create_time: "2019-10-18 20:22:44",
+        update_time: "2019-10-18 20:22:44",
+        is_pass: 0,
+        order_id: null,
+        goods_id: null,
+        imgs: null
+    },
+    {
+        id: 1,
+        user_id: 3,
+        title: "first",
+        desc: "",
+        create_time: "2019-10-18 20:22:20",
+        update_time: "2019-10-18 20:22:20",
+        is_pass: 0,
+        order_id: null,
+        goods_id: null,
+        imgs: null
+    }
+];

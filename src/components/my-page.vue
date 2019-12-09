@@ -578,7 +578,6 @@
                                     <div
                                         class="is_default button"
                                         :class="{ select: address.is_default == 1 }"
-                                        @click="set_address_default(address.id, address)"
                                     ></div>
                                 </div>
                                 <div class="right flex">
@@ -605,9 +604,131 @@
                 </div>
             </div>
 
-            <div class="my_page-container comment_panel" v-if="sidebar_active == 'comment'"></div>
+            <div class="my_page-container comment_panel" v-if="sidebar_active == 'comment'">
+                <div class="container-header">
+                    <span class="text">LIST</span>
+                </div>
+                <div class="container-body">
+                    <div class="comment_list">
+                        <div
+                            class="item flex flex-sb"
+                            v-for="(item) in comment_list"
+                            :key="item.id"
+                        >
+                            <div class="left flex">
+                                <div class="title text">{{ item.title }}</div>
+                                <div class="date text">{{ item.update_time }}</div>
+                            </div>
+                            <div class="right flex flex-sb">
+                                <div
+                                    class="button button-comment_edit"
+                                    @click="edit_comment(item)"
+                                >EDIT</div>
+                                <div
+                                    class="button button-comment_remove"
+                                    @click="del_comment(item)"
+                                >
+                                    <i class="ic ag-icon ag-close_1"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div
+                        class="button button-effect button-create_comment"
+                        @click="upload_image_panel_show = true"
+                    >
+                        <span class="text">creative</span>
+                    </div>
+                </div>
+            </div>
         </div>
 
+        <div class="dialog-upload_image_panel" :class="{ show: upload_image_panel_show }">
+            <div class="dialog-container w">
+                <div class="dialog-close_button button" @click="upload_image_panel_show = false">
+                    <i class="ic ag-icon ag-close_1"></i>
+                </div>
+                <div class="row require title">
+                    <div class="name">
+                        <span class="text">TITLE</span>
+                    </div>
+                    <div class="value">
+                        <c-input v-model="upload_data.title"></c-input>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="name">DESCRIBE</div>
+                    <div class="value">
+                        <textarea v-model="upload_data.des" name="describe"></textarea>
+                    </div>
+                </div>
+                <div class="row require pic">
+                    <div class="name">PICTURE</div>
+                    <div class="value">
+                        <div class="upload-com" v-if="!upload_data.pictures.length">
+                            <el-upload
+                                class="avatar-uploader"
+                                action="/api/upload_img.html"
+                                name="Filedata"
+                                accept="image/x-png, image/gif, image/jpeg, image/bmp"
+                                :show-file-list="false"
+                                :on-success="upload_handle"
+                                :before-upload="beforeUpload_handle"
+                            ></el-upload>
+                            <i class="ic ag-icon ag-upload"></i>
+                            <span class="text">UPLOAD</span>
+                        </div>
+                        <div class="upload-com upload-list" v-else>
+                            <draggable
+                                v-model="upload_data.pictures"
+                                draggable=".item-img_preview"
+                                class="image_list"
+                            >
+                                <div
+                                    class="item item-img_preview"
+                                    v-for="(img, index) in upload_data.pictures"
+                                    :key="index"
+                                >
+                                    <img
+                                        :src="img | upload_resource_link"
+                                        alt
+                                        class="image_preview"
+                                    />
+                                    <div
+                                        class="button button-oper flex flex-c"
+                                        @click="delete_img(index)"
+                                    >
+                                        <i class="ic ag-icon ag-delete"></i>
+                                    </div>
+                                </div>
+                                <div
+                                    class="item item-img_upload"
+                                    v-if="!(upload_data.pictures.length >= 4)"
+                                >
+                                    <el-upload
+                                        class="avatar-uploader"
+                                        action="/api/upload_img.html"
+                                        name="Filedata"
+                                        accept="image/x-png, image/gif, image/jpeg, image/bmp"
+                                        :show-file-list="false"
+                                        :on-success="upload_handle"
+                                        :before-upload="beforeUpload_handle"
+                                    ></el-upload>
+                                    <div class="button button-oper flex flex-c">
+                                        <i class="ic ag-icon ag-add"></i>
+                                    </div>
+                                </div>
+                            </draggable>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="button button-publish button-effect" @click="publish_handler">
+                        <span class="text">PUBLISH</span>
+                    </div>
+                </div>
+            </div>
+        </div>
         <add-address-dialog
             :show="add_address_dialog_show"
             v-on:close="close_add_address_dialog"
@@ -631,13 +752,19 @@ import {
     user_info_bind,
     change_pwdt
 } from "@/api/api";
-import { order_data, order_detail_data, address_data } from "@/api/fake_data";
+import {
+    order_data,
+    order_detail_data,
+    address_data,
+    comment_list_data
+} from "@/api/fake_data";
 import anime from "animejs";
 import dialog_add_address from "@/components/dialog-add_address";
+import draggable from "vuedraggable";
 export default Vue.extend({
     data() {
         return {
-            sidebar_active: "address",
+            sidebar_active: "comment",
             setting_panel: "base",
             setting: {
                 alias: "",
@@ -697,7 +824,16 @@ export default Vue.extend({
             },
             address_list: address_data,
             add_address_dialog_show: false,
-            edit_address_data: {}
+            edit_address_data: {},
+            comment_list: comment_list_data,
+            upload_image_panel_show: false,
+
+            upload_data: {
+                id: "",
+                title: "",
+                des: "",
+                pictures: []
+            }
         };
     },
     components: {
@@ -737,6 +873,9 @@ export default Vue.extend({
         }
     },
     methods: {
+        delete_img(id: number) {
+            this.upload_data.pictures.splice(id, 1);
+        },
         enter(el: HTMLElement, done: Function) {
             anime({
                 targets: el,
@@ -886,6 +1025,86 @@ export default Vue.extend({
             }).then(response => {
                 get_address().then(response => {
                     this.address_list = response.data;
+                });
+            });
+        },
+
+        upload_handle(response: any) {
+            if (response.data.url) {
+                (this.upload_data as any).pictures.push(response.data.url);
+            }
+        },
+        beforeUpload_handle(file: any) {
+            const isImg = [
+                "image/jpeg",
+                "image/jpg",
+                "image/png",
+                "image/gif"
+            ].includes(file.type);
+            const isLt5M = file.size / 1024 / 1024 < 5;
+
+            if (!isImg) {
+                this.$message.error("上传头像图片只能是 JPG 格式!");
+            }
+            if (!isLt5M) {
+                this.$message.error("上传头像图片大小不能超过 5MB!");
+            }
+            return isImg && isLt5M;
+        },
+        publish_handler() {
+            $(".require .value").removeClass("error");
+
+            if (!this.upload_data.title.length) {
+                $(".require.title .value").addClass("error");
+                return false;
+            }
+
+            if (!this.upload_data.pictures.length) {
+                $(".require.pic .value").addClass("error");
+                return false;
+            }
+            let img_json: any = {};
+            this.upload_data.pictures.forEach((url, index) => {
+                img_json[index] = url;
+            });
+
+            let data: any = {
+                title: this.upload_data.title,
+                desc: this.upload_data.des,
+                img: img_json
+            };
+
+            if (this.upload_data.id) {
+                data.id = this.upload_data.id;
+            }
+
+            upload_picture(data).then(response => {
+                this.upload_image_panel_show = false;
+
+                user_picture_list().then(response => {
+                    this.comment_list = response.data;
+                });
+            });
+        },
+        edit_comment(data: any) {
+            let pics: string[] = [];
+            if (data.imgs) {
+                data.imgs.forEach((url: string) => {
+                    pics.push(url);
+                });
+            }
+            (this.upload_data as any) = {
+                id: data.id,
+                title: data.title,
+                des: data.desc,
+                pictures: pics
+            };
+            this.upload_image_panel_show = true;
+        },
+        del_comment(data: any) {
+            upload_picture({ id: data.id, act: "del" }).then(response => {
+                user_picture_list().then(response => {
+                    this.comment_list = response.data;
                 });
             });
         }
@@ -1139,8 +1358,6 @@ export default Vue.extend({
             font-size: 26px;
             line-height: 80px;
 
-            // margin-bottom: 26px;
-
             padding: 0 20px;
         }
     }
@@ -1299,31 +1516,43 @@ export default Vue.extend({
     }
     &.address_panel {
         .address_list-body {
-            line-height: 34px;
             font-size: 24px;
-            color: #666666;
+            line-height: 34px;
 
-            padding-bottom: 25px;
-            border-bottom: 1px solid #eaeaea;
             margin-bottom: 20px;
+            padding-bottom: 25px;
+
+            color: #666;
+            border-bottom: 1px solid #eaeaea;
             &:last-child {
                 margin-bottom: 0;
             }
             .col:first-child {
-                color: #000;
-                font-size: 34px;
                 font-family: $FM;
+                font-size: 34px;
+
                 height: 60px;
+
+                color: #000;
                 .is_default {
                     font-size: 24px;
+                    line-height: 36px;
+
+                    display: none;
+
+                    width: 86px;
+
+                    text-align: center;
+
                     color: #fff;
                     background: #000;
-                    text-align: center;
-                    line-height: 36px;
-                    width: 86px;
+                    &.select {
+                        display: block;
+                    }
                     &:before {
-                        content: "default";
                         display: inline-block;
+
+                        content: "default";
                         transform: scale(0.8);
                     }
                 }
@@ -1333,6 +1562,7 @@ export default Vue.extend({
                 .right {
                     .button {
                         font-size: 24px;
+
                         margin-right: 28px;
                         &:last-child {
                             margin-right: 0;
@@ -1340,21 +1570,246 @@ export default Vue.extend({
                     }
                 }
             }
-            .col:nth-child(2) {
-            }
         }
+    }
+    &.comment_panel {
+        font-size: 28px;
+        line-height: 80px;
+        .item {
+            border-bottom: 1px solid #eaeaea;
+        }
+        .button-comment_edit {
+            font-size: 24px;
 
-        .button-add_address {
-            margin-top: 50px;
+            margin-right: 35px;
+        }
+        .button-comment_remove {
+            font-size: 24px;
+        }
+        .title {
+            font-family: $FM;
+
+            overflow: hidden;
+
+            width: 120px;
+            margin-right: 22px;
+
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
+    }
+    .button-create_comment,
+    .button-add_address {
+        font-family: $FM;
+        font-size: 28px;
+        line-height: 80px;
+
+        width: 290px;
+        margin-top: 50px;
+
+        text-align: center;
+        text-transform: uppercase;
+
+        color: #fff;
+        background-color: #000;
+    }
+}
+.dialog-upload_image_panel {
+    position: fixed;
+    z-index: 900;
+    top: 0;
+    left: 0;
+
+    visibility: hidden;
+    overflow: auto;
+
+    width: 100%;
+    height: 100%;
+
+    transition: 0.36s ease;
+    transform: translateY(30px);
+
+    opacity: 0;
+    background-color: #fff;
+    &.show {
+        visibility: visible;
+
+        transform: translateY(0px);
+
+        opacity: 1;
+    }
+    .dialog-container {
+        position: relative;
+
+        padding-top: 88px;
+        .row {
+            margin-bottom: 20px;
+        }
+        .name {
+            font-family: $FM;
+            font-size: 28px;
+            line-height: 50px;
+        }
+        textarea {
+            font-size: 28px;
+            line-height: 38px;
+
+            box-sizing: border-box;
+            width: 100%;
+            height: 316px;
+            padding: 18px 42px;
+
+            resize: none;
+
+            border: 1px solid #eaeaea;
+        }
+        .button-publish {
+            font-family: $FM;
+            line-height: 92px;
+
+            margin-top: 56px;
+
+            text-align: center;
+
             color: #fff;
             background-color: #000;
-            text-transform: uppercase;
-            font-family: $FM;
-            line-height: 80px;
-            width: 290px;
-            text-align: center;
-            font-size: 28px;
         }
+        .upload-com {
+            position: relative;
+
+            display: flex;
+            flex-direction: column;
+
+            width: 100%;
+            height: 280px;
+
+            color: #c7c7c7;
+            border: 1px dashed #eaeaea;
+
+            align-items: center;
+            justify-content: center;
+            &.upload-list {
+                display: block;
+                overflow: hidden;
+
+                box-sizing: border-box;
+                height: auto;
+                padding: 20px;
+            }
+            .ic {
+                font-size: 30px;
+                line-height: 1;
+            }
+            .avatar-uploader {
+                position: absolute;
+                z-index: 10;
+                top: 0;
+                left: 0;
+
+                width: 100%;
+                height: 100%;
+
+                opacity: 0;
+                .el-upload {
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+
+                    width: 100%;
+                    height: 100%;
+                }
+            }
+            .image_list {
+                overflow: hidden;
+
+                height: 100%;
+                margin-right: -10px;
+                margin-bottom: -10px;
+            }
+            .item {
+                position: relative;
+
+                float: left;
+                overflow: hidden;
+
+                width: calc(25% - 10px);
+                margin-right: 10px;
+                margin-bottom: 10px;
+                &:hover {
+                    .button-oper {
+                        opacity: 1;
+                    }
+                }
+                .button-oper {
+                    position: absolute;
+                    right: 0;
+                    bottom: 0;
+                    left: 0;
+
+                    height: 50px;
+
+                    transition: 0.36s ease;
+
+                    background: rgba(#000, 0.3);
+                }
+                .ic {
+                    font-size: 16px;
+
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+
+                    transform: translate3d(-50%, -50%, 0);
+
+                    color: #fff;
+                }
+                &:after {
+                    display: block;
+
+                    padding-top: 100%;
+
+                    content: "";
+                }
+                img {
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+
+                    min-width: 100%;
+                    min-height: 100%;
+
+                    transform: translate3d(-50%, -50%, 0);
+                }
+            }
+            .item-img_upload {
+                background: #fff;
+
+                .button-oper {
+                    top: 0;
+
+                    height: auto;
+
+                    opacity: 1;
+                    border: 1px dashed #000;
+                    background: transparent;
+                    .ic {
+                        font-size: 36px;
+
+                        color: #000;
+                    }
+                }
+            }
+        }
+    }
+    .dialog-close_button {
+        font-size: 24px;
+        line-height: 88px;
+
+        position: absolute;
+        top: 0;
+        right: 0;
+
+        padding-left: 20px;
     }
 }
 </style>

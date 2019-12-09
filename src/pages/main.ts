@@ -4,6 +4,7 @@ import COMMUNITY_PAGE from "@/pages/community/community";
 import IMAGES_PAGE from "@/pages/images/images";
 import MY_PAGE from "@/pages/my-page/my-page";
 import NOTICE_PAGE from "@/pages/notice/notice";
+import ORDER_PAGE from "@/pages/order/order";
 import PROJECT_POST from "@/pages/project-post/project-post";
 import STOCKISTS_PAGE from "@/pages/stockists/stockists";
 import VIDEO_PAGE from "@/pages/video/video";
@@ -29,6 +30,8 @@ if ($("body").hasClass("page-collection")) {
     new PROJECT_POST();
 } else if ($("body").hasClass("page-my_page")) {
     new MY_PAGE();
+} else if ($("body").hasClass("page-order")) {
+    new ORDER_PAGE();
 } else {
     new U_PAGE();
 }

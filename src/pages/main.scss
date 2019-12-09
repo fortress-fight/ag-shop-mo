@@ -354,7 +354,6 @@ body {
         font-family: $FM;
 
         color: #000;
-        border-top: 1px solid #e8e8e8;
         .container {
             padding-top: 52px;
             padding-bottom: 52px;
@@ -663,5 +662,97 @@ body {
                 }
             }
         }
+    }
+}
+
+.page-order {
+    .order-list {
+        margin-bottom: 50px;
+    }
+    .order_detail-list {
+        display: flex;
+
+        padding: 40px 0;
+
+        border-top: 1px solid #e8e8e8;
+        .order_detail-col {
+            .des_spec {
+                font-size: 24px;
+                line-height: 36px;
+                .name {
+                    width: 110px;
+                }
+            }
+            &:first-child {
+                flex: 0 0 auto;
+
+                width: 185px;
+                margin-right: 32px;
+            }
+            img {
+                max-width: 100%;
+                max-height: 100%;
+            }
+            &:nth-child(2) {
+                position: relative;
+
+                display: flex;
+                flex-direction: column;
+                flex: 1 1 auto;
+
+                padding: 28px 0;
+
+                justify-content: space-between;
+                & > .price {
+                    font-size: 28px;
+
+                    position: absolute;
+                    right: 0;
+                    bottom: 0;
+                }
+            }
+            .des_text {
+                font-family: $FM;
+                font-size: 28px;
+                line-height: 32px;
+
+                text-transform: uppercase;
+            }
+            .good_price {
+                font-family: $FM;
+                font-size: 24px;
+                line-height: 28px;
+
+                color: #666;
+            }
+        }
+    }
+    .order-item_total-price {
+        font-family: $FM;
+        font-size: 34px;
+        line-height: 82px;
+
+        border-top: 1px solid #e8e8e8;
+        .left {
+            font-size: 24px;
+        }
+    }
+    .price_info {
+        font-size: 28px;
+        line-height: 38px;
+
+        padding: 34px 0;
+
+        border-top: 1px solid #e8e8e8;
+    }
+    .pay_button {
+        font-family: $FM;
+        line-height: 74px;
+
+        text-align: center;
+        text-transform: uppercase;
+
+        color: #fff;
+        background: #000;
     }
 }
