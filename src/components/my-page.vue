@@ -431,7 +431,7 @@
                     </div>
 
                     <div key="order_panel-detail" v-else>
-                        <div class="container-body">
+                        <div class="container-body" v-if="order_detail.data.id">
                             <div class="order_panel-detail">
                                 <div
                                     class="back-button button button-effect2"
