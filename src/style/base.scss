@@ -41,6 +41,11 @@ input {
 
     -webkit-appearance: none;
 }
+textarea {
+    box-shadow: none;
+
+    -webkit-appearance: none;
+}
 // 占位符样式
 // input[type=search]::-webkit-input-placeholder{
 //     color: blue;

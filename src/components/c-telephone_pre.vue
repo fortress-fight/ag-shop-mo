@@ -309,7 +309,7 @@ export default Vue.extend({
 .c_select {
     flex: 0 0 auto;
 
-    width: 182px;
+    width: 210px;
     margin-right: 14px;
 }
 body {

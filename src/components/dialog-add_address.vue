@@ -61,6 +61,11 @@ export default Vue.extend({
     },
     components: {
         "add-address-panel": add_address_panel
+    },
+    mounted() {
+        $(this.$el).on("touchmove", function(event) {
+            event.preventDefault();
+        });
     }
 });
 </script>
@@ -84,6 +89,10 @@ export default Vue.extend({
 
     align-items: flex-end;
     .address-add_panel {
+        overflow: auto;
+
+        box-sizing: border-box;
+        max-height: calc(90vh - 50px);
         padding: 35px 0;
         .form_group {
             width: 90%;

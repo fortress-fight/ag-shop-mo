@@ -125,5 +125,5 @@ export function to_pay(data: any) {
         }
         ret += encodeURIComponent(it) + "=" + encodeURIComponent(data[it]);
     }
-    window.open("/user/to_pay.html" + ret);
+    window.location.href = "/user/to_pay.html" + ret;
 }

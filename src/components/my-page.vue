@@ -764,7 +764,7 @@ import draggable from "vuedraggable";
 export default Vue.extend({
     data() {
         return {
-            sidebar_active: "comment",
+            sidebar_active: "security",
             setting_panel: "base",
             setting: {
                 alias: "",
@@ -836,10 +836,11 @@ export default Vue.extend({
             }
         };
     },
-    components: {
-        "add-address-dialog": dialog_add_address
-    },
+    components: { draggable, "add-address-dialog": dialog_add_address },
     watch: {
+        setting_panel() {
+            window.scrollTo(0, 0);
+        },
         sidebar_active(new_value) {
             switch (new_value) {
                 case "security":
@@ -857,14 +858,14 @@ export default Vue.extend({
                     });
                     break;
                 case "address":
-                    // get_address().then(response => {
-                    //     this.address_list = response.data;
-                    // });
+                    get_address().then(response => {
+                        this.address_list = response.data;
+                    });
                     break;
                 case "comment":
-                    // user_picture_list().then(response => {
-                    //     this.comment_list = response.data;
-                    // });
+                    user_picture_list().then(response => {
+                        this.comment_list = response.data;
+                    });
                     break;
 
                 default:
@@ -907,6 +908,7 @@ export default Vue.extend({
         },
         set_sider(name: string) {
             this.sidebar_active = name;
+            window.scrollTo(0, 0);
         },
         update_user_name(this: any) {
             this.$refs.name_register.validate((valid: Boolean) => {
@@ -996,11 +998,12 @@ export default Vue.extend({
         },
         show_detail(id: string) {
             this.order_detail.show = true;
-            // this.order_detail.data = this.order_list[id];
+            this.order_detail.data = this.order_list[id];
 
-            // order_detail({ id: id }).then(response => {
-            //     this.order_detail.data = response.data;
-            // });
+            order_detail({ id: id }).then(response => {
+                this.order_detail.data = response.data;
+            });
+            window.scrollTo(0, 0);
         },
         set_address_default(index: number, address: any) {
             add_address({
@@ -1134,6 +1137,12 @@ export default Vue.extend({
                 email: res.data.email || ""
             };
         });
+    },
+    mounted() {
+        $(".dialog-upload_image_panel").on("touchmove", function(event) {
+            event.preventDefault();
+        });
+        window.scrollTo(0, 0);
     }
 });
 </script>

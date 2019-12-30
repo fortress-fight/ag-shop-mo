@@ -34,7 +34,7 @@
                         class="mini"
                         v-model="data.province"
                         popper-class="c_address-popper"
-                        no-data-text="请先选择 country"
+                        no-data-text="please choose country"
                     >
                         <el-option
                             v-for="(item) in province_list"
@@ -53,7 +53,7 @@
                         class="mini"
                         v-model="data.city"
                         popper-class="c_address-popper"
-                        no-data-text="请先选择 Province"
+                        no-data-text="please choose province"
                     >
                         <el-option
                             v-for="(item) in city_list"
@@ -233,7 +233,8 @@ export default Vue.extend({
             console.log(response);
             this.country_list = response.data;
         });
-    }
+    },
+    mounted() {}
 });
 </script>
 <style lang="scss">
@@ -245,7 +246,7 @@ export default Vue.extend({
         color: #404040;
     }
     .item {
-        margin-bottom: 20px;
+        margin-bottom: 0;
         &.require {
             .name {
                 &:after {

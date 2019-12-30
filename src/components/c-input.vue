@@ -13,12 +13,23 @@ export default Vue.extend({
 </script>
 <style lang="scss">
 body {
+    .el-select .el-input .el-select__caret {
+        font-size: 24px;
+    }
+    .el-form-item__content {
+        font-size: 32px;
+        line-height: 94px;
+    }
     .c_input {
-        font-size: 28px;
+        font-size: 32px;
 
         width: 100%;
 
         color: #666;
+    }
+    .el-input .el-input__clear {
+        font-size: 32px;
+        line-height: 94px;
     }
     .el-input {
         font-size: inherit;
@@ -30,7 +41,7 @@ body {
         width: 100%;
         .el-input__inner {
             font-size: inherit;
-            line-height: 94px;
+            line-height: 56px;
 
             display: inline-block;
 

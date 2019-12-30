@@ -17,7 +17,7 @@ Vue.filter("compute_accuracy", function(
 });
 
 Vue.filter("upload_resource_link", function(link: string) {
-    return window.upload_url || "http://cdn.agender.com" + link;
+    return (window.upload_url || "http://cdn.agender.com") + link;
 });
 export default function(createElement: typeof Vue.prototype.$createElement) {
     const Instance = new Vue({

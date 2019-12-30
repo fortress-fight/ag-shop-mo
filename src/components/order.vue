@@ -52,12 +52,12 @@
             </div>
             <div class="pay_method_body flex flex-sb">
                 <div class="item">
-                    <c-radio v-model="pay_method" label="alipay">
+                    <c-radio v-model="pay_method" label="alipay_m">
                         <img :src="publicPath+'image/alipay.png'" alt class />
                     </c-radio>
                 </div>
                 <div class="item">
-                    <c-radio v-model="pay_method" label="wechat">
+                    <c-radio v-model="pay_method" label="wechat_m">
                         <img :src="publicPath+'image/weichat.png'" alt class />
                     </c-radio>
                 </div>

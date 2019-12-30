@@ -15,6 +15,9 @@ export default Vue.extend({
 </script>
 <style lang="scss">
 body {
+    .el-checkbox__label {
+        font-size: 24px;
+    }
     .el-checkbox__input.is-focus .el-checkbox__inner {
         border-color: #eee;
         background-color: #fff;
