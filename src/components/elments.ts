@@ -21,8 +21,7 @@ import {
     Select,
     Upload
 } from "element-ui";
-import locale from "element-ui/lib/locale";
-import lang from "element-ui/lib/locale/lang/en";
+// import lang from "element-ui/lib/locale/lang/en";
 import Vue from "vue";
 
 Vue.use(Input);
@@ -48,6 +47,6 @@ Vue.component("c-tab-card-box", C_Tab_Card_Box);
 Vue.component("c-send-code", C_Send_Code);
 
 // 设置语言
-locale.use(lang);
+// locale.use(lang);
 
 Vue.prototype.$mask = mask_handle;

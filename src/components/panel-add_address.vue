@@ -1,8 +1,13 @@
 <template>
     <div class="address-add_panel">
-        <el-form :model="data" class="form_group" ref="form_address" :rules="form_rules">
+        <el-form
+            :model="data"
+            class="form_group"
+            ref="form_address"
+            :rules="form_rules"
+        >
             <el-form-item class="item require" prop="country">
-                <div class="name">Country</div>
+                <div class="name">国家</div>
                 <div class="value">
                     <el-select
                         class="mini"
@@ -11,7 +16,7 @@
                         no-data-text=" "
                     >
                         <el-option
-                            v-for="(item) in country_list"
+                            v-for="item in country_list"
                             :key="item.region_id"
                             :label="item.region_name"
                             :value="item.region_id"
@@ -21,23 +26,29 @@
             </el-form-item>
 
             <el-form-item class="item require" prop="name">
-                <div class="name">Name</div>
+                <div class="name">收件人</div>
                 <div class="value">
-                    <c-input class="mini" type="text" name="name" placeholder v-model="data.name"></c-input>
+                    <c-input
+                        class="mini"
+                        type="text"
+                        name="name"
+                        placeholder
+                        v-model="data.name"
+                    ></c-input>
                 </div>
             </el-form-item>
 
             <el-form-item class="item require" prop="province">
-                <div class="name">Province/state</div>
+                <div class="name">省份</div>
                 <div class="value">
                     <el-select
                         class="mini"
                         v-model="data.province"
                         popper-class="c_address-popper"
-                        no-data-text="please choose country"
+                        no-data-text="请先选择国家"
                     >
                         <el-option
-                            v-for="(item) in province_list"
+                            v-for="item in province_list"
                             :key="item.region_id"
                             :label="item.region_name"
                             :value="item.region_id"
@@ -47,16 +58,16 @@
             </el-form-item>
 
             <el-form-item class="item require" prop="city">
-                <div class="name">City</div>
+                <div class="name">城市</div>
                 <div class="value">
                     <el-select
                         class="mini"
                         v-model="data.city"
                         popper-class="c_address-popper"
-                        no-data-text="please choose province"
+                        no-data-text="请先选择省份"
                     >
                         <el-option
-                            v-for="(item) in city_list"
+                            v-for="item in city_list"
                             :key="item.region_id"
                             :label="item.region_name"
                             :value="item.region_id"
@@ -66,7 +77,7 @@
             </el-form-item>
 
             <el-form-item class="item require" prop="address">
-                <div class="name">Address</div>
+                <div class="name">地址</div>
                 <div class="value">
                     <c-input
                         class="mini"
@@ -79,16 +90,26 @@
             </el-form-item>
 
             <el-form-item class="item require" prop="zip">
-                <div class="name">ZIP code</div>
+                <div class="name">邮编</div>
                 <div class="value">
-                    <c-input class="mini" type="text" name="address" placeholder v-model="data.zip"></c-input>
+                    <c-input
+                        class="mini"
+                        type="text"
+                        name="address"
+                        placeholder
+                        v-model="data.zip"
+                    ></c-input>
                 </div>
             </el-form-item>
 
             <el-form-item class="item require" prop="phone">
-                <div class="name">Phone</div>
+                <div class="name">手机号</div>
                 <div class="value">
-                    <c-telephone class="mini" v-model="data.phone" no_code></c-telephone>
+                    <c-telephone
+                        class="mini"
+                        v-model="data.phone"
+                        no_code
+                    ></c-telephone>
                 </div>
             </el-form-item>
             <el-form-item class="item check_default" prop="is_default">
@@ -100,13 +121,15 @@
                         :true-label="1"
                         :false-label="0"
                     >
-                        <span class="button-set_default text">Set as default address</span>
+                        <span class="button-set_default text"
+                            >设置为默认地址</span
+                        >
                     </c-checkbox>
                 </div>
             </el-form-item>
             <div class="item">
                 <div class="button address-save_button" @click="save_address">
-                    <span class="text">SAVE</span>
+                    <span class="text">保存</span>
                 </div>
             </div>
         </el-form>

@@ -2,7 +2,7 @@
     <div id="ag-shopping_carts" :class="is_open ? 'show' : ''">
         <div class="carts_container">
             <div class="carts_header">
-                <span class="text">my cart</span>
+                <span class="text">购物车</span>
             </div>
             <template v-if="goods.length">
                 <div class="carts_body">
@@ -33,28 +33,28 @@
                                                 <span class="text">{{ item.name_cn }}</span>
                                             </div>
                                             <div class="price">
-                                                <span class="text unit">$</span>
+                                                <span class="text unit">￥</span>
                                                 <span class="text">{{ item.price }}</span>
                                             </div>
                                         </div>
 
                                         <div class="spec">
                                             <div class="spec_item flex">
-                                                <span class="text name">Size</span>
+                                                <span class="text name">尺寸</span>
                                                 <span class="text value">{{ item.size }}</span>
                                             </div>
                                             <div class="spec_item flex">
-                                                <span class="text name">Colour</span>
+                                                <span class="text name">颜色</span>
                                                 <span class="text value">{{ item.color }}</span>
                                             </div>
                                             <div class="spec_item flex">
-                                                <span class="text name">Quantity</span>
+                                                <span class="text name">数量</span>
                                                 <div class="value">
                                                     <template v-if="item.stock == 0">
                                                         <span
                                                             class="text"
                                                             style="font-family: MTTMILANO-BOLD;"
-                                                        >Sold out</span>
+                                                        >售罄</span>
                                                     </template>
                                                     <c-input-number
                                                         v-else
@@ -67,7 +67,7 @@
                                             </div>
                                         </div>
                                         <div class="total_price">
-                                            <span class="text unit">$</span>
+                                            <span class="text unit">￥</span>
                                             <span class="text">
                                                 {{
                                                 "multipliedBy"
@@ -87,20 +87,20 @@
                 <div class="carts_footer">
                     <div class="price_info">
                         <div class="item flex flex-sb">
-                            <span class="name">Over value</span>
+                            <span class="name">价格</span>
                             <div class="value">
-                                <span class="text unit">$</span>
+                                <span class="text unit">￥</span>
                                 <span class="text">{{ goods_total_price }}</span>
                             </div>
                         </div>
                         <div class="item flex flex-sb">
-                            <span class="name">Shipping&handing</span>
+                            <span class="name">运费</span>
                             <div class="value">
                                 <template v-if="express_price === 0">
-                                    <span class="text">Free</span>
+                                    <span class="text">0</span>
                                 </template>
                                 <template v-else>
-                                    <span class="text unit">$</span>
+                                    <span class="text unit">￥</span>
                                     <span class="text">{{ express_price }}</span>
                                 </template>
                             </div>
@@ -108,15 +108,15 @@
                     </div>
                     <div class="check_order">
                         <div class="item flex flex-sb">
-                            <span class="text name">TOTAL</span>
+                            <span class="text name">总计</span>
                             <div class="value">
-                                <span class="text unit">$</span>
+                                <span class="text unit">￥</span>
                                 <span class="text">{{ goods_total_price + express_price }}</span>
                             </div>
                         </div>
                         <div class="item">
                             <a href="/user/checkout.html" class="btn-check_order button">
-                                <span class="text">Proceed to checkout</span>
+                                <span class="text">去结算</span>
                             </a>
                         </div>
                     </div>
@@ -124,7 +124,7 @@
             </template>
             <template v-else>
                 <div class="empty_panel flex-cc">
-                    <span class="text">your shopping bag is empty</span>
+                    <span class="text">购物车</span>
                 </div>
             </template>
         </div>
@@ -230,7 +230,6 @@ export default Vue.extend({
             search_str_arr = search_str.split("&");
             search_str_arr.forEach((item: any) => {
                 if (item) {
-
                     let arr: string[0] = item.split("=");
                     search_str_data[arr[0]] = arr[1];
                 }

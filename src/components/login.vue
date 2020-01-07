@@ -26,7 +26,7 @@
                                         <c-input
                                             type="text"
                                             name="username"
-                                            placeholder="Username"
+                                            placeholder="用户名"
                                             v-model="login_form.username"
                                         ></c-input>
                                     </el-form-item>
@@ -35,7 +35,7 @@
                                             type="password"
                                             name="password"
                                             show-password
-                                            placeholder="Password"
+                                            placeholder="密码"
                                             v-model="login_form.password"
                                         ></c-input>
                                     </el-form-item>
@@ -49,7 +49,7 @@
                                             class="button form-submit_btn"
                                             @click="form_submit('login')"
                                         >
-                                            <span class="text">login</span>
+                                            <span class="text">登录</span>
                                         </div>
                                     </div>
                                 </el-form>
@@ -58,12 +58,12 @@
                                 <span
                                     class="button forgot_password-button"
                                     @click="panel_active_card = 2"
-                                >Forgot Password</span>
+                                >忘记密码</span>
                                 <i class="line"></i>
                                 <span
                                     class="button register_account-button"
                                     @click="panel_active_card = 1"
-                                >Don't have an account?</span>
+                                >注册?</span>
                             </div>
                         </div>
                     </template>
@@ -89,7 +89,7 @@
                                             v-model="forgot_password_form.email"
                                             type="text"
                                             name="text"
-                                            placeholder="E-mail"
+                                            placeholder="邮箱"
                                         ></c-input>
                                     </el-form-item>
 
@@ -106,14 +106,14 @@
                                         <c-input
                                             type="text"
                                             name="password"
-                                            placeholder="New Password"
+                                            placeholder="新密码"
                                             v-model="forgot_password_form.new_password"
                                         ></c-input>
                                     </el-form-item>
                                     <el-form-item class="row" prop="old_password">
                                         <c-input
                                             type="text"
-                                            placeholder="Confirm Password"
+                                            placeholder="旧密码"
                                             v-model="forgot_password_form.old_password"
                                         ></c-input>
                                     </el-form-item>
@@ -126,7 +126,7 @@
                                             class="button form-submit_btn"
                                             @click="form_submit('forgot_password')"
                                         >
-                                            <span class="text">submit</span>
+                                            <span class="text">提交</span>
                                         </div>
                                     </div>
                                 </el-form>
@@ -137,17 +137,17 @@
                                     v-if="forgot_password_form.use == 'phone'"
                                     class="button forgot_password-button"
                                     @click="forgot_password_form.use = 'email'"
-                                >Use E-mail</span>
+                                >使用邮箱</span>
                                 <span
                                     v-else
                                     class="button forgot_password-button"
                                     @click="forgot_password_form.use = 'phone'"
-                                >Use phone</span>
+                                >使用手机号</span>
                                 <i class="line"></i>
                                 <span
                                     class="button login-button"
                                     @click="panel_active_card = 0"
-                                >Log In</span>
+                                >登录</span>
                             </div>
                         </div>
                     </template>
@@ -163,7 +163,7 @@
                                     <el-form-item class="row" prop="username">
                                         <c-input
                                             name="username"
-                                            placeholder="Username"
+                                            placeholder="用户名"
                                             v-model="regist_form.username"
                                         ></c-input>
                                     </el-form-item>
@@ -171,7 +171,7 @@
                                         <c-input
                                             name="password"
                                             show-password
-                                            placeholder="Password"
+                                            placeholder="密码"
                                             v-model="regist_form.password"
                                         ></c-input>
                                     </el-form-item>
@@ -194,7 +194,7 @@
                                             class="button form-submit_btn"
                                             @click="form_submit('register')"
                                         >
-                                            <span class="text">register</span>
+                                            <span class="text">注册</span>
                                         </div>
                                     </div>
 
@@ -204,7 +204,7 @@
                                                 <span
                                                     class="text"
                                                     :label="true"
-                                                >I agree with the privacy policy.</span>
+                                                >同意隐私政策.</span>
                                             </c-checkbox>
                                         </div>
                                     </el-form-item>
@@ -215,7 +215,7 @@
                                 <span
                                     class="button login-button"
                                     @click="panel_active_card = 0"
-                                >Already Have An Account</span>
+                                >已有账号，去登陆</span>
                             </div>
                         </div>
                     </template>

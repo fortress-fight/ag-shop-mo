@@ -1,7 +1,7 @@
 <template>
     <div class="c_telephone">
         <div class="c_select" v-if="!no_code">
-            <el-select v-model="value.code" popper-class="c_telephone-popper">
+            <el-select v-model="value.code" placeholder="区号" popper-class="c_telephone-popper">
                 <el-option
                     v-for="item in code_data"
                     :key="item['country-code']"
@@ -19,7 +19,7 @@
             v-model="value.number"
             name="phonenumber"
             @change="value_change"
-            placeholder="Telephone"
+            placeholder="手机号"
         ></c-input>
     </div>
 </template>
@@ -274,7 +274,20 @@ export default Vue.extend({
                 { "dial-code": "260", "country-code": "zm" },
                 { "dial-code": "263", "country-code": "zw" },
                 { "dial-code": "358", "country-code": "ax" }
-            ]
+            ],
+
+            watch: {
+                "value.code": new_value => {
+                    if (!new_value) {
+                        this.value.code = "cn";
+                    }
+                }
+            },
+            mounted() {
+                if (!this.value.code) {
+                    this.value.code = "cn";
+                }
+            }
         };
     },
     props: {

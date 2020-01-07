@@ -6,34 +6,34 @@
                 :class="{ active: sidebar_active == 'security' }"
                 @click="set_sider('security')"
             >
-                <span class="text">security setting</span>
+                <span class="text">账户与安全</span>
             </div>
             <div
                 class="item"
                 :class="{ active: sidebar_active == 'order' }"
                 @click="set_sider('order')"
             >
-                <span class="text">order</span>
+                <span class="text">订单</span>
             </div>
             <div
                 class="item"
                 :class="{ active: sidebar_active == 'address' }"
                 @click="set_sider('address')"
             >
-                <span class="text">address</span>
+                <span class="text">地址</span>
             </div>
             <div
                 class="item"
                 :class="{ active: sidebar_active == 'comment' }"
                 @click="set_sider('comment')"
             >
-                <span class="text">upload pictures</span>
+                <span class="text">买家秀</span>
             </div>
         </div>
         <div class="body-my_page">
             <div class="my_page-container setting_panel" v-if="sidebar_active == 'security'">
                 <div class="container-header">
-                    <span class="text">Account information</span>
+                    <span class="text">用户信息</span>
                 </div>
 
                 <div class="container-body">
@@ -52,7 +52,7 @@
                         >
                             <div class="row">
                                 <div class="name">
-                                    <span class="text">Name</span>
+                                    <span class="text">用户名</span>
                                 </div>
                                 <div class="value">
                                     <span class="text">{{user_info.alias}}</span>
@@ -60,7 +60,7 @@
                             </div>
                             <div class="row">
                                 <div class="name">
-                                    <span class="text">Phone</span>
+                                    <span class="text">手机号</span>
                                 </div>
                                 <div class="value flex">
                                     <span class="text">{{user_info.mobile}}</span>
@@ -68,13 +68,13 @@
                                         class="verification_button button-effect2 button col"
                                         @click="setting_panel = 'editor_phone'"
                                     >
-                                        <span class="text">Verification ></span>
+                                        <span class="text">修改 ></span>
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="name">
-                                    <span class="text">E-mail</span>
+                                    <span class="text">邮箱</span>
                                 </div>
                                 <div class="value flex">
                                     <span class="text">{{user_info.email}}</span>
@@ -82,7 +82,7 @@
                                         class="verification_button button-effect2 button col"
                                         @click="setting_panel = 'editor_email'"
                                     >
-                                        <span class="text">Verification ></span>
+                                        <span class="text">修改 ></span>
                                     </div>
                                 </div>
                             </div>
@@ -91,7 +91,7 @@
                                     class="button button-setting_editor_submit button-setting_submit button-effect"
                                     @click="setting_panel = 'editor_name'"
                                 >
-                                    <span class="text">EDIT</span>
+                                    <span class="text">编辑</span>
                                 </div>
                             </div>
                             <div class="row">
@@ -99,7 +99,7 @@
                                     class="button button-change_password"
                                     @click="setting_panel = 'password'"
                                 >
-                                    <span class="text">Change Password</span>
+                                    <span class="text">修改密码</span>
                                 </div>
                             </div>
                         </div>
@@ -113,7 +113,7 @@
                                 <el-form-item prop="username">
                                     <div class="row">
                                         <div class="name col flex-yc">
-                                            <span class="text">Name</span>
+                                            <span class="text">用户名</span>
                                         </div>
                                         <div class="value col">
                                             <c-input v-model="setting.alias"></c-input>
@@ -125,7 +125,7 @@
                                         class="button button-setting_submit button-effect col"
                                         @click="update_user_name()"
                                     >
-                                        <span class="text">SUBMIT</span>
+                                        <span class="text">确定</span>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -133,7 +133,7 @@
                                         class="button button-change_password col"
                                         @click="setting_panel = 'base'"
                                     >
-                                        <span class="text">Back</span>
+                                        <span class="text">返回</span>
                                     </div>
                                 </div>
                             </el-form>
@@ -148,7 +148,7 @@
                                 <el-form-item prop="phone">
                                     <div class="row">
                                         <div class="name flex-yc col">
-                                            <span class="text">Phone</span>
+                                            <span class="text">手机号</span>
                                         </div>
                                         <div class="value col">
                                             <c-telephone-pre v-model="setting.phone"></c-telephone-pre>
@@ -175,7 +175,7 @@
                                         class="button button-setting_submit button-effect col"
                                         @click="submit_phone"
                                     >
-                                        <span class="text">SUBMIT</span>
+                                        <span class="text">确认</span>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -183,7 +183,7 @@
                                         class="button button-change_password col"
                                         @click="setting_panel = 'base'"
                                     >
-                                        <span class="text">Back</span>
+                                        <span class="text">返回</span>
                                     </div>
                                 </div>
                             </el-form>
@@ -198,7 +198,7 @@
                                 <el-form-item prop="e_mail">
                                     <div class="row">
                                         <div class="name col flex-yc">
-                                            <span class="text">E-mail</span>
+                                            <span class="text">邮箱</span>
                                         </div>
                                         <div class="value col">
                                             <c-input v-model="setting.e_mail.value"></c-input>
@@ -225,7 +225,7 @@
                                         class="button button-setting_submit button-effect col"
                                         @click="submit_email"
                                     >
-                                        <span class="text">SUBMIT</span>
+                                        <span class="text">确认</span>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -233,7 +233,7 @@
                                         class="button button-change_password col"
                                         @click="setting_panel = 'base'"
                                     >
-                                        <span class="text">Back</span>
+                                        <span class="text">返回</span>
                                     </div>
                                 </div>
                             </el-form>
@@ -252,7 +252,7 @@
                                 <div class="row">
                                     <el-form-item prop="old_password">
                                         <c-input
-                                            placeholder="Old password"
+                                            placeholder="旧密码"
                                             v-model="change_password_data.old_password"
                                             show-password
                                             type="password"
@@ -263,24 +263,20 @@
                                     <el-form-item prop="new_password">
                                         <c-input
                                             v-model="change_password_data.new_password"
-                                            placeholder="New password"
+                                            placeholder="新密码"
                                             show-password
                                             type="password"
                                         ></c-input>
                                     </el-form-item>
 
                                     <div class="message">
-                                        <span class="text">
-                                            Please enter a new password of 6 to 16
-                                            characters, including letters and
-                                            numbers
-                                        </span>
+                                        <span class="text">请输入 8 - 16 位由字母和数字组成的字符</span>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <el-form-item prop="confirm_password">
                                         <c-input
-                                            placeholder="Confirm password"
+                                            placeholder="确认密码"
                                             v-model="change_password_data.confirm_password"
                                             show-password
                                             type="password"
@@ -297,7 +293,7 @@
                                         class="button-setting_submit button button-effect button-setting_submit"
                                         @click="change_password_submit"
                                     >
-                                        <span class="text">SUBMIT</span>
+                                        <span class="text">确认</span>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -305,7 +301,7 @@
                                         class="button button-change_password_cancel button-effect2"
                                         @click="change_password_cancel"
                                     >
-                                        <span class="text">Cancel</span>
+                                        <span class="text">取消</span>
                                     </div>
                                 </div>
                             </el-form>
@@ -325,11 +321,11 @@
                 >
                     <div v-if="!order_detail.show" key="order-list">
                         <div class="container-header flex-sb flex-yc">
-                            <span class="text">order</span>
+                            <span class="text">订单</span>
 
                             <el-select
                                 v-model="order_status.select"
-                                placeholder="Order Status"
+                                placeholder="全部"
                                 class="select-order_status"
                                 popper-class="select_popper-order_status"
                             >
@@ -395,13 +391,13 @@
                                                     </div>
                                                     <div
                                                         class="text price"
-                                                    >${{ order_commodity.sku.goods.cost }}</div>
+                                                    >￥{{ order_commodity.sku.goods.cost }}</div>
                                                 </div>
                                             </a>
                                         </template>
                                         <div class="order-item_total-price flex flex-sb">
-                                            <div class="left">SUBTOTAL</div>
-                                            <div class="right">${{ order.price }}</div>
+                                            <div class="left">总计</div>
+                                            <div class="right">￥{{ order.price }}</div>
                                         </div>
                                     </div>
                                     <div class="order-item_footer">
@@ -410,7 +406,7 @@
                                             @click=" show_detail( order.id ) "
                                             v-if="order.status !== 0"
                                         >
-                                            <span class="text">Order detail</span>
+                                            <span class="text">订单详情</span>
                                         </div>
                                         <template v-else>
                                             <a
@@ -418,10 +414,10 @@
                                                 target="_blank"
                                                 :href="`/user/order_info.html?id=${order.id}`"
                                             >
-                                                <span class="text">Payment</span>
+                                                <span class="text">支付</span>
                                             </a>
                                             <div class="button button-order_cancel button-effect2">
-                                                <span class="text">Cancel</span>
+                                                <span class="text">取消</span>
                                             </div>
                                         </template>
                                     </div>
@@ -438,28 +434,28 @@
                                     @click="order_detail.show = false"
                                 >
                                     <i class="ic"><&nbsp;</i>
-                                    <span class="text">Back to the order</span>
+                                    <span class="text">返回</span>
                                 </div>
                                 <div class="reveive_info">
                                     <div class="title">
-                                        <span class="text">receiving information</span>
+                                        <span class="text">物流信息</span>
                                     </div>
                                     <div class="list">
                                         <div class="item">
-                                            <span class="name text">Name:</span>
+                                            <span class="name text">用户名:</span>
                                             <span class="value text">{{order_detail.data.name}}</span>
                                         </div>
                                         <div class="item">
-                                            <span class="name text">Phone:</span>
+                                            <span class="name text">手机号:</span>
                                             <span class="value text">{{order_detail.data.mobile}}</span>
                                         </div>
                                         <div class="item" v-if="order_detail.data.address">
-                                            <span class="name text">Address:</span>
+                                            <span class="name text">地址:</span>
 
                                             <span class="value text">{{order_detail.data.address}}</span>
                                         </div>
                                         <div class="item">
-                                            <span class="name text">Delivery:</span>
+                                            <span class="name text">物流:</span>
                                             <span
                                                 class="value text"
                                             >{{order_detail.data.shipping_type}}</span>
@@ -468,25 +464,25 @@
                                 </div>
                                 <div class="order_info">
                                     <div class="title">
-                                        <span class="text">ORDER information</span>
+                                        <span class="text">订单信息</span>
                                     </div>
                                     <div class="list">
                                         <div class="item">
-                                            <span class="name text">OrderID:</span>
+                                            <span class="name text">订单ID:</span>
                                             <span class="value text">{{order_detail.data.order_sn}}</span>
                                         </div>
                                         <div class="item">
-                                            <span class="name text">Ordertime:</span>
+                                            <span class="name text">创建时间:</span>
                                             <span
                                                 class="value text"
                                             >{{order_detail.data.create_time}}</span>
                                         </div>
                                         <div class="item">
-                                            <span class="name text">Paytime:</span>
+                                            <span class="name text">支付时间:</span>
                                             <span class="value text">{{order_detail.data.pay_time}}</span>
                                         </div>
                                         <div class="item">
-                                            <span class="name text">Logistics numbe:</span>
+                                            <span class="name text">物流号:</span>
                                             <span
                                                 class="value text"
                                             >{{order_detail.data.shipping_sn}}</span>
@@ -543,13 +539,13 @@
                                                         </div>
                                                         <div
                                                             class="text price"
-                                                        >${{ order_commodity.sku.goods.cost }}</div>
+                                                        >￥{{ order_commodity.sku.goods.cost }}</div>
                                                     </div>
                                                 </a>
                                             </template>
                                             <div class="order-item_total-price flex flex-sb">
-                                                <div class="left">SUBTOTAL</div>
-                                                <div class="right">${{ order_detail.data.price }}</div>
+                                                <div class="left">总计</div>
+                                                <div class="right">￥{{ order_detail.data.price }}</div>
                                             </div>
                                         </div>
                                     </div>
@@ -562,7 +558,7 @@
 
             <div class="my_page-container address_panel" v-if="sidebar_active == 'address'">
                 <div class="container-header">
-                    <span class="text">Stored Receiving Address</span>
+                    <span class="text">收货地址</span>
                 </div>
                 <div class="container-body">
                     <div class="address_list">
@@ -581,8 +577,8 @@
                                     ></div>
                                 </div>
                                 <div class="right flex">
-                                    <div class="button" @click="edit_address(address)">Edit</div>
-                                    <div class="button" @click="del_address(address)">Delete</div>
+                                    <div class="button" @click="edit_address(address)">编辑</div>
+                                    <div class="button" @click="del_address(address)">删除</div>
                                 </div>
                             </div>
                             <div class="col">
@@ -599,14 +595,14 @@
                         class="button button-effect button-add_address"
                         @click="add_address_dialog_show = true"
                     >
-                        <span class="text">Creative</span>
+                        <span class="text">添加</span>
                     </div>
                 </div>
             </div>
 
             <div class="my_page-container comment_panel" v-if="sidebar_active == 'comment'">
                 <div class="container-header">
-                    <span class="text">LIST</span>
+                    <span class="text">买家秀</span>
                 </div>
                 <div class="container-body">
                     <div class="comment_list">
@@ -623,7 +619,7 @@
                                 <div
                                     class="button button-comment_edit"
                                     @click="edit_comment(item)"
-                                >EDIT</div>
+                                >编辑</div>
                                 <div
                                     class="button button-comment_remove"
                                     @click="del_comment(item)"
@@ -650,20 +646,20 @@
                 </div>
                 <div class="row require title">
                     <div class="name">
-                        <span class="text">TITLE</span>
+                        <span class="text">标题</span>
                     </div>
                     <div class="value">
                         <c-input v-model="upload_data.title"></c-input>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="name">DESCRIBE</div>
+                    <div class="name">描述</div>
                     <div class="value">
                         <textarea v-model="upload_data.des" name="describe"></textarea>
                     </div>
                 </div>
                 <div class="row require pic">
-                    <div class="name">PICTURE</div>
+                    <div class="name">图片</div>
                     <div class="value">
                         <div class="upload-com" v-if="!upload_data.pictures.length">
                             <el-upload
@@ -676,7 +672,7 @@
                                 :before-upload="beforeUpload_handle"
                             ></el-upload>
                             <i class="ic ag-icon ag-upload"></i>
-                            <span class="text">UPLOAD</span>
+                            <span class="text">上传</span>
                         </div>
                         <div class="upload-com upload-list" v-else>
                             <draggable
@@ -724,7 +720,7 @@
                 </div>
                 <div class="row">
                     <div class="button button-publish button-effect" @click="publish_handler">
-                        <span class="text">PUBLISH</span>
+                        <span class="text">发布</span>
                     </div>
                 </div>
             </div>
@@ -795,23 +791,23 @@ export default Vue.extend({
                 select: "",
                 list: [
                     {
-                        label: "All",
+                        label: "全部",
                         value: "All"
                     },
                     {
-                        label: "unpaid",
+                        label: "未支付",
                         value: "unpaid"
                     },
                     {
-                        label: "paid",
+                        label: "已支付",
                         value: "paid"
                     },
                     {
-                        label: "completed",
+                        label: "已完成",
                         value: "completed"
                     },
                     {
-                        label: "cancelled",
+                        label: "已取消",
                         value: "cancelled"
                     }
                 ]
