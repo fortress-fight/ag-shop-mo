@@ -47,10 +47,14 @@ class U_PAGE extends BASE_PAGE {
             "click",
             function() {
                 if (this.tagName.toLowerCase() != "a") {
-                    $(this)
-                        .siblings()
-                        .removeClass("active");
-                    $(this).addClass("active");
+                    if ($(this).hasClass("active")) {
+                        $(this).removeClass("active");
+                    } else {
+                        $(this)
+                            .siblings()
+                            .removeClass("active");
+                        $(this).addClass("active");
+                    }
                 }
             }
         );

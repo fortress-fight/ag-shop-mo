@@ -30,7 +30,7 @@ export default class COMMUNITY_PAGE extends U_PAGE {
             itemSelector: ".item"
         });
         imagesLoaded(".community_list").on("progress", function() {
-            msnry.layout;
+            msnry.layout();
         });
     }
 }

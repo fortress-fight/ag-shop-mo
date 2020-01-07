@@ -6,12 +6,24 @@
         <div class="container">
             <div class="detail_list w">
                 <div class="detail_item" v-for="(item, index) in list" :key="index">
-                    <img :src="item.img | upload_resource_link" v-if="item.img" alt class />
+                    <img
+                        :src="item.img | upload_resource_link"
+                        v-if="item.img"
+                        alt
+                        class
+                        @click="open_img"
+                    />
                 </div>
             </div>
         </div>
 
         <loading v-if="loading"></loading>
+        <div class="big_img" :class="{ open: big_img.open }">
+            <div class="back_btn" @click="close_img">
+                <i class="ic ag-left-arrow ag-icon"></i>
+            </div><img :src="big_img.url" alt @load="big_img.loading = false" />
+            <loading v-if="big_img.loading"></loading>
+        </div>
     </div>
 </template>
 <script lang="ts">
@@ -25,6 +37,11 @@ export default Vue.extend({
             loading: true,
             show_panel: false,
             show_detail: 0,
+            big_img: {
+                open: false,
+                url: "",
+                loading: true
+            },
             publicPath: process.env.BASE_URL,
             list: [
                 {
@@ -77,6 +94,21 @@ export default Vue.extend({
         open_detail_panel() {
             this.show_panel = true;
         },
+        close_img(ev: Event) {
+            this.big_img.open = false;
+            setTimeout(() => {
+                this.big_img.url = "";
+                this.big_img.loading = true;
+            }, 400);
+        },
+        open_img(ev: Event) {
+            if (ev.currentTarget) {
+                let src = $(ev.currentTarget).attr("src");
+
+                this.big_img.open = true;
+                this.big_img.url = src || "";
+            }
+        },
         set_data(link: string) {
             this.loading = true;
             get_collect(link).then(response => {
@@ -89,6 +121,50 @@ export default Vue.extend({
 });
 </script>
 <style lang="scss">
+.big_img {
+    position: absolute;
+    z-index: 10;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+
+    display: flex;
+    visibility: hidden;
+
+    padding: 10px;
+    padding-top: 80px;
+
+    transition: 0.36s;
+
+    opacity: 0;
+    background: #fff;
+
+    align-items: center;
+    justify-content: center;
+    .back_btn {
+        position: absolute;
+        top: 0;
+        left: 0;
+
+        display: flex;
+
+        width: 80px;
+        height: 80px;
+
+        align-items: center;
+        justify-content: center;
+    }
+    img {
+        max-width: 96%;
+        max-height: 96%;
+    }
+    &.open {
+        visibility: visible;
+
+        opacity: 1;
+    }
+}
 .detail_panel {
     position: fixed;
     z-index: 999;
