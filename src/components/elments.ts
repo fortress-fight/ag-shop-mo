@@ -22,7 +22,12 @@ import {
     Upload
 } from "element-ui";
 // import lang from "element-ui/lib/locale/lang/en";
+import locale from "element-ui/lib/locale";
+import lang from "element-ui/lib/locale/lang/en";
 import Vue from "vue";
+
+// 设置语言
+locale.use(lang);
 
 Vue.use(Input);
 Vue.use(Select);

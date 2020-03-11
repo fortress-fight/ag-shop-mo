@@ -1,7 +1,11 @@
 <template>
     <div class="c_telephone">
         <div class="c_select" v-if="!no_code">
-            <el-select v-model="value.code" placeholder="区号" popper-class="c_telephone-popper">
+            <el-select
+                v-model="value.code"
+                placeholder="Code"
+                popper-class="c_telephone-popper"
+            >
                 <el-option
                     v-for="item in code_data"
                     :key="item['country-code']"
@@ -19,7 +23,7 @@
             v-model="value.number"
             name="phonenumber"
             @change="value_change"
-            placeholder="手机号"
+            placeholder="Telephone"
         ></c-input>
     </div>
 </template>

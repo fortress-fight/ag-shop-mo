@@ -27,7 +27,7 @@ export const carts_data = [
     //         pid: 4907,
     //         is_dir: 0,
     //         ext: null,
-    //         name_cn: "Agender破洞开叉牛仔裤",
+    //         name_cn: "Agender",
     //         name_en: "AD1450101",
     //         view: null,
     //         create_time: "2019-11-23 17:01:27",
@@ -37,12 +37,12 @@ export const carts_data = [
     //         desc: null,
     //         search_type: 0,
     //         configs: null,
-    //         type_name: "开放",
+    //         type_name: "",
     //         template: "product_post",
     //         state_name: null
     //     },
     //     num: 1,
-    //     name_cn: "Agender破洞开叉牛仔裤",
+    //     name_cn: "Agender",
     //     img: "/uploads/13450/5eecd5c56e5495c34849c7d64dfe47f7.jpg",
     //     price: "1298.00"
     // }
@@ -101,7 +101,7 @@ export const order_data = [
     //                     pid: 4907,
     //                     is_dir: 0,
     //                     ext: null,
-    //                     name_cn: "Agender破洞开叉牛仔裤",
+    //                     name_cn: "Agender",
     //                     name_en: "AD1450101",
     //                     view: null,
     //                     create_time: "2019-11-23 17:01:27",
@@ -112,7 +112,7 @@ export const order_data = [
     //                     desc: null,
     //                     search_type: 0,
     //                     configs: null,
-    //                     type_name: "开放",
+    //                     type_name: "",
     //                     template: "product_post",
     //                     state_name: null
     //                 }
@@ -172,7 +172,7 @@ export const order_data = [
     //                     pid: 4907,
     //                     is_dir: 0,
     //                     ext: null,
-    //                     name_cn: "Agender破洞开叉牛仔裤",
+    //                     name_cn: "Agender",
     //                     name_en: "AD1450101",
     //                     view: null,
     //                     create_time: "2019-11-23 17:01:27",
@@ -183,7 +183,7 @@ export const order_data = [
     //                     desc: null,
     //                     search_type: 0,
     //                     configs: null,
-    //                     type_name: "开放",
+    //                     type_name: "",
     //                     template: "product_post",
     //                     state_name: null
     //                 }
@@ -246,7 +246,7 @@ export const order_detail_data = {
     //                 pid: 4907,
     //                 is_dir: 0,
     //                 ext: null,
-    //                 name_cn: "Agender破洞开叉牛仔裤",
+    //                 name_cn: "Agender",
     //                 name_en: "AD1450101",
     //                 view: null,
     //                 create_time: "2019-11-23 17:01:27",
@@ -256,7 +256,7 @@ export const order_detail_data = {
     //                 desc: null,
     //                 search_type: 0,
     //                 configs: null,
-    //                 type_name: "开放",
+    //                 type_name: "",
     //                 template: "product_post",
     //                 state_name: null
     //             }
@@ -285,11 +285,11 @@ export const address_data = [
     //     id: 11,
     //     user_id: 3,
     //     country_id: 1,
-    //     country_name: "中国",
+    //     country_name: "",
     //     state_id: 4,
-    //     state_name: "河北省",
+    //     state_name: "",
     //     city_id: 40,
-    //     city_name: "唐山市",
+    //     city_name: "",
     //     address: "beijin",
     //     zip_code: "0",
     //     mobile: "2147483647",

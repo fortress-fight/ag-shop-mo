@@ -7,7 +7,7 @@
             :rules="form_rules"
         >
             <el-form-item class="item require" prop="country">
-                <div class="name">国家</div>
+                <div class="name">Country</div>
                 <div class="value">
                     <el-select
                         class="mini"
@@ -26,7 +26,7 @@
             </el-form-item>
 
             <el-form-item class="item require" prop="name">
-                <div class="name">收件人</div>
+                <div class="name">Name</div>
                 <div class="value">
                     <c-input
                         class="mini"
@@ -39,13 +39,13 @@
             </el-form-item>
 
             <el-form-item class="item require" prop="province">
-                <div class="name">省份</div>
+                <div class="name">Province</div>
                 <div class="value">
                     <el-select
                         class="mini"
                         v-model="data.province"
                         popper-class="c_address-popper"
-                        no-data-text="请先选择国家"
+                        no-data-text="Please select a country first"
                     >
                         <el-option
                             v-for="item in province_list"
@@ -58,13 +58,13 @@
             </el-form-item>
 
             <el-form-item class="item require" prop="city">
-                <div class="name">城市</div>
+                <div class="name">City</div>
                 <div class="value">
                     <el-select
                         class="mini"
                         v-model="data.city"
                         popper-class="c_address-popper"
-                        no-data-text="请先选择省份"
+                        no-data-text="Please select a province first"
                     >
                         <el-option
                             v-for="item in city_list"
@@ -77,7 +77,7 @@
             </el-form-item>
 
             <el-form-item class="item require" prop="address">
-                <div class="name">地址</div>
+                <div class="name">Address</div>
                 <div class="value">
                     <c-input
                         class="mini"
@@ -90,7 +90,7 @@
             </el-form-item>
 
             <el-form-item class="item require" prop="zip">
-                <div class="name">邮编</div>
+                <div class="name">ZIP code</div>
                 <div class="value">
                     <c-input
                         class="mini"
@@ -103,7 +103,7 @@
             </el-form-item>
 
             <el-form-item class="item require" prop="phone">
-                <div class="name">手机号</div>
+                <div class="name">Phone</div>
                 <div class="value">
                     <c-telephone
                         class="mini"
@@ -122,14 +122,14 @@
                         :false-label="0"
                     >
                         <span class="button-set_default text"
-                            >设置为默认地址</span
+                            >Set as default address</span
                         >
                     </c-checkbox>
                 </div>
             </el-form-item>
             <div class="item">
                 <div class="button address-save_button" @click="save_address">
-                    <span class="text">保存</span>
+                    <span class="text">SAVE</span>
                 </div>
             </div>
         </el-form>

@@ -19,7 +19,7 @@
             v-model="default_value"
             name="phonenumber"
             @change="value_change"
-            placeholder="手机号"
+            placeholder="Telephone"
         ></c-input>
     </div>
 </template>

@@ -126,7 +126,9 @@ export default class PROJECT_POST_PAGE extends U_PAGE {
             this.form_data.act = "buy_now";
             add_to_cart(this.form_data).then(response => {
                 if ((response as any).code == 2) {
-                    $(".project_detail-spec .msg").text("*所选规格库存不足");
+                    $(".project_detail-spec .msg").text(
+                        "*The selected specification is out of stock"
+                    );
                     return false;
                 }
                 $(".project_detail-spec .msg").text("");

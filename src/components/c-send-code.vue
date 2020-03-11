@@ -1,12 +1,19 @@
 <template>
     <div class="flex wrapper-send_code">
-        <c-input type="text" name="code" v-model="code" placeholder="验证码"></c-input>
+        <c-input
+            type="text"
+            name="code"
+            v-model="code"
+            placeholder="Verification Code"
+        ></c-input>
         <div
             class="send-verification_code button button-effect button-send_code col flex-cc"
             :class="{ gray: !send_code_ready() }"
             @click="send_phone_verification"
         >
-            <span class="text">{{ count != 0 ? `( ${count}S )` : "发送" }}</span>
+            <span class="text">{{
+                count != 0 ? `( ${count}S )` : "Send"
+            }}</span>
         </div>
     </div>
 </template>

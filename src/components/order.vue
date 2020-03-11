@@ -2,7 +2,7 @@
     <div class="order_container">
         <div class="address_group">
             <div class="address_header">
-                <span class="text">收货地址</span>
+                <span class="text">SHIPPING ADDRESS</span>
             </div>
             <div class="address_body">
                 <template v-if="!address_list.length">
@@ -53,30 +53,16 @@
                         class="button button-effect button-add_address"
                         @click="add_address_dialog_show = true"
                     >
-                        <span class="text">添加</span>
+                        <span class="text">Add</span>
                     </div>
                 </template>
             </div>
         </div>
         <div class="pay_method_group" :data-select_pay="pay_method">
             <div class="pay_method_header">
-                <span class="text">支付方式</span>
+                <span class="text">Payment method</span>
             </div>
             <div class="pay_method_body flex flex-sb">
-                <div class="item">
-                    <c-radio v-model="pay_method" label="alipay_m">
-                        <img :src="publicPath + 'image/alipay.png'" alt class />
-                    </c-radio>
-                </div>
-                <div class="item">
-                    <c-radio v-model="pay_method" label="wechat_m">
-                        <img
-                            :src="publicPath + 'image/weichat.png'"
-                            alt
-                            class
-                        />
-                    </c-radio>
-                </div>
                 <div class="item">
                     <c-radio v-model="pay_method" label="paypal">
                         <img :src="publicPath + 'image/paypal.png'" alt class />
@@ -109,31 +95,31 @@
                                         {{ item.sku.goods.name_cn }}
                                     </div>
                                     <div class="text good_price">
-                                        ￥{{ item.price }}
+                                        ${{ item.price }}
                                     </div>
                                 </div>
                                 <div class="bottom des_spec">
                                     <div class="row">
-                                        <span class="name">尺寸</span>
+                                        <span class="name">SIZE</span>
                                         <span class="value">{{
                                             item.sku.size
                                         }}</span>
                                     </div>
                                     <div class="row">
-                                        <span class="name">颜色</span>
+                                        <span class="name">COLOR</span>
                                         <span class="value">{{
                                             item.sku.color
                                         }}</span>
                                     </div>
                                     <div class="row">
-                                        <span class="name">数量</span>
+                                        <span class="name">QUANTITY</span>
                                         <span class="value">
                                             {{ item.num }}
                                         </span>
                                     </div>
                                 </div>
                                 <div class="text price">
-                                    ￥{{ multipliedBy(item.price, item.num) }}
+                                    ${{ multipliedBy(item.price, item.num) }}
                                 </div>
                             </div>
                         </div>
@@ -142,29 +128,27 @@
                 <div class="order-list_footer">
                     <div class="price_info">
                         <div class="item flex flex-sb">
-                            <span class="name">价格</span>
+                            <span class="name">Over value</span>
                             <div class="value">
-                                <span class="text unit">￥</span>
+                                <span class="text unit">$</span>
                                 <span class="text">{{
                                     this.order_info.price
                                 }}</span>
                             </div>
                         </div>
                         <div class="item flex flex-sb">
-                            <span class="name">运费</span>
+                            <span class="name">Shipping&handing</span>
                             <div class="value">
                                 <span class="text"
-                                    >￥{{
-                                        this.order_info.shipping_price
-                                    }}</span
+                                    >${{ this.order_info.shipping_price }}</span
                                 >
                             </div>
                         </div>
                     </div>
                     <div class="order-item_total-price flex flex-sb">
-                        <div class="left">总价</div>
+                        <div class="left">TOTAL</div>
                         <div class="right">
-                            ￥{{
+                            ${{
                                 plus(
                                     Number(this.order_info.shipping_price),
                                     Number(this.order_info.price)
@@ -173,7 +157,7 @@
                         </div>
                     </div>
                     <div class="button pay_button" @click="pay_order">
-                        支付
+                        PROCEED TO CHECKOUT
                     </div>
                 </div>
             </div>
@@ -196,7 +180,7 @@ export default Vue.extend({
         return {
             add_address_dialog_show: false,
             publicPath: process.env.BASE_URL,
-            pay_method: "alipay_m",
+            pay_method: "paypal",
             select_address: NaN,
             order_info: {},
             address_list: address_data
@@ -396,7 +380,7 @@ export default Vue.extend({
                 &:before {
                     display: inline-block;
 
-                    content: "默认";
+                    content: "default";
                     transform: scale(0.8);
                 }
             }

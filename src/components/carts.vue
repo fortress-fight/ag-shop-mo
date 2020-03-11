@@ -2,7 +2,7 @@
     <div id="ag-shopping_carts" :class="is_open ? 'show' : ''">
         <div class="carts_container">
             <div class="carts_header">
-                <span class="text">购物车</span>
+                <span class="text">my cart</span>
             </div>
             <template v-if="goods.length">
                 <div class="carts_body">
@@ -17,7 +17,14 @@
                                 <div class="container flex flex-sb">
                                     <div class="left">
                                         <div class="preview_image">
-                                            <img :src="item.img| upload_resource_link" alt class />
+                                            <img
+                                                :src="
+                                                    item.img
+                                                        | upload_resource_link
+                                                "
+                                                alt
+                                                class
+                                            />
                                         </div>
                                     </div>
                                     <div class="right">
@@ -26,55 +33,79 @@
                                             :data-index="index"
                                             @click="remove_item(item.sys_sku)"
                                         >
-                                            <i class="ic ag-close_1 ag-icon"></i>
+                                            <i
+                                                class="ic ag-close_1 ag-icon"
+                                            ></i>
                                         </div>
                                         <div class="header">
                                             <div class="title">
-                                                <span class="text">{{ item.name_cn }}</span>
+                                                <span class="text">{{
+                                                    item.name_cn
+                                                }}</span>
                                             </div>
                                             <div class="price">
-                                                <span class="text unit">￥</span>
-                                                <span class="text">{{ item.price }}</span>
+                                                <span class="text unit">$</span>
+                                                <span class="text">{{
+                                                    item.price
+                                                }}</span>
                                             </div>
                                         </div>
 
                                         <div class="spec">
                                             <div class="spec_item flex">
-                                                <span class="text name">尺寸</span>
-                                                <span class="text value">{{ item.size }}</span>
+                                                <span class="text name"
+                                                    >Size</span
+                                                >
+                                                <span class="text value">{{
+                                                    item.size
+                                                }}</span>
                                             </div>
                                             <div class="spec_item flex">
-                                                <span class="text name">颜色</span>
-                                                <span class="text value">{{ item.color }}</span>
+                                                <span class="text name"
+                                                    >Colour</span
+                                                >
+                                                <span class="text value">{{
+                                                    item.color
+                                                }}</span>
                                             </div>
                                             <div class="spec_item flex">
-                                                <span class="text name">数量</span>
+                                                <span class="text name"
+                                                    >Quantity</span
+                                                >
                                                 <div class="value">
-                                                    <template v-if="item.stock == 0">
+                                                    <template
+                                                        v-if="item.stock == 0"
+                                                    >
                                                         <span
                                                             class="text"
                                                             style="font-family: MTTMILANO-BOLD;"
-                                                        >售罄</span>
+                                                            >Sold out</span
+                                                        >
                                                     </template>
                                                     <c-input-number
                                                         v-else
                                                         v-model="item.num"
                                                         :min="1"
                                                         :max="item.stock"
-                                                        @change="item_num_change(item.sys_sku,item.num)"
+                                                        @change="
+                                                            item_num_change(
+                                                                item.sys_sku,
+                                                                item.num
+                                                            )
+                                                        "
                                                     ></c-input-number>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="total_price">
-                                            <span class="text unit">￥</span>
+                                            <span class="text unit">$</span>
                                             <span class="text">
                                                 {{
-                                                "multipliedBy"
-                                                | compute_accuracy(
-                                                item.num,
-                                                item.price
-                                                )
+                                                    "multipliedBy"
+                                                        | compute_accuracy(
+                                                            item.num,
+                                                            item.price
+                                                        )
                                                 }}
                                             </span>
                                         </div>
@@ -87,24 +118,31 @@
                 <div class="carts_footer">
                     <div class="price_info">
                         <div class="item flex flex-sb">
-                            <span class="name">价格</span>
+                            <span class="name">Over value</span>
                             <div class="value">
-                                <span class="text unit">￥</span>
-                                <span class="text">{{ goods_total_price }}</span>
+                                <span class="text unit">$</span>
+                                <span class="text">{{
+                                    goods_total_price
+                                }}</span>
                             </div>
                         </div>
                     </div>
                     <div class="check_order">
                         <div class="item flex flex-sb">
-                            <span class="text name">总计</span>
+                            <span class="text name">TOTAL</span>
                             <div class="value">
-                                <span class="text unit">￥</span>
-                                <span class="text">{{ goods_total_price + express_price }}</span>
+                                <span class="text unit">$</span>
+                                <span class="text">{{
+                                    goods_total_price + express_price
+                                }}</span>
                             </div>
                         </div>
                         <div class="item">
-                            <a href="/user/checkout.html" class="btn-check_order button">
-                                <span class="text">去结算</span>
+                            <a
+                                href="/user/checkout.html"
+                                class="btn-check_order button"
+                            >
+                                <span class="text">Proceed to checkout</span>
                             </a>
                         </div>
                     </div>
@@ -112,7 +150,7 @@
             </template>
             <template v-else>
                 <div class="empty_panel flex-cc">
-                    <span class="text">购物车</span>
+                    <span class="text">your shopping bag is empty</span>
                 </div>
             </template>
         </div>

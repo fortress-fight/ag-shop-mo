@@ -5,7 +5,9 @@
         </div>
         <div class="login_panel w">
             <div class="login_panel-header">
-                <span class="text">{{ tab_cards[panel_active_card].name }}</span>
+                <span class="text">{{
+                    tab_cards[panel_active_card].name
+                }}</span>
             </div>
             <div class="login_panel-body">
                 <c-tab-card-box
@@ -26,7 +28,7 @@
                                         <c-input
                                             type="text"
                                             name="username"
-                                            placeholder="用户名"
+                                            placeholder="Username"
                                             v-model="login_form.username"
                                         ></c-input>
                                     </el-form-item>
@@ -35,21 +37,23 @@
                                             type="password"
                                             name="password"
                                             show-password
-                                            placeholder="密码"
+                                            placeholder="Password"
                                             v-model="login_form.password"
                                         ></c-input>
                                     </el-form-item>
                                     <div
                                         class="error_message text"
                                         v-if="login_error_message"
-                                    >{{ login_error_message }}</div>
+                                    >
+                                        {{ login_error_message }}
+                                    </div>
 
                                     <div class="form_footer">
                                         <div
                                             class="button form-submit_btn"
                                             @click="form_submit('login')"
                                         >
-                                            <span class="text">登录</span>
+                                            <span class="text">login</span>
                                         </div>
                                     </div>
                                 </el-form>
@@ -58,12 +62,14 @@
                                 <span
                                     class="button forgot_password-button"
                                     @click="panel_active_card = 2"
-                                >忘记密码</span>
+                                    >Forgot Password</span
+                                >
                                 <i class="line"></i>
                                 <span
                                     class="button register_account-button"
                                     @click="panel_active_card = 1"
-                                >注册?</span>
+                                    >Don't have an account?</span
+                                >
                             </div>
                         </div>
                     </template>
@@ -78,10 +84,17 @@
                                 >
                                     <el-form-item
                                         class="row"
-                                        :prop="forgot_password_form.use == 'phone'? 'phone': 'email'"
+                                        :prop="
+                                            forgot_password_form.use == 'phone'
+                                                ? 'phone'
+                                                : 'email'
+                                        "
                                     >
                                         <c-telephone-pre
-                                            v-if="forgot_password_form.use == 'phone'"
+                                            v-if="
+                                                forgot_password_form.use ==
+                                                    'phone'
+                                            "
                                             v-model="forgot_password_form.phone"
                                         ></c-telephone-pre>
                                         <c-input
@@ -89,7 +102,7 @@
                                             v-model="forgot_password_form.email"
                                             type="text"
                                             name="text"
-                                            placeholder="邮箱"
+                                            placeholder="E-mail"
                                         ></c-input>
                                     </el-form-item>
 
@@ -97,36 +110,54 @@
                                         <c-send-code
                                             v-model="forgot_password_form.code"
                                             :send_code_target="{
-                                            type: forgot_password_form.use,
-                                            value: forgot_password_form.use== 'phone' ?  forgot_password_form.phone:forgot_password_form.email
-                                        }"
+                                                type: forgot_password_form.use,
+                                                value:
+                                                    forgot_password_form.use ==
+                                                    'phone'
+                                                        ? forgot_password_form.phone
+                                                        : forgot_password_form.email
+                                            }"
                                         ></c-send-code>
                                     </el-form-item>
-                                    <el-form-item class="row" prop="new_password">
+                                    <el-form-item
+                                        class="row"
+                                        prop="new_password"
+                                    >
                                         <c-input
                                             type="text"
                                             name="password"
-                                            placeholder="新密码"
-                                            v-model="forgot_password_form.new_password"
+                                            placeholder="password"
+                                            v-model="
+                                                forgot_password_form.new_password
+                                            "
                                         ></c-input>
                                     </el-form-item>
-                                    <el-form-item class="row" prop="old_password">
+                                    <el-form-item
+                                        class="row"
+                                        prop="old_password"
+                                    >
                                         <c-input
                                             type="text"
-                                            placeholder="旧密码"
-                                            v-model="forgot_password_form.old_password"
+                                            placeholder="Confirm Password"
+                                            v-model="
+                                                forgot_password_form.old_password
+                                            "
                                         ></c-input>
                                     </el-form-item>
                                     <div
                                         class="error_message text"
                                         v-if="login_error_message"
-                                    >{{ login_error_message }}</div>
+                                    >
+                                        {{ login_error_message }}
+                                    </div>
                                     <div class="form_footer">
                                         <div
                                             class="button form-submit_btn"
-                                            @click="form_submit('forgot_password')"
+                                            @click="
+                                                form_submit('forgot_password')
+                                            "
                                         >
-                                            <span class="text">提交</span>
+                                            <span class="text">submit</span>
                                         </div>
                                     </div>
                                 </el-form>
@@ -137,17 +168,20 @@
                                     v-if="forgot_password_form.use == 'phone'"
                                     class="button forgot_password-button"
                                     @click="forgot_password_form.use = 'email'"
-                                >使用邮箱</span>
+                                    >Use E-mail</span
+                                >
                                 <span
                                     v-else
                                     class="button forgot_password-button"
                                     @click="forgot_password_form.use = 'phone'"
-                                >使用手机号</span>
+                                    >Use phone</span
+                                >
                                 <i class="line"></i>
                                 <span
                                     class="button login-button"
                                     @click="panel_active_card = 0"
-                                >登录</span>
+                                    >Log In</span
+                                >
                             </div>
                         </div>
                     </template>
@@ -163,7 +197,7 @@
                                     <el-form-item class="row" prop="username">
                                         <c-input
                                             name="username"
-                                            placeholder="用户名"
+                                            placeholder="Username"
                                             v-model="regist_form.username"
                                         ></c-input>
                                     </el-form-item>
@@ -171,40 +205,55 @@
                                         <c-input
                                             name="password"
                                             show-password
-                                            placeholder="密码"
+                                            placeholder="Password"
                                             v-model="regist_form.password"
                                         ></c-input>
                                     </el-form-item>
-                                    <el-form-item class="row" prop="confirm_password">
+                                    <el-form-item
+                                        class="row"
+                                        prop="confirm_password"
+                                    >
                                         <c-input
                                             show-password
                                             name="confirm_password"
                                             v-model="
-                                                    regist_form.confirm_password
-                                                "
+                                                regist_form.confirm_password
+                                            "
                                             placeholder="Confirm Password"
                                         ></c-input>
                                     </el-form-item>
                                     <div
                                         class="error_message text"
                                         v-if="login_error_message"
-                                    >{{ login_error_message }}</div>
+                                    >
+                                        {{ login_error_message }}
+                                    </div>
                                     <div class="form_footer">
                                         <div
                                             class="button form-submit_btn"
                                             @click="form_submit('register')"
                                         >
-                                            <span class="text">注册</span>
+                                            <span class="text">register</span>
                                         </div>
                                     </div>
 
-                                    <el-form-item class="row agree_policy" prop="agree_policy">
-                                        <div class="privacy_policy_check" ref="polic_check">
-                                            <c-checkbox v-model="regist_form.agree_policy">
-                                                <span
-                                                    class="text"
-                                                    :label="true"
-                                                >同意隐私政策.</span>
+                                    <el-form-item
+                                        class="row agree_policy"
+                                        prop="agree_policy"
+                                    >
+                                        <div
+                                            class="privacy_policy_check"
+                                            ref="polic_check"
+                                        >
+                                            <c-checkbox
+                                                v-model="
+                                                    regist_form.agree_policy
+                                                "
+                                            >
+                                                <span class="text" :label="true"
+                                                    >I agree with thie
+                                                    privacy.</span
+                                                >
                                             </c-checkbox>
                                         </div>
                                     </el-form-item>
@@ -215,7 +264,8 @@
                                 <span
                                     class="button login-button"
                                     @click="panel_active_card = 0"
-                                >已有账号，去登陆</span>
+                                    >Already Have An Account</span
+                                >
                             </div>
                         </div>
                     </template>

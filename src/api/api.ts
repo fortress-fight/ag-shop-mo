@@ -9,7 +9,7 @@ axios_instance.interceptors.response.use(
         if (response.data.code === 999) {
             window.V.$store.dispatch("login/open");
 
-            return Promise.reject("没有登录");
+            return Promise.reject("Not Logged");
         }
         if (response.data.code === 998) {
             window.location.href = response.data.msg;
@@ -18,7 +18,7 @@ axios_instance.interceptors.response.use(
         if (response.data.code === 1) {
             alert(response.data.msg);
 
-            return Promise.reject("code=1 出现错误：" + response.data.msg);
+            return Promise.reject("code=1 ERROR：" + response.data.msg);
         }
         return response.data;
     },
