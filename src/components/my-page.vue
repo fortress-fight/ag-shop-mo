@@ -396,8 +396,9 @@
                                             </a>
                                         </template>
                                         <div class="order-item_total-price flex flex-sb">
-                                            <div class="left">总计</div>
-                                            <div class="right">￥{{ order.price }}</div>
+                                            
+                                                <div class="left">总计(包含运费)</div>
+                                                <div class="right">￥{{ plus(order.price, order.shipping_price) }}</div>
                                         </div>
                                     </div>
                                     <div class="order-item_footer">
@@ -427,7 +428,7 @@
                     </div>
 
                     <div key="order_panel-detail" v-else>
-                        <div class="container-body" v-if="order_detail.data.id">
+                        <div class="container-body" v-if="order_detail.data && order_detail.data.id">
                             <div class="order_panel-detail">
                                 <div
                                     class="back-button button button-effect2"
@@ -544,8 +545,9 @@
                                                 </a>
                                             </template>
                                             <div class="order-item_total-price flex flex-sb">
-                                                <div class="left">总计</div>
-                                                <div class="right">￥{{ order_detail.data.price }}</div>
+                                                
+                                                <div class="left">总计(包含运费)</div>
+                                                <div class="right">￥{{ plus(order_detail.data.price, order_detail.data.shipping_price) }}</div>
                                             </div>
                                         </div>
                                     </div>
@@ -734,6 +736,7 @@
 </template>
 <script lang="ts">
 import Vue from "vue";
+import BigNumber from "bignumber.js";
 import { v_form_test } from "@/unit/vue";
 import {
     order_list,
@@ -870,6 +873,9 @@ export default Vue.extend({
         }
     },
     methods: {
+        plus(num, num2) {
+            return new BigNumber(num).plus(new BigNumber(num2)).toFixed(2);
+        },
         delete_img(id: number) {
             this.upload_data.pictures.splice(id, 1);
         },
@@ -994,6 +1000,7 @@ export default Vue.extend({
         },
         show_detail(id: string) {
             this.order_detail.show = true;
+            console.log('this.order_list:', this.order_list)
             this.order_detail.data = this.order_list[id];
 
             order_detail({ id: id }).then(response => {

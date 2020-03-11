@@ -5,7 +5,11 @@
         </div>
         <div class="container">
             <div class="detail_list w">
-                <div class="detail_item" v-for="(item, index) in list" :key="index">
+                <div
+                    class="detail_item"
+                    v-for="(item, index) in list"
+                    :key="index"
+                >
                     <img
                         :src="item.img | upload_resource_link"
                         v-if="item.img"
@@ -21,7 +25,8 @@
         <div class="big_img" :class="{ open: big_img.open }">
             <div class="back_btn" @click="close_img">
                 <i class="ic ag-left-arrow ag-icon"></i>
-            </div><img :src="big_img.url" alt @load="big_img.loading = false" />
+            </div>
+            <img :src="big_img.url" alt @load="big_img.loading = false" />
             <loading v-if="big_img.loading"></loading>
         </div>
     </div>
@@ -233,7 +238,9 @@ export default Vue.extend({
 .detail_item {
     float: left;
 
+    box-sizing: border-box;
     width: calc(33.3333%);
+    padding: 2px;
     &:nth-child(3n + 1) {
         clear: left;
     }

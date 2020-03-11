@@ -138,3 +138,54 @@ li {
 .flex-sb {
     justify-content: space-between;
 }
+
+
+
+
+/* 补充 */
+
+.page-community_list .item .preview_image img {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+
+.page-collection .detail_panel .detail_list {
+    width: 100%;
+    padding: 1px;
+    box-sizing: border-box;
+}
+.page-stockists .stockist_list .item .number+img {
+    display: block !important;
+    margin-top: 20px
+}
+.page-project .project .module_container  {overflow:hidden}
+
+.project_item_list {margin-right:  -7.6vw;overflow: hidden;}
+.project_item_list .item {
+
+    width: calc(50% - 7.6vw);
+    margin-right: 7.6vw;
+    margin-bottom: 4vw;
+    text-align: center
+}
+.project_item_list .item .des {
+    padding-top: 3vw
+}
+
+.project_item_list .item .des .title {
+    margin-bottom: 6vw;
+    font-weight: 900
+}
+
+.page_tab_bar .pagination>li {
+    display: none
+}
+
+.page_tab_bar .pagination>li:first-child {
+    display: inline-block
+}
+
+.page_tab_bar .pagination>li:last-child {
+    display: inline-block
+}

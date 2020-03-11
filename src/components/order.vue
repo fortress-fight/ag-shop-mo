@@ -2,14 +2,19 @@
     <div class="order_container">
         <div class="address_group">
             <div class="address_header">
-                <span class="text">shipping address</span>
+                <span class="text">收货地址</span>
             </div>
             <div class="address_body">
                 <template v-if="!address_list.length">
-                    <add-address-panel @address_save="add_address_save"></add-address-panel>
+                    <add-address-panel
+                        @address_save="add_address_save"
+                    ></add-address-panel>
                 </template>
                 <template v-else>
-                    <div class="address_list" :data-select_address_id="select_address">
+                    <div
+                        class="address_list"
+                        :data-select_address_id="select_address"
+                    >
                         <div
                             class="address_list-body row"
                             :class="{ select: select_address == address.id }"
@@ -19,11 +24,15 @@
                         >
                             <div class="col flex-yc flex-sb">
                                 <div class="left flex flex-yc">
-                                    <span class="name text">{{ address.username }}</span>
+                                    <span class="name text">{{
+                                        address.username
+                                    }}</span>
 
                                     <div
                                         class="is_default button"
-                                        :class="{ select: address.is_default == 1 }"
+                                        :class="{
+                                            select: address.is_default == 1
+                                        }"
                                     ></div>
                                 </div>
                             </div>
@@ -31,9 +40,12 @@
                                 <span class="text">{{ address.mobile }}</span>
                             </div>
                             <div class="col">
-                                <span
-                                    class="text"
-                                >{{address.country_name}}{{address.city_name}}{{address.state_name}}{{address.address}}</span>
+                                <span class="text"
+                                    >{{ address.country_name
+                                    }}{{ address.city_name
+                                    }}{{ address.state_name
+                                    }}{{ address.address }}</span
+                                >
                             </div>
                         </div>
                     </div>
@@ -41,49 +53,152 @@
                         class="button button-effect button-add_address"
                         @click="add_address_dialog_show = true"
                     >
-                        <span class="text">Creative</span>
+                        <span class="text">添加</span>
                     </div>
                 </template>
             </div>
         </div>
         <div class="pay_method_group" :data-select_pay="pay_method">
             <div class="pay_method_header">
-                <span class="text">PAYMENT</span>
+                <span class="text">支付方式</span>
             </div>
             <div class="pay_method_body flex flex-sb">
                 <div class="item">
                     <c-radio v-model="pay_method" label="alipay_m">
-                        <img :src="publicPath+'image/alipay.png'" alt class />
+                        <img :src="publicPath + 'image/alipay.png'" alt class />
                     </c-radio>
                 </div>
                 <div class="item">
                     <c-radio v-model="pay_method" label="wechat_m">
-                        <img :src="publicPath+'image/weichat.png'" alt class />
+                        <img
+                            :src="publicPath + 'image/weichat.png'"
+                            alt
+                            class
+                        />
                     </c-radio>
                 </div>
                 <div class="item">
                     <c-radio v-model="pay_method" label="paypal">
-                        <img :src="publicPath+'image/paypal.png'" alt class />
+                        <img :src="publicPath + 'image/paypal.png'" alt class />
                     </c-radio>
                 </div>
             </div>
         </div>
-        <add-address-dialog :show="add_address_dialog_show" v-on:close="close_add_address_dialog"></add-address-dialog>
+        <template v-if="this.order_info.order_goods">
+            <div class="order-list">
+                <div
+                    class="order-list_item"
+                    v-for="(item, index) in order_info.order_goods"
+                    :key="index"
+                >
+                    <div class="order-item_body">
+                        <div class="order_detail-list">
+                            <div class="order_detail-col">
+                                <img
+                                    :src="
+                                        item.sku.goods.img
+                                            | upload_resource_link
+                                    "
+                                    alt
+                                    class="image_preview"
+                                />
+                            </div>
+                            <div class="order_detail-col">
+                                <div class="des">
+                                    <div class="text des_text">
+                                        {{ item.sku.goods.name_cn }}
+                                    </div>
+                                    <div class="text good_price">
+                                        ￥{{ item.price }}
+                                    </div>
+                                </div>
+                                <div class="bottom des_spec">
+                                    <div class="row">
+                                        <span class="name">尺寸</span>
+                                        <span class="value">{{
+                                            item.sku.size
+                                        }}</span>
+                                    </div>
+                                    <div class="row">
+                                        <span class="name">颜色</span>
+                                        <span class="value">{{
+                                            item.sku.color
+                                        }}</span>
+                                    </div>
+                                    <div class="row">
+                                        <span class="name">数量</span>
+                                        <span class="value">
+                                            {{ item.num }}
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="text price">
+                                    ￥{{ multipliedBy(item.price, item.num) }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="order-list_footer">
+                    <div class="price_info">
+                        <div class="item flex flex-sb">
+                            <span class="name">价格</span>
+                            <div class="value">
+                                <span class="text unit">￥</span>
+                                <span class="text">{{
+                                    this.order_info.price
+                                }}</span>
+                            </div>
+                        </div>
+                        <div class="item flex flex-sb">
+                            <span class="name">运费</span>
+                            <div class="value">
+                                <span class="text"
+                                    >￥{{
+                                        this.order_info.shipping_price
+                                    }}</span
+                                >
+                            </div>
+                        </div>
+                    </div>
+                    <div class="order-item_total-price flex flex-sb">
+                        <div class="left">总价</div>
+                        <div class="right">
+                            ￥{{
+                                plus(
+                                    Number(this.order_info.shipping_price),
+                                    Number(this.order_info.price)
+                                )
+                            }}
+                        </div>
+                    </div>
+                    <div class="button pay_button" @click="pay_order">
+                        支付
+                    </div>
+                </div>
+            </div>
+        </template>
+        <add-address-dialog
+            :show="add_address_dialog_show"
+            v-on:close="close_add_address_dialog"
+        ></add-address-dialog>
     </div>
 </template>
 <script lang="ts">
 import Vue from "vue";
 import add_address_panel from "@/components/panel-add_address.vue";
 import dialog_add_address from "@/components/dialog-add_address.vue";
-import { get_address } from "@/api/api";
+import { get_address, order_info, to_pay } from "@/api/api";
 import { address_data } from "@/api/fake_data";
+import BigNumber from "bignumber.js";
 export default Vue.extend({
     data() {
         return {
             add_address_dialog_show: false,
             publicPath: process.env.BASE_URL,
-            pay_method: "alipay",
+            pay_method: "alipay_m",
             select_address: NaN,
+            order_info: {},
             address_list: address_data
         };
     },
@@ -93,6 +208,14 @@ export default Vue.extend({
         "add-address-dialog": dialog_add_address
     },
     methods: {
+        plus(num: number, num2: number) {
+            return new BigNumber(num).plus(new BigNumber(num2)).toFixed(2);
+        },
+        multipliedBy(num: number, num2: number) {
+            return new BigNumber(num)
+                .multipliedBy(new BigNumber(num2))
+                .toFixed(2);
+        },
         close_add_address_dialog() {
             this.add_address_dialog_show = false;
             get_address().then(response => {
@@ -101,6 +224,7 @@ export default Vue.extend({
         },
         change_address_select(id: number) {
             this.select_address = id;
+            this.update_order_info(id);
         },
         show_add_address_dialog() {
             this.add_address_dialog_show = true;
@@ -108,6 +232,21 @@ export default Vue.extend({
         add_address_save() {
             get_address().then(response => {
                 this.address_list = response.data;
+            });
+        },
+        update_order_info(id: number) {
+            order_info({
+                address_id: id
+            }).then(res => {
+                if (res.data.order) {
+                    this.order_info = res.data.order;
+                }
+            });
+        },
+        pay_order() {
+            to_pay({
+                order_id: this.order_info.id,
+                payment: this.pay_method
             });
         }
     },
@@ -118,6 +257,15 @@ export default Vue.extend({
                 if (address.is_default == 1) {
                     this.select_address = address.id;
                     console.log(this.select_address, "this.select_address");
+                }
+                if (!this.address_list.length) {
+                    this.update_order_info(0);
+                } else {
+                    this.address_list.forEach(item => {
+                        if (item.is_default == 1) {
+                            this.update_order_info(item.id);
+                        }
+                    });
                 }
             });
         });
@@ -248,7 +396,7 @@ export default Vue.extend({
                 &:before {
                     display: inline-block;
 
-                    content: "default";
+                    content: "默认";
                     transform: scale(0.8);
                 }
             }

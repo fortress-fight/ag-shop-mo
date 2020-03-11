@@ -93,18 +93,6 @@
                                 <span class="text">{{ goods_total_price }}</span>
                             </div>
                         </div>
-                        <div class="item flex flex-sb">
-                            <span class="name">运费</span>
-                            <div class="value">
-                                <template v-if="express_price === 0">
-                                    <span class="text">0</span>
-                                </template>
-                                <template v-else>
-                                    <span class="text unit">￥</span>
-                                    <span class="text">{{ express_price }}</span>
-                                </template>
-                            </div>
-                        </div>
                     </div>
                     <div class="check_order">
                         <div class="item flex flex-sb">

@@ -27,7 +27,6 @@ axios_instance.interceptors.response.use(
         return Promise.reject(error);
     }
 );
-
 export function login(data: any) {
     return axios.post("/service/login.html", data).then((response: any) => {
         if (response.data.code == 0) {
@@ -59,19 +58,19 @@ export function register(data: any) {
 export function add_to_cart(data: any) {
     return axios_instance.post("/api/add_to_cart.html", data);
 }
-export function goods_bug_now(data: any) {
+export function goods_buy_now(data: any) {
     return axios_instance.post("/api/add_to_cart.html", data);
 }
-export function get_cart(data?: any): Promise<{ data: any }> {
+export function get_cart(data: any) {
     return axios_instance.post("/api/get_cart.html", data);
 }
 export function add_address(data: any) {
     return axios_instance.post("/api/add_address.html", data);
 }
-export function get_region(data?: any) {
+export function get_region(data: any) {
     return axios_instance.post("/api/get_region.html", data);
 }
-export function get_address(data?: any) {
+export function get_address(data: any) {
     return axios_instance.post("/api/get_address.html", data);
 }
 
@@ -114,6 +113,16 @@ export function user_info_bind(data: any) {
 export function login_by_code(data: any) {
     return axios_instance.post("/api/login_by_code.html", data);
 }
+export function order_info(data: any) {
+    if (process.env.NODE_ENV === "production") {
+        return axios_instance.post(
+            window.location.pathname + window.location.search,
+            data
+        );
+    } else {
+        return axios_instance.post("/page/user/order_info.html?id=52", data);
+    }
+}
 
 export function to_pay(data: any) {
     let ret = "";
@@ -125,5 +134,5 @@ export function to_pay(data: any) {
         }
         ret += encodeURIComponent(it) + "=" + encodeURIComponent(data[it]);
     }
-    window.location.href = "/user/to_pay.html" + ret;
+    window.open("/user/to_pay.html" + ret);
 }
