@@ -82,4 +82,8 @@ export default Vue.extend({
         justify-content: center;
     }
 }
+
+.notice_list-detail_panel {
+    overflow: auto;
+}
 </style>
