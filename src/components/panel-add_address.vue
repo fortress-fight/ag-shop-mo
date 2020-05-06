@@ -133,14 +133,17 @@
                 </div>
             </div>
         </el-form>
+        <loading v-if="loading"></loading>
     </div>
 </template>
 <script lang="ts">
 import Vue from "vue";
+import Loading from "@/components/c-loading.vue";
 import { get_region, add_address } from "@/api/api";
 export default Vue.extend({
     data() {
         return {
+            loading: false,
             id: false,
             data: {
                 country: "",
@@ -177,11 +180,15 @@ export default Vue.extend({
     },
     watch: {
         "data.country"(newValue) {
+            this.data.province = "";
+            this.data.city = "";
+            this.city_list = [];
             get_region({ id: newValue }).then(response => {
                 this.province_list = response.data;
             });
         },
         "data.province"(newValue) {
+            this.data.city = "";
             get_region({ id: newValue }).then(response => {
                 this.city_list = response.data;
             });
@@ -231,17 +238,20 @@ export default Vue.extend({
     },
     methods: {
         save_address(this: any) {
+            this.loading = true;
             this.$refs.form_address.validate((valid: any) => {
                 if (valid) {
                     if (this.id) {
                         add_address({ id: this.id, ...this.data }).then(
                             response => {
                                 this.$emit("save");
+                                this.loading = false;
                             }
                         );
                     } else {
                         add_address(this.data).then(response => {
                             this.$emit("save");
+                            this.loading = false;
                         });
                     }
                 } else {
@@ -252,10 +262,12 @@ export default Vue.extend({
         }
     },
     created() {
-        get_region().then(response => {
-            console.log(response);
+        get_region().then((response: any) => {
             this.country_list = response.data;
         });
+    },
+    components: {
+        loading: Loading
     },
     mounted() {}
 });

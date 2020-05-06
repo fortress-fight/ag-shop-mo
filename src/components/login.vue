@@ -5,7 +5,9 @@
         </div>
         <div class="login_panel w">
             <div class="login_panel-header">
-                <span class="text">{{ tab_cards[panel_active_card].name }}</span>
+                <span class="text">{{
+                    tab_cards[panel_active_card].name
+                }}</span>
             </div>
             <div class="login_panel-body">
                 <c-tab-card-box
@@ -42,7 +44,9 @@
                                     <div
                                         class="error_message text"
                                         v-if="login_error_message"
-                                    >{{ login_error_message }}</div>
+                                    >
+                                        {{ login_error_message }}
+                                    </div>
 
                                     <div class="form_footer">
                                         <div
@@ -58,12 +62,14 @@
                                 <span
                                     class="button forgot_password-button"
                                     @click="panel_active_card = 2"
-                                >忘记密码</span>
+                                    >忘记密码</span
+                                >
                                 <i class="line"></i>
                                 <span
                                     class="button register_account-button"
                                     @click="panel_active_card = 1"
-                                >注册?</span>
+                                    >注册?</span
+                                >
                             </div>
                         </div>
                     </template>
@@ -78,15 +84,24 @@
                                 >
                                     <el-form-item
                                         class="row"
-                                        :prop="forgot_password_form.use == 'phone'? 'phone': 'email'"
+                                        v-if="
+                                            forgot_password_form.use == 'phone'
+                                        "
+                                        :prop="forgot_password_form.use"
                                     >
                                         <c-telephone-pre
-                                            v-if="forgot_password_form.use == 'phone'"
+                                            :key="'phone'"
                                             v-model="forgot_password_form.phone"
                                         ></c-telephone-pre>
+                                    </el-form-item>
+                                    <el-form-item
+                                        class="row"
+                                        v-else
+                                        :prop="forgot_password_form.use"
+                                    >
                                         <c-input
-                                            v-else
-                                            v-model="forgot_password_form.email"
+                                            :key="'email'"
+                                            v-model="email"
                                             type="text"
                                             name="text"
                                             placeholder="邮箱"
@@ -97,34 +112,52 @@
                                         <c-send-code
                                             v-model="forgot_password_form.code"
                                             :send_code_target="{
-                                            type: forgot_password_form.use,
-                                            value: forgot_password_form.use== 'phone' ?  forgot_password_form.phone:forgot_password_form.email
-                                        }"
+                                                type: forgot_password_form.use,
+                                                value:
+                                                    forgot_password_form.use ==
+                                                    'phone'
+                                                        ? forgot_password_form.phone
+                                                        : forgot_password_form.email
+                                            }"
                                         ></c-send-code>
                                     </el-form-item>
-                                    <el-form-item class="row" prop="new_password">
+                                    <el-form-item
+                                        class="row"
+                                        prop="new_password"
+                                    >
                                         <c-input
                                             type="text"
                                             name="password"
                                             placeholder="新密码"
-                                            v-model="forgot_password_form.new_password"
+                                            v-model="
+                                                forgot_password_form.new_password
+                                            "
                                         ></c-input>
                                     </el-form-item>
-                                    <el-form-item class="row" prop="old_password">
+                                    <el-form-item
+                                        class="row"
+                                        prop="old_password"
+                                    >
                                         <c-input
                                             type="text"
                                             placeholder="旧密码"
-                                            v-model="forgot_password_form.old_password"
+                                            v-model="
+                                                forgot_password_form.old_password
+                                            "
                                         ></c-input>
                                     </el-form-item>
                                     <div
                                         class="error_message text"
                                         v-if="login_error_message"
-                                    >{{ login_error_message }}</div>
+                                    >
+                                        {{ login_error_message }}
+                                    </div>
                                     <div class="form_footer">
                                         <div
                                             class="button form-submit_btn"
-                                            @click="form_submit('forgot_password')"
+                                            @click="
+                                                form_submit('forgot_password')
+                                            "
                                         >
                                             <span class="text">提交</span>
                                         </div>
@@ -137,17 +170,20 @@
                                     v-if="forgot_password_form.use == 'phone'"
                                     class="button forgot_password-button"
                                     @click="forgot_password_form.use = 'email'"
-                                >使用邮箱</span>
+                                    >使用邮箱</span
+                                >
                                 <span
                                     v-else
                                     class="button forgot_password-button"
                                     @click="forgot_password_form.use = 'phone'"
-                                >使用手机号</span>
+                                    >使用手机号</span
+                                >
                                 <i class="line"></i>
                                 <span
                                     class="button login-button"
                                     @click="panel_active_card = 0"
-                                >登录</span>
+                                    >登录</span
+                                >
                             </div>
                         </div>
                     </template>
@@ -175,20 +211,25 @@
                                             v-model="regist_form.password"
                                         ></c-input>
                                     </el-form-item>
-                                    <el-form-item class="row" prop="confirm_password">
+                                    <el-form-item
+                                        class="row"
+                                        prop="confirm_password"
+                                    >
                                         <c-input
                                             show-password
                                             name="confirm_password"
                                             v-model="
-                                                    regist_form.confirm_password
-                                                "
-                                            placeholder="Confirm Password"
+                                                regist_form.confirm_password
+                                            "
+                                            placeholder="再次输入密码"
                                         ></c-input>
                                     </el-form-item>
                                     <div
                                         class="error_message text"
                                         v-if="login_error_message"
-                                    >{{ login_error_message }}</div>
+                                    >
+                                        {{ login_error_message }}
+                                    </div>
                                     <div class="form_footer">
                                         <div
                                             class="button form-submit_btn"
@@ -198,13 +239,22 @@
                                         </div>
                                     </div>
 
-                                    <el-form-item class="row agree_policy" prop="agree_policy">
-                                        <div class="privacy_policy_check" ref="polic_check">
-                                            <c-checkbox v-model="regist_form.agree_policy">
-                                                <span
-                                                    class="text"
-                                                    :label="true"
-                                                >同意隐私政策.</span>
+                                    <el-form-item
+                                        class="row agree_policy"
+                                        prop="agree_policy"
+                                    >
+                                        <div
+                                            class="privacy_policy_check"
+                                            ref="polic_check"
+                                        >
+                                            <c-checkbox
+                                                v-model="
+                                                    regist_form.agree_policy
+                                                "
+                                            >
+                                                <span class="text" :label="true"
+                                                    >同意隐私政策.</span
+                                                >
                                             </c-checkbox>
                                         </div>
                                     </el-form-item>
@@ -215,7 +265,8 @@
                                 <span
                                     class="button login-button"
                                     @click="panel_active_card = 0"
-                                >已有账号，去登陆</span>
+                                    >已有账号，去登陆</span
+                                >
                             </div>
                         </div>
                     </template>
@@ -228,24 +279,25 @@
 <script lang="ts">
 import Vue from "vue";
 import { v_form_test } from "@/unit/vue";
-import { login, register, send_code, login_by_code } from "@/api/api";
+import { login, register, get_user, send_code, login_by_code } from "@/api/api";
 import { reg_test } from "@/unit/unit";
 export default Vue.extend({
     data() {
         return {
+            email: "",
             phone_verification_count: 0,
             panel_active_card: 0,
             tab_cards: [
                 {
-                    name: "log in",
+                    name: "登录",
                     slot_name: "login_card"
                 },
                 {
-                    name: "register",
+                    name: "注册",
                     slot_name: "register_card"
                 },
                 {
-                    name: "forgot password",
+                    name: "忘记密码",
                     slot_name: "forgot_password_card"
                 }
             ],
@@ -274,6 +326,11 @@ export default Vue.extend({
             v_form_test
         };
     },
+    watch: {
+        email(newVal, oldVal) {
+            this.forgot_password_form.email = newVal;
+        }
+    },
     methods: {
         form_submit(this: any, type: string) {
             switch (type) {
@@ -284,8 +341,7 @@ export default Vue.extend({
                                 this.login_error_message = data.msg;
                             });
                         } else {
-                            this.login_error_message =
-                                "These field is required.";
+                            this.login_error_message = "请正确填写相应信息.";
                             return false;
                         }
                     });
@@ -297,8 +353,7 @@ export default Vue.extend({
                                 this.login_error_message = data.msg;
                             });
                         } else {
-                            this.login_error_message =
-                                "These field is required.";
+                            this.login_error_message = "请正确填写相应信息.";
                             return false;
                         }
                     });
@@ -311,12 +366,14 @@ export default Vue.extend({
                                 this.regist_form.password
                             ) {
                                 this.login_error_message =
-                                    "Two input password must be consistent!";
+                                    "两次输入的密码不一致!";
                                 return false;
                             }
+                            register(this.regist_form).then((data: any) => {
+                                this.login_error_message = data.msg;
+                            });
                         } else {
-                            this.login_error_message =
-                                "These field is required.";
+                            this.login_error_message = "请正确填写相应信息.";
                             return false;
                         }
                     });
@@ -361,7 +418,13 @@ export default Vue.extend({
         }
         if (search_str_data.tab == "login") {
             setTimeout(() => {
-                this.is_open = true;
+                get_user().then((res: any) => {
+                    if (res.code !== 0) {
+                        this.is_open = true;
+                    } else {
+                        this.is_open = false;
+                    }
+                });
             });
         }
     }
@@ -477,6 +540,9 @@ export default Vue.extend({
 
         text-transform: uppercase;
 
+        color: #f56c6c;
+    }
+    .is-error .privacy_policy_check .el-checkbox__label {
         color: #f56c6c;
     }
 }

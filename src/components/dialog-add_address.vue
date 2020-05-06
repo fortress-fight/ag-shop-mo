@@ -5,9 +5,13 @@
                 <i class="ic ag-icon ag-close_1"></i>
             </div>
             <div class="dialog-header">
-                <span class="text">shipping address</span>
+                <span class="text">地址</span>
             </div>
-            <add-address-panel @save="address_save" :address="address" :reset="reset"></add-address-panel>
+            <add-address-panel
+                @save="address_save"
+                :address="address"
+                :reset="reset"
+            ></add-address-panel>
         </div>
     </div>
 </template>

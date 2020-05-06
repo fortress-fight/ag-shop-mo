@@ -31,7 +31,10 @@
             </div>
         </div>
         <div class="body-my_page">
-            <div class="my_page-container setting_panel" v-if="sidebar_active == 'security'">
+            <div
+                class="my_page-container setting_panel"
+                v-if="sidebar_active == 'security'"
+            >
                 <div class="container-header">
                     <span class="text">用户信息</span>
                 </div>
@@ -55,7 +58,9 @@
                                     <span class="text">用户名</span>
                                 </div>
                                 <div class="value">
-                                    <span class="text">{{user_info.alias}}</span>
+                                    <span class="text">{{
+                                        user_info.alias
+                                    }}</span>
                                 </div>
                             </div>
                             <div class="row">
@@ -63,7 +68,9 @@
                                     <span class="text">手机号</span>
                                 </div>
                                 <div class="value flex">
-                                    <span class="text">{{user_info.mobile}}</span>
+                                    <span class="text">{{
+                                        user_info.mobile
+                                    }}</span>
                                     <div
                                         class="verification_button button-effect2 button col"
                                         @click="setting_panel = 'editor_phone'"
@@ -77,7 +84,9 @@
                                     <span class="text">邮箱</span>
                                 </div>
                                 <div class="value flex">
-                                    <span class="text">{{user_info.email}}</span>
+                                    <span class="text">{{
+                                        user_info.email
+                                    }}</span>
                                     <div
                                         class="verification_button button-effect2 button col"
                                         @click="setting_panel = 'editor_email'"
@@ -109,14 +118,20 @@
                             v-if="setting_panel == 'editor_name'"
                             key="editor_name"
                         >
-                            <el-form ref="name_register" :model="setting" :rules="v_form_test">
+                            <el-form
+                                ref="name_register"
+                                :model="setting"
+                                :rules="v_form_test"
+                            >
                                 <el-form-item prop="username">
                                     <div class="row">
                                         <div class="name col flex-yc">
                                             <span class="text">用户名</span>
                                         </div>
                                         <div class="value col">
-                                            <c-input v-model="setting.alias"></c-input>
+                                            <c-input
+                                                v-model="setting.alias"
+                                            ></c-input>
                                         </div>
                                     </div>
                                 </el-form-item>
@@ -144,14 +159,20 @@
                             v-if="setting_panel == 'editor_phone'"
                             key="editor_phone"
                         >
-                            <el-form ref="phone_register" :model="setting" :rules="v_form_test">
+                            <el-form
+                                ref="phone_register"
+                                :model="setting"
+                                :rules="v_form_test"
+                            >
                                 <el-form-item prop="phone">
                                     <div class="row">
                                         <div class="name flex-yc col">
                                             <span class="text">手机号</span>
                                         </div>
                                         <div class="value col">
-                                            <c-telephone-pre v-model="setting.phone"></c-telephone-pre>
+                                            <c-telephone-pre
+                                                v-model="setting.phone"
+                                            ></c-telephone-pre>
                                         </div>
                                     </div>
                                 </el-form-item>
@@ -163,9 +184,9 @@
                                             <c-send-code
                                                 v-model="setting.phone_code"
                                                 :send_code_target="{
-                                                type: 'phone',
-                                                value: setting.phone
-                                            }"
+                                                    type: 'phone',
+                                                    value: setting.phone
+                                                }"
                                             ></c-send-code>
                                         </div>
                                     </div>
@@ -194,14 +215,20 @@
                             v-if="setting_panel == 'editor_email'"
                             key="editor_email"
                         >
-                            <el-form ref="email_register" :model="setting" :rules="v_form_test">
+                            <el-form
+                                ref="email_register"
+                                :model="setting"
+                                :rules="v_form_test"
+                            >
                                 <el-form-item prop="e_mail">
                                     <div class="row">
                                         <div class="name col flex-yc">
                                             <span class="text">邮箱</span>
                                         </div>
                                         <div class="value col">
-                                            <c-input v-model="setting.e_mail.value"></c-input>
+                                            <c-input
+                                                v-model="setting.e_mail.value"
+                                            ></c-input>
                                         </div>
                                     </div>
                                 </el-form-item>
@@ -213,9 +240,9 @@
                                             <c-send-code
                                                 v-model="setting.e_mail_code"
                                                 :send_code_target="{
-                                                type: 'email',
-                                                value: setting.e_mail.value
-                                            }"
+                                                    type: 'email',
+                                                    value: setting.e_mail.value
+                                                }"
                                             ></c-send-code>
                                         </div>
                                     </div>
@@ -253,7 +280,9 @@
                                     <el-form-item prop="old_password">
                                         <c-input
                                             placeholder="旧密码"
-                                            v-model="change_password_data.old_password"
+                                            v-model="
+                                                change_password_data.old_password
+                                            "
                                             show-password
                                             type="password"
                                         ></c-input>
@@ -262,7 +291,9 @@
                                 <div class="row">
                                     <el-form-item prop="new_password">
                                         <c-input
-                                            v-model="change_password_data.new_password"
+                                            v-model="
+                                                change_password_data.new_password
+                                            "
                                             placeholder="新密码"
                                             show-password
                                             type="password"
@@ -270,14 +301,19 @@
                                     </el-form-item>
 
                                     <div class="message">
-                                        <span class="text">请输入 8 - 16 位由字母和数字组成的字符</span>
+                                        <span class="text"
+                                            >请输入 8 - 16
+                                            位由字母和数字组成的字符</span
+                                        >
                                     </div>
                                 </div>
                                 <div class="row">
                                     <el-form-item prop="confirm_password">
                                         <c-input
                                             placeholder="确认密码"
-                                            v-model="change_password_data.confirm_password"
+                                            v-model="
+                                                change_password_data.confirm_password
+                                            "
                                             show-password
                                             type="password"
                                         ></c-input>
@@ -286,7 +322,9 @@
                                     <div
                                         class="error_message text"
                                         v-if="error_message"
-                                    >{{ error_message }}</div>
+                                    >
+                                        {{ error_message }}
+                                    </div>
                                 </div>
                                 <div class="row">
                                     <div
@@ -310,7 +348,10 @@
                 </div>
             </div>
 
-            <div class="my_page-container order_panel" v-if="sidebar_active == 'order'">
+            <div
+                class="my_page-container order_panel"
+                v-if="sidebar_active == 'order'"
+            >
                 <transition-group
                     name="tab_panel"
                     mode="in-out"
@@ -346,25 +387,39 @@
                                     :key="index"
                                 >
                                     <div class="order-item_header">
-                                        <div class="order-detail_header flex flex-sb">
-                                            <span class="text">{{ order.order_sn }}</span>
-                                            <span class="text">{{ order.status_name }}</span>
+                                        <div
+                                            class="order-detail_header flex flex-sb"
+                                        >
+                                            <span class="text">{{
+                                                order.order_sn
+                                            }}</span>
+                                            <span class="text">{{
+                                                order.status_name
+                                            }}</span>
                                         </div>
                                     </div>
 
                                     <div class="order-item_body">
                                         <template
-                                            v-for="(order_commodity, index) in order.order_goods"
+                                            v-for="(order_commodity,
+                                            index) in order.order_goods"
                                         >
                                             <a
-                                                :href="order_commodity.sku.goods.url"
+                                                :href="
+                                                    order_commodity.sku.goods
+                                                        .url
+                                                "
                                                 class="order_detail-list"
                                                 v-if="order_commodity.sku.goods"
                                                 :key="index"
                                             >
                                                 <div class="order_detail-col">
                                                     <img
-                                                        :src="order_commodity.sku.goods.img | upload_resource_link"
+                                                        :src="
+                                                            order_commodity.sku
+                                                                .goods.img
+                                                                | upload_resource_link
+                                                        "
                                                         alt
                                                         class="image_preview"
                                                     />
@@ -372,39 +427,67 @@
                                                 <div class="order_detail-col">
                                                     <div class="des">
                                                         <div class="top">
-                                                            <span class="text des_text">
+                                                            <span
+                                                                class="text des_text"
+                                                            >
                                                                 {{
-                                                                order_commodity.sku.goods.name_cn
+                                                                    order_commodity
+                                                                        .sku
+                                                                        .goods
+                                                                        .name_cn
                                                                 }}
                                                             </span>
                                                         </div>
-                                                        <div class="bottom des_spec">
-                                                            <span
-                                                                class="text"
-                                                            >{{ order_commodity.sku.size }}-{{ order_commodity.sku.color }}</span>
+                                                        <div
+                                                            class="bottom des_spec"
+                                                        >
+                                                            <span class="text"
+                                                                >{{
+                                                                    order_commodity
+                                                                        .sku
+                                                                        .size
+                                                                }}-{{
+                                                                    order_commodity
+                                                                        .sku
+                                                                        .color
+                                                                }}</span
+                                                            >
                                                             <span class="text">
                                                                 {{
-                                                                order_commodity.num
+                                                                    order_commodity.num
                                                                 }}
                                                             </span>
                                                         </div>
                                                     </div>
-                                                    <div
-                                                        class="text price"
-                                                    >￥{{ order_commodity.sku.goods.cost }}</div>
+                                                    <div class="text price">
+                                                        ￥{{
+                                                            order_commodity.sku
+                                                                .goods.cost
+                                                        }}
+                                                    </div>
                                                 </div>
                                             </a>
                                         </template>
-                                        <div class="order-item_total-price flex flex-sb">
-                                            
-                                                <div class="left">总计(包含运费)</div>
-                                                <div class="right">￥{{ plus(order.price, order.shipping_price) }}</div>
+                                        <div
+                                            class="order-item_total-price flex flex-sb"
+                                        >
+                                            <div class="left">
+                                                总计(包含运费)
+                                            </div>
+                                            <div class="right">
+                                                ￥{{
+                                                    plus(
+                                                        order.price,
+                                                        order.shipping_price
+                                                    )
+                                                }}
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="order-item_footer">
                                         <div
                                             class="button button-order_detail button-effect2"
-                                            @click=" show_detail( order.id ) "
+                                            @click="show_detail(order.id)"
                                             v-if="order.status !== 0"
                                         >
                                             <span class="text">订单详情</span>
@@ -413,11 +496,15 @@
                                             <a
                                                 class="button button-order_pay button-effect"
                                                 target="_blank"
-                                                :href="`/user/order_info.html?id=${order.id}`"
+                                                :href="
+                                                    `/user/order_info.html?id=${order.id}`
+                                                "
                                             >
                                                 <span class="text">支付</span>
                                             </a>
-                                            <div class="button button-order_cancel button-effect2">
+                                            <div
+                                                class="button button-order_cancel button-effect2"
+                                            >
                                                 <span class="text">取消</span>
                                             </div>
                                         </template>
@@ -428,7 +515,10 @@
                     </div>
 
                     <div key="order_panel-detail" v-else>
-                        <div class="container-body" v-if="order_detail.data && order_detail.data.id">
+                        <div
+                            class="container-body"
+                            v-if="order_detail.data && order_detail.data.id"
+                        >
                             <div class="order_panel-detail">
                                 <div
                                     class="back-button button button-effect2"
@@ -443,23 +533,36 @@
                                     </div>
                                     <div class="list">
                                         <div class="item">
-                                            <span class="name text">用户名:</span>
-                                            <span class="value text">{{order_detail.data.name}}</span>
+                                            <span class="name text"
+                                                >用户名:</span
+                                            >
+                                            <span class="value text">{{
+                                                order_detail.data.name
+                                            }}</span>
                                         </div>
                                         <div class="item">
-                                            <span class="name text">手机号:</span>
-                                            <span class="value text">{{order_detail.data.mobile}}</span>
+                                            <span class="name text"
+                                                >手机号:</span
+                                            >
+                                            <span class="value text">{{
+                                                order_detail.data.mobile
+                                            }}</span>
                                         </div>
-                                        <div class="item" v-if="order_detail.data.address">
+                                        <div
+                                            class="item"
+                                            v-if="order_detail.data.address"
+                                        >
                                             <span class="name text">地址:</span>
 
-                                            <span class="value text">{{order_detail.data.address}}</span>
+                                            <span class="value text">{{
+                                                order_detail.data.address
+                                            }}</span>
                                         </div>
                                         <div class="item">
                                             <span class="name text">物流:</span>
-                                            <span
-                                                class="value text"
-                                            >{{order_detail.data.shipping_type}}</span>
+                                            <span class="value text">{{
+                                                order_detail.data.shipping_type
+                                            }}</span>
                                         </div>
                                     </div>
                                 </div>
@@ -469,85 +572,153 @@
                                     </div>
                                     <div class="list">
                                         <div class="item">
-                                            <span class="name text">订单ID:</span>
-                                            <span class="value text">{{order_detail.data.order_sn}}</span>
+                                            <span class="name text"
+                                                >订单ID:</span
+                                            >
+                                            <span class="value text">{{
+                                                order_detail.data.order_sn
+                                            }}</span>
                                         </div>
                                         <div class="item">
-                                            <span class="name text">创建时间:</span>
-                                            <span
-                                                class="value text"
-                                            >{{order_detail.data.create_time}}</span>
+                                            <span class="name text"
+                                                >创建时间:</span
+                                            >
+                                            <span class="value text">{{
+                                                order_detail.data.create_time
+                                            }}</span>
                                         </div>
                                         <div class="item">
-                                            <span class="name text">支付时间:</span>
-                                            <span class="value text">{{order_detail.data.pay_time}}</span>
+                                            <span class="name text"
+                                                >支付时间:</span
+                                            >
+                                            <span class="value text">{{
+                                                order_detail.data.pay_time
+                                            }}</span>
                                         </div>
                                         <div class="item">
-                                            <span class="name text">物流号:</span>
-                                            <span
-                                                class="value text"
-                                            >{{order_detail.data.shipping_sn}}</span>
+                                            <span class="name text"
+                                                >物流号:</span
+                                            >
+                                            <span class="value text">{{
+                                                order_detail.data.shipping_sn
+                                            }}</span>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="order-list">
                                     <div class="order-list_item">
                                         <div class="order-item_header">
-                                            <div class="order-detail_header flex flex-sb">
-                                                <span class="text">{{ order_detail.data.order_sn }}</span>
-                                                <span
-                                                    class="text"
-                                                >{{ order_detail.data.status_name }}</span>
+                                            <div
+                                                class="order-detail_header flex flex-sb"
+                                            >
+                                                <span class="text">{{
+                                                    order_detail.data.order_sn
+                                                }}</span>
+                                                <span class="text">{{
+                                                    order_detail.data
+                                                        .status_name
+                                                }}</span>
                                             </div>
                                         </div>
 
                                         <div class="order-item_body">
                                             <template
-                                                v-for="(order_commodity, index) in order_detail.data.order_goods"
+                                                v-for="(order_commodity,
+                                                index) in order_detail.data
+                                                    .order_goods"
                                             >
                                                 <a
-                                                    :href="order_commodity.sku.goods.url"
+                                                    :href="
+                                                        order_commodity.sku
+                                                            .goods.url
+                                                    "
                                                     class="order_detail-list"
-                                                    v-if="order_commodity.sku.goods"
+                                                    v-if="
+                                                        order_commodity.sku
+                                                            .goods
+                                                    "
                                                     :key="index"
                                                 >
-                                                    <div class="order_detail-col">
+                                                    <div
+                                                        class="order_detail-col"
+                                                    >
                                                         <img
-                                                            :src="order_commodity.sku.goods.img | upload_resource_link"
+                                                            :src="
+                                                                order_commodity
+                                                                    .sku.goods
+                                                                    .img
+                                                                    | upload_resource_link
+                                                            "
                                                             alt
                                                             class="image_preview"
                                                         />
                                                     </div>
-                                                    <div class="order_detail-col">
+                                                    <div
+                                                        class="order_detail-col"
+                                                    >
                                                         <div class="des">
                                                             <div class="top">
-                                                                <span class="text des_text">
+                                                                <span
+                                                                    class="text des_text"
+                                                                >
                                                                     {{
-                                                                    order_commodity.sku.goods.name_cn
+                                                                        order_commodity
+                                                                            .sku
+                                                                            .goods
+                                                                            .name_cn
                                                                     }}
                                                                 </span>
                                                             </div>
-                                                            <div class="bottom des_spec">
+                                                            <div
+                                                                class="bottom des_spec"
+                                                            >
                                                                 <span
                                                                     class="text"
-                                                                >{{ order_commodity.sku.size }}-{{ order_commodity.sku.color }}</span>
-                                                                <span class="text">
+                                                                    >{{
+                                                                        order_commodity
+                                                                            .sku
+                                                                            .size
+                                                                    }}-{{
+                                                                        order_commodity
+                                                                            .sku
+                                                                            .color
+                                                                    }}</span
+                                                                >
+                                                                <span
+                                                                    class="text"
+                                                                >
                                                                     {{
-                                                                    order_commodity.num
+                                                                        order_commodity.num
                                                                     }}
                                                                 </span>
                                                             </div>
                                                         </div>
-                                                        <div
-                                                            class="text price"
-                                                        >￥{{ order_commodity.sku.goods.cost }}</div>
+                                                        <div class="text price">
+                                                            ￥{{
+                                                                order_commodity
+                                                                    .sku.goods
+                                                                    .cost
+                                                            }}
+                                                        </div>
                                                     </div>
                                                 </a>
                                             </template>
-                                            <div class="order-item_total-price flex flex-sb">
-                                                
-                                                <div class="left">总计(包含运费)</div>
-                                                <div class="right">￥{{ plus(order_detail.data.price, order_detail.data.shipping_price) }}</div>
+                                            <div
+                                                class="order-item_total-price flex flex-sb"
+                                            >
+                                                <div class="left">
+                                                    总计(包含运费)
+                                                </div>
+                                                <div class="right">
+                                                    ￥{{
+                                                        plus(
+                                                            order_detail.data
+                                                                .price,
+                                                            order_detail.data
+                                                                .shipping_price
+                                                        )
+                                                    }}
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -558,7 +729,10 @@
                 </transition-group>
             </div>
 
-            <div class="my_page-container address_panel" v-if="sidebar_active == 'address'">
+            <div
+                class="my_page-container address_panel"
+                v-if="sidebar_active == 'address'"
+            >
                 <div class="container-header">
                     <span class="text">收货地址</span>
                 </div>
@@ -566,30 +740,47 @@
                     <div class="address_list">
                         <div
                             class="address_list-body row"
-                            v-for="(address) in address_list"
+                            v-for="address in address_list"
                             :key="address.id"
                         >
                             <div class="col flex-yc flex-sb">
                                 <div class="left flex flex-yc">
-                                    <span class="name text">{{ address.username }}</span>
+                                    <span class="name text">{{
+                                        address.username
+                                    }}</span>
 
                                     <div
                                         class="is_default button"
-                                        :class="{ select: address.is_default == 1 }"
+                                        :class="{
+                                            select: address.is_default == 1
+                                        }"
                                     ></div>
                                 </div>
                                 <div class="right flex">
-                                    <div class="button" @click="edit_address(address)">编辑</div>
-                                    <div class="button" @click="del_address(address)">删除</div>
+                                    <div
+                                        class="button"
+                                        @click="edit_address(address)"
+                                    >
+                                        编辑
+                                    </div>
+                                    <div
+                                        class="button"
+                                        @click="del_address(address)"
+                                    >
+                                        删除
+                                    </div>
                                 </div>
                             </div>
                             <div class="col">
                                 <span class="text">{{ address.mobile }}</span>
                             </div>
                             <div class="col">
-                                <span
-                                    class="text"
-                                >{{address.country_name}}{{address.city_name}}{{address.state_name}}{{address.address}}</span>
+                                <span class="text"
+                                    >{{ address.country_name
+                                    }}{{ address.city_name
+                                    }}{{ address.state_name
+                                    }}{{ address.address }}</span
+                                >
                             </div>
                         </div>
                     </div>
@@ -602,7 +793,10 @@
                 </div>
             </div>
 
-            <div class="my_page-container comment_panel" v-if="sidebar_active == 'comment'">
+            <div
+                class="my_page-container comment_panel"
+                v-if="sidebar_active == 'comment'"
+            >
                 <div class="container-header">
                     <span class="text">买家秀</span>
                 </div>
@@ -610,18 +804,22 @@
                     <div class="comment_list">
                         <div
                             class="item flex flex-sb"
-                            v-for="(item) in comment_list"
+                            v-for="item in comment_list"
                             :key="item.id"
                         >
                             <div class="left flex">
                                 <div class="title text">{{ item.title }}</div>
-                                <div class="date text">{{ item.update_time }}</div>
+                                <div class="date text">
+                                    {{ item.update_time }}
+                                </div>
                             </div>
                             <div class="right flex flex-sb">
                                 <div
                                     class="button button-comment_edit"
                                     @click="edit_comment(item)"
-                                >编辑</div>
+                                >
+                                    编辑
+                                </div>
                                 <div
                                     class="button button-comment_remove"
                                     @click="del_comment(item)"
@@ -635,15 +833,21 @@
                         class="button button-effect button-create_comment"
                         @click="upload_image_panel_show = true"
                     >
-                        <span class="text">creative</span>
+                        <span class="text">添加</span>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="dialog-upload_image_panel" :class="{ show: upload_image_panel_show }">
+        <div
+            class="dialog-upload_image_panel"
+            :class="{ show: upload_image_panel_show }"
+        >
             <div class="dialog-container w">
-                <div class="dialog-close_button button" @click="upload_image_panel_show = false">
+                <div
+                    class="dialog-close_button button"
+                    @click="upload_image_panel_show = false"
+                >
                     <i class="ic ag-icon ag-close_1"></i>
                 </div>
                 <div class="row require title">
@@ -657,13 +861,19 @@
                 <div class="row">
                     <div class="name">描述</div>
                     <div class="value">
-                        <textarea v-model="upload_data.des" name="describe"></textarea>
+                        <textarea
+                            v-model="upload_data.des"
+                            name="describe"
+                        ></textarea>
                     </div>
                 </div>
                 <div class="row require pic">
                     <div class="name">图片</div>
                     <div class="value">
-                        <div class="upload-com" v-if="!upload_data.pictures.length">
+                        <div
+                            class="upload-com"
+                            v-if="!upload_data.pictures.length"
+                        >
                             <el-upload
                                 class="avatar-uploader"
                                 action="/api/upload_img.html"
@@ -721,7 +931,10 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="button button-publish button-effect" @click="publish_handler">
+                    <div
+                        class="button button-publish button-effect"
+                        @click="publish_handler"
+                    >
                         <span class="text">发布</span>
                     </div>
                 </div>
@@ -1000,7 +1213,7 @@ export default Vue.extend({
         },
         show_detail(id: string) {
             this.order_detail.show = true;
-            console.log('this.order_list:', this.order_list)
+            console.log("this.order_list:", this.order_list);
             this.order_detail.data = this.order_list[id];
 
             order_detail({ id: id }).then(response => {
@@ -1564,7 +1777,7 @@ export default Vue.extend({
                     &:before {
                         display: inline-block;
 
-                        content: "default";
+                        content: "默认";
                         transform: scale(0.8);
                     }
                 }

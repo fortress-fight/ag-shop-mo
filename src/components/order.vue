@@ -77,11 +77,6 @@
                         />
                     </c-radio>
                 </div>
-                <div class="item">
-                    <c-radio v-model="pay_method" label="paypal">
-                        <img :src="publicPath + 'image/paypal.png'" alt class />
-                    </c-radio>
-                </div>
             </div>
         </div>
         <template v-if="this.order_info.order_goods">
