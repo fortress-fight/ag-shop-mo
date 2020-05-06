@@ -84,22 +84,24 @@
                                 >
                                     <el-form-item
                                         class="row"
-                                        :prop="
+                                        v-if="
                                             forgot_password_form.use == 'phone'
-                                                ? 'phone'
-                                                : 'email'
                                         "
+                                        :prop="forgot_password_form.use"
                                     >
                                         <c-telephone-pre
-                                            v-if="
-                                                forgot_password_form.use ==
-                                                    'phone'
-                                            "
+                                            :key="'phone'"
                                             v-model="forgot_password_form.phone"
                                         ></c-telephone-pre>
+                                    </el-form-item>
+                                    <el-form-item
+                                        class="row"
+                                        v-else
+                                        :prop="forgot_password_form.use"
+                                    >
                                         <c-input
-                                            v-else
-                                            v-model="forgot_password_form.email"
+                                            :key="'email'"
+                                            v-model="email"
                                             type="text"
                                             name="text"
                                             placeholder="E-mail"
@@ -278,24 +280,25 @@
 <script lang="ts">
 import Vue from "vue";
 import { v_form_test } from "@/unit/vue";
-import { login, register, send_code, login_by_code } from "@/api/api";
+import { login, register, get_user, send_code, login_by_code } from "@/api/api";
 import { reg_test } from "@/unit/unit";
 export default Vue.extend({
     data() {
         return {
+            email: "",
             phone_verification_count: 0,
             panel_active_card: 0,
             tab_cards: [
                 {
-                    name: "log in",
+                    name: "登录",
                     slot_name: "login_card"
                 },
                 {
-                    name: "register",
+                    name: "注册",
                     slot_name: "register_card"
                 },
                 {
-                    name: "forgot password",
+                    name: "忘记密码",
                     slot_name: "forgot_password_card"
                 }
             ],
@@ -324,6 +327,11 @@ export default Vue.extend({
             v_form_test
         };
     },
+    watch: {
+        email(newVal, oldVal) {
+            this.forgot_password_form.email = newVal;
+        }
+    },
     methods: {
         form_submit(this: any, type: string) {
             switch (type) {
@@ -334,8 +342,7 @@ export default Vue.extend({
                                 this.login_error_message = data.msg;
                             });
                         } else {
-                            this.login_error_message =
-                                "These field is required.";
+                            this.login_error_message = "请正确填写相应信息.";
                             return false;
                         }
                     });
@@ -347,8 +354,7 @@ export default Vue.extend({
                                 this.login_error_message = data.msg;
                             });
                         } else {
-                            this.login_error_message =
-                                "These field is required.";
+                            this.login_error_message = "请正确填写相应信息.";
                             return false;
                         }
                     });
@@ -361,12 +367,14 @@ export default Vue.extend({
                                 this.regist_form.password
                             ) {
                                 this.login_error_message =
-                                    "Two input password must be consistent!";
+                                    "两次输入的密码不一致!";
                                 return false;
                             }
+                            register(this.regist_form).then((data: any) => {
+                                this.login_error_message = data.msg;
+                            });
                         } else {
-                            this.login_error_message =
-                                "These field is required.";
+                            this.login_error_message = "请正确填写相应信息.";
                             return false;
                         }
                     });
@@ -411,7 +419,13 @@ export default Vue.extend({
         }
         if (search_str_data.tab == "login") {
             setTimeout(() => {
-                this.is_open = true;
+                get_user().then((res: any) => {
+                    if (res.code !== 0) {
+                        this.is_open = true;
+                    } else {
+                        this.is_open = false;
+                    }
+                });
             });
         }
     }
@@ -527,6 +541,9 @@ export default Vue.extend({
 
         text-transform: uppercase;
 
+        color: #f56c6c;
+    }
+    .is-error .privacy_policy_check .el-checkbox__label {
         color: #f56c6c;
     }
 }

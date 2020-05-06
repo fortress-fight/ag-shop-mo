@@ -67,7 +67,7 @@ export function get_cart(data: any) {
 export function add_address(data: any) {
     return axios_instance.post("/api/add_address.html", data);
 }
-export function get_region(data: any) {
+export function get_region(data?: any) {
     return axios_instance.post("/api/get_region.html", data);
 }
 export function get_address(data: any) {
