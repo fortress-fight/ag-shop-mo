@@ -113,6 +113,10 @@ export function user_info_bind(data: any) {
 export function login_by_code(data: any) {
     return axios_instance.post("/api/login_by_code.html", data);
 }
+
+export function order_cannel(data: any) {
+    return axios_instance.post("/api/order_cannel.html", data);
+}
 export function order_info(data: any) {
     if (process.env.NODE_ENV === "production") {
         return axios_instance.post(

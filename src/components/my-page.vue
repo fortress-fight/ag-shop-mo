@@ -504,6 +504,7 @@
                                             </a>
                                             <div
                                                 class="button button-order_cancel button-effect2"
+                                                @click="order_cannel(order.id)"
                                             >
                                                 <span class="text">取消</span>
                                             </div>
@@ -962,7 +963,8 @@ import {
     order_detail,
     send_code,
     user_info_bind,
-    change_pwdt
+    change_pwdt,
+    order_cannel
 } from "@/api/api";
 import {
     order_data,
@@ -1086,6 +1088,17 @@ export default Vue.extend({
         }
     },
     methods: {
+        order_cannel(id) {
+            order_cannel({
+                id
+            })
+                .then(res => {
+                    return order_list();
+                })
+                .then(response => {
+                    this.order_list = response.data;
+                });
+        },
         plus(num, num2) {
             return new BigNumber(num).plus(new BigNumber(num2)).toFixed(2);
         },
@@ -1154,6 +1167,7 @@ export default Vue.extend({
                         this.setting_panel = "base";
                         this.setting.phone_code = "";
                         this.setting.phone.number = "";
+                        this.update_user_info();
                     });
                 } else {
                     console.log("error submit!!");
@@ -1171,6 +1185,7 @@ export default Vue.extend({
                         this.setting_panel = "base";
                         this.setting.e_mail_code = "";
                         this.setting.e_mail.value = "";
+                        this.update_user_info();
                     });
                 } else {
                     console.log("error submit!!");
@@ -1326,6 +1341,15 @@ export default Vue.extend({
                     this.comment_list = response.data;
                 });
             });
+        },
+        update_user_info() {
+            get_user().then(res => {
+                this.user_info = {
+                    alias: res.data.alias || "",
+                    mobile: res.data.mobile || "",
+                    email: res.data.email || ""
+                };
+            });
         }
     },
     created() {
@@ -1346,13 +1370,7 @@ export default Vue.extend({
             this.sidebar_active = search_str_data.tab;
         }
 
-        get_user().then(res => {
-            this.user_info = {
-                alias: res.data.alias || "",
-                mobile: res.data.mobile || "",
-                email: res.data.email || ""
-            };
-        });
+        this.update_user_info();
     },
     mounted() {
         $(".dialog-upload_image_panel").on("touchmove", function(event) {
