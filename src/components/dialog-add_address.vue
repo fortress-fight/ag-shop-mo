@@ -5,7 +5,7 @@
                 <i class="ic ag-icon ag-close_1"></i>
             </div>
             <div class="dialog-header">
-                <span class="text">地址</span>
+                <span class="text">shipping address</span>
             </div>
             <add-address-panel
                 @save="address_save"

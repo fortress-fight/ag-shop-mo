@@ -290,15 +290,15 @@ export default Vue.extend({
             panel_active_card: 0,
             tab_cards: [
                 {
-                    name: "登录",
+                    name: "log in",
                     slot_name: "login_card"
                 },
                 {
-                    name: "注册",
+                    name: "register",
                     slot_name: "register_card"
                 },
                 {
-                    name: "忘记密码",
+                    name: "forgot password",
                     slot_name: "forgot_password_card"
                 }
             ],
@@ -342,7 +342,8 @@ export default Vue.extend({
                                 this.login_error_message = data.msg;
                             });
                         } else {
-                            this.login_error_message = "请正确填写相应信息.";
+                            this.login_error_message =
+                                "These field is required.";
                             return false;
                         }
                     });
@@ -354,7 +355,8 @@ export default Vue.extend({
                                 this.login_error_message = data.msg;
                             });
                         } else {
-                            this.login_error_message = "请正确填写相应信息.";
+                            this.login_error_message =
+                                "These field is required.";
                             return false;
                         }
                     });
@@ -367,14 +369,15 @@ export default Vue.extend({
                                 this.regist_form.password
                             ) {
                                 this.login_error_message =
-                                    "两次输入的密码不一致!";
+                                    "Two input password must be consistent!";
                                 return false;
                             }
                             register(this.regist_form).then((data: any) => {
                                 this.login_error_message = data.msg;
                             });
                         } else {
-                            this.login_error_message = "请正确填写相应信息.";
+                            this.login_error_message =
+                                "These field is required.";
                             return false;
                         }
                     });

@@ -847,7 +847,7 @@
                         class="button button-effect button-create_comment"
                         @click="upload_image_panel_show = true"
                     >
-                        <span class="text">添加</span>
+                        <span class="text">creative</span>
                     </div>
                 </div>
             </div>
@@ -1808,7 +1808,7 @@ export default Vue.extend({
                     &:before {
                         display: inline-block;
 
-                        content: "默认";
+                        content: "default";
                         transform: scale(0.8);
                     }
                 }
