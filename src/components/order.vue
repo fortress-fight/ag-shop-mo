@@ -167,7 +167,11 @@
                             }}
                         </div>
                     </div>
-                    <div class="button pay_button" @click="pay_order">
+                    <div
+                        class="button pay_button"
+                        :class="{ 'state-disable': select_address == -1 }"
+                        @click="pay_order"
+                    >
                         支付
                     </div>
                 </div>
@@ -239,10 +243,12 @@ export default Vue.extend({
             });
         },
         pay_order() {
-            to_pay({
-                order_id: this.order_info.id,
-                payment: this.pay_method
-            });
+            if (this.select_address != -1) {
+                to_pay({
+                    order_id: this.order_info.id,
+                    payment: this.pay_method
+                });
+            }
         },
         updateAddressList() {
             get_address().then(response => {
@@ -278,6 +284,12 @@ export default Vue.extend({
 </script>
 <style lang="scss">
 .order_container {
+    .pay_button {
+        &.state-disable {
+            background-color: #afafaf !important;
+            pointer-events: none;
+        }
+    }
     .pay_method_header {
         font-family: $FM;
         font-size: 34px;
