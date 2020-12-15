@@ -8,6 +8,7 @@
                 <span class="text">shipping address</span>
             </div>
             <add-address-panel
+                v-if="showPanel"
                 @save="address_save"
                 :address="address"
                 :reset="reset"
@@ -23,7 +24,8 @@ export default Vue.extend({
     data() {
         return {
             mask_handle: null,
-            reset: false
+            reset: false,
+            showPanel: false
         };
     },
     props: {
@@ -41,6 +43,7 @@ export default Vue.extend({
     watch: {
         show(this: any, new_value, old_value) {
             if (new_value) {
+                this.showPanel = true;
                 this.mask_handle = this.$mask({
                     background: "rgba(255, 255, 255, 0.8)"
                 });
@@ -50,6 +53,9 @@ export default Vue.extend({
                 };
             } else if (this.mask_handle) {
                 this.mask_handle.show = false;
+                setTimeout(() => {
+                    this.showPanel = false;
+                }, 260);
             }
         }
     },

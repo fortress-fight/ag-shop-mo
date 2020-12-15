@@ -13,6 +13,7 @@
                         class="mini"
                         v-model="data.country"
                         popper-class="c_address-popper"
+                        @change="country_change"
                         no-data-text=" "
                     >
                         <el-option
@@ -44,6 +45,7 @@
                     <el-select
                         class="mini"
                         v-model="data.province"
+                        @change="province_change"
                         popper-class="c_address-popper"
                         no-data-text="Please select a country first"
                     >
@@ -173,70 +175,57 @@ export default Vue.extend({
     props: {
         address: {
             type: Object
-        },
-        reset: {
-            type: Boolean
-        }
-    },
-    watch: {
-        "data.country"(newValue) {
-            this.data.province = "";
-            this.data.city = "";
-            this.city_list = [];
-            get_region({ id: newValue }).then(response => {
-                this.province_list = response.data;
-            });
-        },
-        "data.province"(newValue) {
-            this.data.city = "";
-            get_region({ id: newValue }).then(response => {
-                this.city_list = response.data;
-            });
-        },
-        address(newValue) {
-            if (newValue.id) {
-                this.id = newValue.id;
-                this.data = {
-                    country: newValue.country_id,
-                    name: newValue.username,
-                    province: newValue.state_id,
-                    city: newValue.city_id,
-                    address: newValue.address,
-                    phone: newValue.mobile,
-                    is_default: newValue.is_default,
-                    zip: newValue.zip_code
-                };
-            } else {
-                this.id = false;
-                this.data = {
-                    country: "",
-                    name: "",
-                    province: "",
-                    city: "",
-                    address: "",
-                    phone: "",
-                    is_default: 0,
-                    zip: ""
-                };
-            }
-        },
-        reset() {
-            this.id = false;
-            this.data = {
-                country: "",
-                name: "",
-                province: "",
-                city: "",
-                address: "",
-                phone: "",
-                is_default: 0,
-                zip: ""
-            };
-            this.city_list = [];
-            this.province_list = [];
         }
     },
     methods: {
+        country_change(id) {
+            this.data.province = "";
+            this.data.city = "";
+            this.city_list = [];
+            get_region({ id }).then(response => {
+                this.province_list = response.data;
+            });
+        },
+        province_change(id) {
+            this.data.city = "";
+            get_region({ id }).then(response => {
+                this.city_list = response.data;
+            });
+        },
+        initList() {
+            get_region().then(response => {
+                this.country_list = response.data;
+            });
+            let propAddress = this.address;
+            if (propAddress.id) {
+                this.loading = true;
+                this.id = propAddress.id;
+                Promise.all([
+                    get_region({ id: propAddress.country_id }).then(res => {
+                        return Promise.resolve(res.data);
+                    }),
+                    get_region({ id: propAddress.state_id }).then(res => {
+                        return Promise.resolve(res.data);
+                    })
+                ]).then(([res1, res2]) => {
+                    this.province_list = res1;
+                    this.city_list = res2;
+                    this.$nextTick(() => {
+                        this.loading = false;
+                        this.data = {
+                            country: propAddress.country_id,
+                            name: propAddress.username,
+                            province: propAddress.state_id,
+                            city: propAddress.city_id,
+                            address: propAddress.address,
+                            phone: propAddress.mobile,
+                            is_default: propAddress.is_default,
+                            zip: propAddress.zip_code
+                        };
+                    });
+                });
+            }
+        },
         save_address(this: any) {
             this.loading = true;
             this.$refs.form_address.validate((valid: any) => {
@@ -261,15 +250,12 @@ export default Vue.extend({
             });
         }
     },
-    created() {
-        get_region().then((response: any) => {
-            this.country_list = response.data;
-        });
-    },
     components: {
         loading: Loading
     },
-    mounted() {}
+    mounted() {
+        this.initList();
+    }
 });
 </script>
 <style lang="scss">
