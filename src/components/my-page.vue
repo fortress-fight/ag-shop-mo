@@ -787,7 +787,7 @@
                     </div>
                     <div
                         class="button button-effect button-add_address"
-                        @click="add_address_dialog_show = true"
+                        @click="addNewAddress"
                     >
                         <span class="text">添加</span>
                     </div>
@@ -1247,6 +1247,11 @@ export default Vue.extend({
             });
         },
 
+        addNewAddress(address: any) {
+            this.edit_address_data = {};
+
+            this.add_address_dialog_show = true;
+        },
         edit_address(address: any) {
             this.edit_address_data = address;
 
