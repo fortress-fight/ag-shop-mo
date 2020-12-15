@@ -105,6 +105,7 @@ module.exports = {
             openAnalyzer: false
         }
     },
+    lintOnSave: false,
     devServer: {
         // port: 80,
         // sockPort: 81,
