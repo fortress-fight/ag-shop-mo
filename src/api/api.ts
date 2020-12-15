@@ -70,12 +70,12 @@ export function add_address(data: any) {
 export function get_region(data?: any) {
     return axios_instance.post("/api/get_region.html", data);
 }
-export function get_address(data: any) {
+export function get_address(data?: any) {
     return axios_instance.post("/api/get_address.html", data);
 }
 
-export function order_list() {
-    return axios_instance.get("/api/order_list.html");
+export function order_list(data?:any) {
+    return axios_instance.post("/api/order_list.html",data);
 }
 export function upload_picture(data: any) {
     return axios_instance.post("/api/upload_picture.html", data);

@@ -162,19 +162,64 @@ export default Vue.extend({
             province_list: [],
 
             form_rules: {
-                country: [{ required: true, message: " ", trigger: "submit" }],
-                name: [{ required: true, message: " ", trigger: "submit" }],
-                province: [{ required: true, message: " ", trigger: "submit" }],
-                city: [{ required: true, message: " ", trigger: "submit" }],
-                address: [{ required: true, message: " ", trigger: "submit" }],
-                phone: [{ required: true, message: " ", trigger: "submit" }],
-                zip: [{ required: true, message: " ", trigger: "submit" }]
+                country: [
+                    {
+                        required: true,
+                        message: " ",
+                        trigger: ["submit", "change"]
+                    }
+                ],
+                name: [
+                    {
+                        required: true,
+                        message: " ",
+                        trigger: ["submit", "blur"]
+                    }
+                ],
+                province: [
+                    {
+                        required: true,
+                        message: " ",
+                        trigger: ["submit", "change"]
+                    }
+                ],
+                city: [
+                    {
+                        required: true,
+                        message: " ",
+                        trigger: ["submit", "change"]
+                    }
+                ],
+                address: [
+                    {
+                        required: true,
+                        message: " ",
+                        trigger: ["submit", "blur"]
+                    }
+                ],
+                phone: [
+                    {
+                        required: true,
+                        message: " ",
+                        trigger: ["submit", "blur"]
+                    }
+                ],
+                zip: [
+                    {
+                        required: true,
+                        message: " ",
+                        trigger: ["submit", "blur"]
+                    }
+                ]
             }
         };
     },
     props: {
         address: {
-            type: Object
+            type: Object,
+            default() {
+                return {};
+            }
         }
     },
     methods: {
@@ -227,20 +272,25 @@ export default Vue.extend({
             }
         },
         save_address(this: any) {
-            this.loading = true;
             this.$refs.form_address.validate((valid: any) => {
                 if (valid) {
+                    this.loading = true;
+
                     if (this.id) {
                         add_address({ id: this.id, ...this.data }).then(
                             response => {
                                 this.$emit("save");
-                                this.loading = false;
+                                this.$nextTick(() => {
+                                    this.loading = false;
+                                });
                             }
                         );
                     } else {
                         add_address(this.data).then(response => {
                             this.$emit("save");
-                            this.loading = false;
+                            this.$nextTick(() => {
+                                this.loading = false;
+                            });
                         });
                     }
                 } else {
@@ -261,6 +311,7 @@ export default Vue.extend({
 <style lang="scss">
 .address-add_panel {
     padding-top: 19px;
+    position: relative;
 
     border-top: 1px solid #eaeaea;
     .button-set_default {
@@ -323,10 +374,10 @@ export default Vue.extend({
         text-align: center;
 
         color: #fff;
-        background-color: #afafaf;
-        &:hover {
-            background-color: #000;
-        }
+        // background-color: #afafaf;
+        background-color: #000;
+        // &:hover {
+        // }
     }
 }
 </style>

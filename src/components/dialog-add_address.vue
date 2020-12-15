@@ -62,7 +62,6 @@ export default Vue.extend({
     methods: {
         close_panel() {
             this.$emit("close");
-            this.reset = !this.reset;
         },
         address_save() {
             this.close_panel();

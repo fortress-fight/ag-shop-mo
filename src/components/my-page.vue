@@ -369,6 +369,7 @@
                                 placeholder="ALL"
                                 class="select-order_status"
                                 popper-class="select_popper-order_status"
+                                @change="orderStatusChange"
                             >
                                 <el-option
                                     v-for="item in order_status.list"
@@ -958,6 +959,7 @@
             :show="add_address_dialog_show"
             v-on:close="close_add_address_dialog"
             :address="edit_address_data"
+            @address_save="address_save"
         ></add-address-dialog>
     </div>
 </template>
@@ -1023,7 +1025,7 @@ export default Vue.extend({
                 list: [
                     {
                         label: "All",
-                        value: "All"
+                        value: ""
                     },
                     {
                         label: "unpaid",
@@ -1080,9 +1082,7 @@ export default Vue.extend({
                     });
                     break;
                 case "order":
-                    order_list().then(response => {
-                        this.order_list = response.data;
-                    });
+                    this.updateOrderList();
                     break;
                 case "address":
                     get_address().then(response => {
@@ -1101,16 +1101,21 @@ export default Vue.extend({
         }
     },
     methods: {
+        orderStatusChange(value) {
+            this.updateOrderList({ order_status: value });
+        },
+
+        updateOrderList(param = {}) {
+            order_list(param).then(res => {
+                this.order_list = res.data;
+            });
+        },
         order_cannel(id) {
             order_cannel({
                 id
-            })
-                .then(res => {
-                    return order_list();
-                })
-                .then(response => {
-                    this.order_list = response.data;
-                });
+            }).then(res => {
+                this.updateOrderList();
+            });
         },
         plus(num, num2) {
             return new BigNumber(num).plus(new BigNumber(num2)).toFixed(2);
@@ -1166,6 +1171,8 @@ export default Vue.extend({
         },
         close_add_address_dialog() {
             this.add_address_dialog_show = false;
+        },
+        address_save() {
             get_address().then(response => {
                 this.address_list = response.data;
             });

@@ -7,7 +7,7 @@
             <div class="address_body">
                 <template v-if="!address_list.length">
                     <add-address-panel
-                        @address_save="add_address_save"
+                        @save="add_address_save"
                     ></add-address-panel>
                 </template>
                 <template v-else>
@@ -165,6 +165,7 @@
         <add-address-dialog
             :show="add_address_dialog_show"
             v-on:close="close_add_address_dialog"
+            @address_save="address_save"
         ></add-address-dialog>
     </div>
 </template>
@@ -181,7 +182,7 @@ export default Vue.extend({
             add_address_dialog_show: false,
             publicPath: process.env.BASE_URL,
             pay_method: "paypal",
-            select_address: NaN,
+            select_address: -1,
             order_info: {},
             address_list: address_data
         };
@@ -202,21 +203,20 @@ export default Vue.extend({
         },
         close_add_address_dialog() {
             this.add_address_dialog_show = false;
-            get_address().then(response => {
-                this.address_list = response.data;
-            });
+        },
+        address_save() {
+            this.updateAddressList();
         },
         change_address_select(id: number) {
             this.select_address = id;
+
             this.update_order_info(id);
         },
         show_add_address_dialog() {
             this.add_address_dialog_show = true;
         },
         add_address_save() {
-            get_address().then(response => {
-                this.address_list = response.data;
-            });
+            this.updateAddressList();
         },
         update_order_info(id: number) {
             order_info({
@@ -232,27 +232,36 @@ export default Vue.extend({
                 order_id: this.order_info.id,
                 payment: this.pay_method
             });
-        }
-    },
-    created() {
-        get_address().then(response => {
-            this.address_list = response.data;
-            this.address_list.forEach((address: any) => {
-                if (address.is_default == 1) {
-                    this.select_address = address.id;
-                    console.log(this.select_address, "this.select_address");
-                }
+        },
+        updateAddressList() {
+            get_address().then(response => {
+                this.address_list = response.data;
                 if (!this.address_list.length) {
                     this.update_order_info(0);
                 } else {
-                    this.address_list.forEach(item => {
-                        if (item.is_default == 1) {
-                            this.update_order_info(item.id);
+                    let defaultAddress;
+                    let hasDefaultAddress = this.address_list.some(
+                        (address: any) => {
+                            if (address.is_default == 1) {
+                                defaultAddress = address;
+                                return true;
+                            }
                         }
-                    });
+                    );
+                    if (hasDefaultAddress) {
+                        if (this.select_address == -1) {
+                            this.select_address = defaultAddress.id;
+                        }
+                    } else {
+                        this.select_address = this.address_list[0].id;
+                    }
+                    this.update_order_info(this.select_address);
                 }
             });
-        });
+        }
+    },
+    mounted() {
+        this.updateAddressList();
     }
 });
 </script>
