@@ -140,3 +140,7 @@ export function to_pay(data: any) {
     }
     window.open("/user/to_pay.html" + ret);
 }
+
+export function checkout(data: any) {
+    return axios_instance.post("/user/checkout.html", data);
+}
