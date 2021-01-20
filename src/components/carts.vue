@@ -15,9 +15,29 @@
                                 :key="item.sys_sku"
                             >
                                 <div class="container flex flex-sb">
-                                    <div class="left">
+                                    <div class="left flex">
+                                        <div
+                                            class="item-selector_wrapper  flex flex-yc"
+                                            @click="excludeSku(item.sys_sku)"
+                                        >
+                                            <div
+                                                class="item-selector"
+                                                :class="{
+                                                    ['state-select']: !excludeSkuSelect.includes(
+                                                        item.sys_sku
+                                                    )
+                                                }"
+                                            ></div>
+                                        </div>
                                         <div class="preview_image">
-                                            <img :src="item.img| upload_resource_link" alt class />
+                                            <img
+                                                :src="
+                                                    item.img
+                                                        | upload_resource_link
+                                                "
+                                                alt
+                                                class
+                                            />
                                         </div>
                                     </div>
                                     <div class="right">
@@ -26,42 +46,68 @@
                                             :data-index="index"
                                             @click="remove_item(item.sys_sku)"
                                         >
-                                            <i class="ic ag-close_1 ag-icon"></i>
+                                            <i
+                                                class="ic ag-close_1 ag-icon"
+                                            ></i>
                                         </div>
                                         <div class="header">
                                             <div class="title">
-                                                <span class="text">{{ item.name_cn }}</span>
+                                                <span class="text">{{
+                                                    item.name_cn
+                                                }}</span>
                                             </div>
                                             <div class="price">
-                                                <span class="text unit">￥</span>
-                                                <span class="text">{{ item.price }}</span>
+                                                <span class="text unit"
+                                                    >￥</span
+                                                >
+                                                <span class="text">{{
+                                                    item.price
+                                                }}</span>
                                             </div>
                                         </div>
 
                                         <div class="spec">
                                             <div class="spec_item flex">
-                                                <span class="text name">尺寸</span>
-                                                <span class="text value">{{ item.size }}</span>
+                                                <span class="text name"
+                                                    >尺寸</span
+                                                >
+                                                <span class="text value">{{
+                                                    item.size
+                                                }}</span>
                                             </div>
                                             <div class="spec_item flex">
-                                                <span class="text name">颜色</span>
-                                                <span class="text value">{{ item.color }}</span>
+                                                <span class="text name"
+                                                    >颜色</span
+                                                >
+                                                <span class="text value">{{
+                                                    item.color
+                                                }}</span>
                                             </div>
                                             <div class="spec_item flex">
-                                                <span class="text name">数量</span>
+                                                <span class="text name"
+                                                    >数量</span
+                                                >
                                                 <div class="value">
-                                                    <template v-if="item.stock == 0">
+                                                    <template
+                                                        v-if="item.stock == 0"
+                                                    >
                                                         <span
                                                             class="text"
                                                             style="font-family: MTTMILANO-BOLD;"
-                                                        >售罄</span>
+                                                            >售罄</span
+                                                        >
                                                     </template>
                                                     <c-input-number
                                                         v-else
                                                         v-model="item.num"
                                                         :min="1"
                                                         :max="item.stock"
-                                                        @change="item_num_change(item.sys_sku,item.num)"
+                                                        @change="
+                                                            item_num_change(
+                                                                item.sys_sku,
+                                                                item.num
+                                                            )
+                                                        "
                                                     ></c-input-number>
                                                 </div>
                                             </div>
@@ -70,11 +116,11 @@
                                             <span class="text unit">￥</span>
                                             <span class="text">
                                                 {{
-                                                "multipliedBy"
-                                                | compute_accuracy(
-                                                item.num,
-                                                item.price
-                                                )
+                                                    "multipliedBy"
+                                                        | compute_accuracy(
+                                                            item.num,
+                                                            item.price
+                                                        )
                                                 }}
                                             </span>
                                         </div>
@@ -90,7 +136,9 @@
                             <span class="name">价格</span>
                             <div class="value">
                                 <span class="text unit">￥</span>
-                                <span class="text">{{ goods_total_price }}</span>
+                                <span class="text">{{
+                                    goods_total_price
+                                }}</span>
                             </div>
                         </div>
                     </div>
@@ -99,11 +147,19 @@
                             <span class="text name">总计</span>
                             <div class="value">
                                 <span class="text unit">￥</span>
-                                <span class="text">{{ goods_total_price + express_price }}</span>
+                                <span class="text">{{
+                                    goods_total_price + express_price
+                                }}</span>
                             </div>
                         </div>
                         <div class="item">
-                            <a href="/user/checkout.html" class="btn-check_order button">
+                            <a
+                                @click.prevent="checkout_order"
+                                class="btn-check_order button"
+                                :class="{
+                                    'state-disable': selectSkus.length <= 0
+                                }"
+                            >
                                 <span class="text">去结算</span>
                             </a>
                         </div>
@@ -121,16 +177,19 @@
 </template>
 
 <script lang="ts">
+/* eslint-disable vue/no-side-effects-in-computed-properties */
+/* eslint-disable vue/no-async-in-computed-properties */
 import Vue from "vue";
 import anime from "animejs";
 import BigNumber from "bignumber.js";
 import Loading from "@/components/c-loading.vue";
 import { carts_data } from "@/api/fake_data";
-import { get_cart } from "@/api/api";
+import { get_cart, checkout } from "@/api/api";
 
 export default Vue.extend({
     data() {
         return {
+            excludeSkuSelect: [],
             loading: true,
             express_price: 0,
             goods: []
@@ -140,10 +199,20 @@ export default Vue.extend({
         loading: Loading
     },
     computed: {
+        selectSkus() {
+            return this.goods
+                .filter(item => {
+                    return !this.excludeSkuSelect.includes(item.sys_sku);
+                })
+                .map(item => item.sys_sku);
+        },
         goods_total_price() {
             let result = new BigNumber(0);
             this.goods.forEach((item: any) => {
-                if (item.stock > 0) {
+                if (
+                    item.stock > 0 &&
+                    !this.excludeSkuSelect.includes(item.sys_sku)
+                ) {
                     result = result.plus(
                         new BigNumber(item.num).multipliedBy(
                             new BigNumber(item.price)
@@ -158,7 +227,7 @@ export default Vue.extend({
                 let result = this.$store.state.carts.show;
                 if (result) {
                     this.loading = true;
-                    get_cart()
+                    get_cart({})
                         .then(response => {
                             this.loading = false;
                             this.goods = response.data;
@@ -166,6 +235,162 @@ export default Vue.extend({
                         .catch(error => {
                             this.loading = false;
                         });
+
+                    // // eslint-disable-next-line vue/no-side-effects-in-computed-properties
+                    // this.loading = false;
+                    // // eslint-disable-next-line vue/no-side-effects-in-computed-properties
+                    // this.goods = [
+                    //     {
+                    //         id: 428,
+                    //         goods_id: 5485,
+                    //         goods_sn: null,
+                    //         color: "产品颜色",
+                    //         size: "F",
+                    //         sku: null,
+                    //         goods_attr: null,
+                    //         stock: 111,
+                    //         sys_sku: "149bffd65c3a9c5194612bc5088c631f",
+                    //         goods: {
+                    //             id: 5485,
+                    //             type: "page",
+                    //             site_id: 13450,
+                    //             user_id: 0,
+                    //             url: "/index.php?id=5485",
+                    //             need_login: 0,
+                    //             module_id: 4908,
+                    //             module_list_id: 0,
+                    //             attr_code_cat: "tops",
+                    //             level: 1,
+                    //             state: null,
+                    //             cost: "1298.00",
+                    //             sort: 0,
+                    //             cid: 1,
+                    //             pid: 4907,
+                    //             is_dir: 0,
+                    //             ext: null,
+                    //             name_cn: "Agender做旧马甲",
+                    //             name_en: "AS0050109",
+                    //             view: null,
+                    //             create_time: "2020-12-17 09:58:38",
+                    //             update_time: "2021-01-20 14:44:52",
+                    //             expire_time: null,
+                    //             img:
+                    //                 "/uploads/13450/5d032bc8b80e9b231094118cb5a1ac91.jpg",
+                    //             desc: null,
+                    //             search_type: 0,
+                    //             configs: null,
+                    //             type_name: "开放",
+                    //             template: "product_post",
+                    //             state_name: null,
+                    //             origin_cost: "1298.00"
+                    //         },
+                    //         num: 2,
+                    //         name_cn: "Agender做旧马甲",
+                    //         img:
+                    //             "/uploads/13450/5d032bc8b80e9b231094118cb5a1ac91.jpg",
+                    //         price: "1298.00"
+                    //     },
+                    //     {
+                    //         id: 435,
+                    //         goods_id: 5494,
+                    //         goods_sn: null,
+                    //         color: "产品颜色",
+                    //         size: "F",
+                    //         sku: null,
+                    //         goods_attr: null,
+                    //         stock: 111,
+                    //         sys_sku: "d7637c979a7983d448a200cec192afb6",
+                    //         goods: {
+                    //             id: 5494,
+                    //             type: "page",
+                    //             site_id: 13450,
+                    //             user_id: 0,
+                    //             url: "/index.php?id=5494",
+                    //             need_login: 0,
+                    //             module_id: 4908,
+                    //             module_list_id: 0,
+                    //             attr_code_cat: "Coat_Jackets",
+                    //             level: 1,
+                    //             state: null,
+                    //             cost: "2849.00",
+                    //             sort: 0,
+                    //             cid: 1,
+                    //             pid: 4907,
+                    //             is_dir: 0,
+                    //             ext: null,
+                    //             name_cn: " Agender锯齿风衣",
+                    //             name_en: "AT0030101",
+                    //             view: null,
+                    //             create_time: "2020-10-17 10:34:37",
+                    //             update_time: "2020-10-28 13:24:22",
+                    //             expire_time: null,
+                    //             img:
+                    //                 "/uploads/13450/32ee324b00504c41982e2cc9613d8dff.jpg",
+                    //             desc: null,
+                    //             search_type: 0,
+                    //             configs: null,
+                    //             type_name: "开放",
+                    //             template: "product_post",
+                    //             state_name: null,
+                    //             origin_cost: "2849.00"
+                    //         },
+                    //         num: 1,
+                    //         name_cn: " Agender锯齿风衣",
+                    //         img:
+                    //             "/uploads/13450/32ee324b00504c41982e2cc9613d8dff.jpg",
+                    //         price: "2849.00"
+                    //     },
+                    //     {
+                    //         id: 436,
+                    //         goods_id: 5493,
+                    //         goods_sn: null,
+                    //         color: "产品颜色",
+                    //         size: "F",
+                    //         sku: null,
+                    //         goods_attr: null,
+                    //         stock: 111,
+                    //         sys_sku: "d6edbe421568b82b5d8f25812d31ea33",
+                    //         goods: {
+                    //             id: 5493,
+                    //             type: "page",
+                    //             site_id: 13450,
+                    //             user_id: 0,
+                    //             url: "/index.php?id=5493",
+                    //             need_login: 0,
+                    //             module_id: 4908,
+                    //             module_list_id: 0,
+                    //             attr_code_cat: "Coat_Jackets",
+                    //             level: 1,
+                    //             state: null,
+                    //             cost: "2849.00",
+                    //             sort: 0,
+                    //             cid: 1,
+                    //             pid: 4907,
+                    //             is_dir: 0,
+                    //             ext: null,
+                    //             name_cn: "Agender锯齿风衣",
+                    //             name_en: "AT0030102",
+                    //             view: null,
+                    //             create_time: "2020-10-17 10:31:39",
+                    //             update_time: "2020-10-28 13:20:14",
+                    //             expire_time: null,
+                    //             img:
+                    //                 "/uploads/13450/0c84bf9fd68a9ba86bff005362ef77bc.jpg",
+                    //             desc: null,
+                    //             search_type: 0,
+                    //             configs: null,
+                    //             type_name: "开放",
+                    //             template: "product_post",
+                    //             state_name: null,
+                    //             origin_cost: "2849.00"
+                    //         },
+                    //         num: 1,
+                    //         name_cn: "Agender锯齿风衣",
+                    //         img:
+                    //             "/uploads/13450/0c84bf9fd68a9ba86bff005362ef77bc.jpg",
+                    //         price: "2849.00"
+                    //     }
+                    // ];
                 }
                 return result;
             },
@@ -175,6 +400,23 @@ export default Vue.extend({
         }
     },
     methods: {
+        excludeSku(sku) {
+            if (this.excludeSkuSelect.includes(sku)) {
+                this.excludeSkuSelect.splice(
+                    this.excludeSkuSelect.indexOf(sku),
+                    1
+                );
+            } else {
+                this.excludeSkuSelect.push(sku);
+            }
+        },
+        checkout_order() {
+            if (this.selectSkus.length <= 0) return;
+            checkout({ skus: this.selectSkus.join(",") }).then(data => {
+                console.log(data);
+            });
+        },
+
         close() {
             this.$store.dispatch("carts/close");
         },
@@ -242,12 +484,46 @@ export default Vue.extend({
     visibility: hidden;
 
     width: 672px;
-    height: 100%;
+    height: 100vh;
 
     transition: 0.36s ease;
 
     color: #000;
     background: #fff;
+    .item-selector {
+        display: flex;
+
+        width: 28px;
+        height: 28px;
+        margin-right: 15px;
+
+        cursor: pointer;
+
+        border: 2px solid #ccc;
+        border-radius: 50%;
+        background: #fff;
+
+        align-items: center;
+        justify-content: center;
+        &.state-select {
+            border-color: #000;
+            background: #000;
+            &:after {
+                display: block;
+
+                width: 9px;
+                height: 5px;
+
+                content: "";
+                transform: translateY(-2px) translateX(0px) rotate(-40deg)
+                    scale(0.9);
+
+                border: 3px solid #fff;
+                border-top: 0;
+                border-right: 0;
+            }
+        }
+    }
     &.show {
         right: 0;
 
@@ -314,6 +590,11 @@ export default Vue.extend({
 
             color: #fff;
             background: #000;
+            &.state-disable {
+                background: #d4d4d4;
+                cursor: not-allowed;
+                pointer-events: none;
+            }
         }
     }
     .loading_wrapper {

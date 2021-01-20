@@ -156,6 +156,18 @@
                             </div>
                         </div>
                     </div>
+                    <div class="order-item_order-ext flex flex-yc flex-sb">
+                        <div class="left">订单备注</div>
+                        <div class="right">
+                            <c-input
+                                class="mini"
+                                type="text"
+                                name="ext"
+                                placeholder="* 选填，先和商家协商一致"
+                                v-model="orderExt"
+                            ></c-input>
+                        </div>
+                    </div>
                     <div class="order-item_total-price flex flex-sb">
                         <div class="left">总价</div>
                         <div class="right">
@@ -194,6 +206,7 @@ import BigNumber from "bignumber.js";
 export default Vue.extend({
     data() {
         return {
+            orderExt: "",
             add_address_dialog_show: false,
             publicPath: process.env.BASE_URL,
             pay_method: "alipay_m",
@@ -241,10 +254,88 @@ export default Vue.extend({
                     this.order_info = res.data.order;
                 }
             });
+            // this.order_info = {
+            //     id: 356,
+            //     user_id: 2,
+            //     order_sn: "Order202101201536541564",
+            //     price: "1298.00",
+            //     is_paid: 0,
+            //     status: 0,
+            //     shipping_sn: null,
+            //     shipping_type: null,
+            //     create_time: "2021-01-20 15:36:54",
+            //     update_time: "2021-01-20 15:47:00",
+            //     pay_time: null,
+            //     pay_way: null,
+            //     name: "陆宇",
+            //     mobile: "18059223627",
+            //     address: "中国北京北京市朝阳区三里屯陆33号一层1108号",
+            //     goods_num: 1,
+            //     shipping_price: "0.00",
+            //     delete_time: null,
+            //     ext: null,
+            //     status_name: "未支付",
+            //     order_goods: [
+            //         {
+            //             id: 433,
+            //             order_id: 356,
+            //             order_sn: "Order202101201536541564",
+            //             sys_sku: "149bffd65c3a9c5194612bc5088c631f",
+            //             num: 1,
+            //             price: "1298.00",
+            //             sku: {
+            //                 id: 428,
+            //                 goods_id: 5485,
+            //                 goods_sn: null,
+            //                 color: "产品颜色",
+            //                 size: "F",
+            //                 sku: null,
+            //                 goods_attr: null,
+            //                 stock: 111,
+            //                 sys_sku: "149bffd65c3a9c5194612bc5088c631f",
+            //                 goods: {
+            //                     id: 5485,
+            //                     type: "page",
+            //                     site_id: 13450,
+            //                     user_id: 0,
+            //                     url: "/index.php?id=5485",
+            //                     need_login: 0,
+            //                     module_id: 4908,
+            //                     module_list_id: 0,
+            //                     attr_code_cat: "tops",
+            //                     level: 1,
+            //                     state: null,
+            //                     cost: "1298.00",
+            //                     sort: 0,
+            //                     cid: 1,
+            //                     pid: 4907,
+            //                     is_dir: 0,
+            //                     ext: null,
+            //                     name_cn: "Agender做旧马甲",
+            //                     name_en: "AS0050109",
+            //                     view: null,
+            //                     create_time: "2020-12-17 09:58:38",
+            //                     update_time: "2021-01-20 14:44:52",
+            //                     expire_time: null,
+            //                     img:
+            //                         "/uploads/13450/5d032bc8b80e9b231094118cb5a1ac91.jpg",
+            //                     desc: null,
+            //                     search_type: 0,
+            //                     configs: null,
+            //                     type_name: "开放",
+            //                     template: "product_post",
+            //                     state_name: null,
+            //                     origin_cost: "1298.00"
+            //                 }
+            //             }
+            //         }
+            //     ]
+            // };
         },
         pay_order() {
             if (this.select_address != -1) {
                 to_pay({
+                    ext: this.orderExt,
                     order_id: this.order_info.id,
                     payment: this.pay_method
                 });
@@ -284,10 +375,34 @@ export default Vue.extend({
 </script>
 <style lang="scss">
 .order_container {
+    .order-item_order-ext {
+        padding: 4.533vw 0;
+
+        border-top: 1px solid #e8e8e8;
+        .left {
+            font-size: 3.733vw;
+            line-height: 5.067vw;
+        }
+        .c_input.mini .el-input {
+            // font-size: 3.733vw;
+            // line-height: 5.067vw;
+            .el-input__inner {
+                // font-size: 4.733vw;
+                // line-height: 6.067vw;
+                width: 13em;
+                padding: 0;
+
+                text-align: right;
+
+                border: none;
+            }
+        }
+    }
     .pay_button {
         &.state-disable {
-            background-color: #afafaf !important;
             pointer-events: none;
+
+            background-color: #afafaf !important;
         }
     }
     .pay_method_header {
