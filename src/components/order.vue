@@ -145,15 +145,12 @@
                             </div>
                         </div>
                     </div>
-                    <div
-                        class="order-item_order-ext flex flex-yc flex-sb"
-                        style="white-space: nowrap;"
-                    >
+                    <div class="order-item_order-ext">
                         <div class="left">Order Remarks</div>
                         <div class="right">
                             <c-input
                                 class="mini"
-                                type="text"
+                                type="textarea"
                                 name="ext"
                                 placeholder="* Enter a order remark"
                                 v-model="orderExt"
@@ -370,19 +367,27 @@ export default Vue.extend({
         .left {
             font-size: 3.733vw;
             line-height: 5.067vw;
+            margin-bottom: 40px;
         }
-        .c_input.mini .el-input {
+        .c_input.mini .el-textarea {
             // font-size: 3.733vw;
             // line-height: 5.067vw;
-            .el-input__inner {
-                // font-size: 4.733vw;
+            .el-textarea__inner {
+                line-height: 1.3;
+
+                width: 100%;
+                height: 180px;
+                padding: 20px;
+                font-size: 4.3vw;
                 // line-height: 6.067vw;
-                width: 15em;
-                padding: 0;
+                // width: 13em;
+                // padding: 0;
+                // text-align: right;
+                // border: none;
 
-                text-align: right;
+                resize: none;
 
-                border: none;
+                border: 1px solid #e8e8e8;
             }
         }
     }
