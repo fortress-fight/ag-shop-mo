@@ -434,7 +434,7 @@ export default Vue.extend({
 <style lang="scss">
 .wrapper-login_panel {
     position: fixed;
-    z-index: 910;
+    z-index: 1910;
     top: 0;
 
     visibility: hidden;
