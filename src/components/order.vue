@@ -194,6 +194,10 @@
             v-on:close="close_add_address_dialog"
             @address_save="address_save"
         ></add-address-dialog>
+        <OrderNotice
+            v-if="showNotice"
+            @confirmEvent="confirmEvent"
+        ></OrderNotice>
     </div>
 </template>
 <script lang="ts">
@@ -201,11 +205,13 @@ import Vue from "vue";
 import add_address_panel from "@/components/panel-add_address.vue";
 import dialog_add_address from "@/components/dialog-add_address.vue";
 import { get_address, order_info, to_pay } from "@/api/api";
+import OrderNotice from "./OrderNotice.vue";
 import { address_data } from "@/api/fake_data";
 import BigNumber from "bignumber.js";
 export default Vue.extend({
     data() {
         return {
+            showNotice: false,
             orderExt: "",
             add_address_dialog_show: false,
             publicPath: process.env.BASE_URL,
@@ -217,6 +223,7 @@ export default Vue.extend({
     },
 
     components: {
+        OrderNotice,
         "add-address-panel": add_address_panel,
         "add-address-dialog": dialog_add_address
     },
@@ -342,7 +349,7 @@ export default Vue.extend({
             }
         },
         updateAddressList() {
-            get_address().then(response => {
+            return get_address().then(response => {
                 this.address_list = response.data;
                 if (!this.address_list.length) {
                     this.update_order_info(0);
@@ -366,10 +373,18 @@ export default Vue.extend({
                     this.update_order_info(this.select_address);
                 }
             });
+        },
+        openNoticePanel() {
+            this.showNotice = true;
+        },
+        confirmEvent() {
+            this.showNotice = false;
         }
     },
     mounted() {
-        this.updateAddressList();
+        this.updateAddressList().finally(() => {
+            this.openNoticePanel();
+        });
     }
 });
 </script>
