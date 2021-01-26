@@ -11,28 +11,37 @@
     <div class="panel-order_notice flex-cc">
         <div class="panel-order_notice-body">
             <div class="panel-order_notice-header">
-                <span class="text">货品更换条款</span>
+                <span class="text">Goods Change Article</span>
             </div>
             <div class="panel-order_notice-post">
-                <p>1. 如货品不存在质量问题，所有已售出货品均不支持退货。</p>
                 <p>
-                    2. 除上述情况之外，其他未经使用，未经修改，<br />
-                    无损坏及货品包装完好之货品，如需更换：
+                    1、If there were no problem about quality of the goods,all
+                    the cargo that have been sold out are not permitted to
+                    return.
                 </p>
                 <p>
-                    * 需凭订单编号或销售凭证于收到货品七日内办理。
+                    2、 In addition to the above condition, other cargos not
+                    being utilized, not adapted,<br />
+                    not damaged, and with intact package, if they need to be
+                    changed;
                 </p>
                 <p>
-                    * 有质量问题的货品，会优先更换同款式货品。
+                    * it should be tackled within seven days when you received
+                    the goods,and with the order code or sales voucher
+                </p>
+                <p>
+                    * goods with bad quality will be prioritily to change into
+                    products with the same style
                 </p>
 
                 <p>
-                    一切争议的解决将以中国现行法律为准。
+                    solution of all the dispute will subject to the current law
+                    of China.
                 </p>
             </div>
             <div class="panel-order_notice-footer">
                 <div class="btn--confirm" @click="confirmEvent">
-                    确认已阅
+                    Confirm I have read
                 </div>
             </div>
         </div>
