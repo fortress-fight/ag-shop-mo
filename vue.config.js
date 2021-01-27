@@ -128,12 +128,12 @@ module.exports = {
                 // }
             },
             "/service": {
-                target: "http://www.agender.com/",
+                target: "http://cn.agender.com/",
                 changeOrigin: true, // target是域名的话，需要这个参数，
                 secure: false // 设置支持https协议的代理
             },
             "/page": {
-                target: "http://www.agender.com/",
+                target: "http://cn.agender.com/",
                 changeOrigin: true, // target是域名的话，需要这个参数，
                 secure: false, // 设置支持https协议的代理
                 pathRewrite: {
@@ -141,7 +141,7 @@ module.exports = {
                 }
             },
             "/api": {
-                target: "http://www.agender.com/",
+                target: "http://cn.agender.com/",
                 changeOrigin: true, // target是域名的话，需要这个参数，
                 secure: false // 设置支持https协议的代理
                 // pathRewrite: {

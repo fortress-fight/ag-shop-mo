@@ -473,7 +473,7 @@
                                             class="order-item_total-price flex flex-sb"
                                         >
                                             <div class="left">
-                                                TOTAL(including freight an tax)
+                                                <!-- TOTAL(including freight an tax) -->
                                             </div>
                                             <div class="right">
                                                 ${{
@@ -507,13 +507,22 @@
                                                     >Payment</span
                                                 >
                                             </a>
-                                            <div
-                                                class="button button-order_cancel button-effect2"
-                                                @click="order_cannel(order.id)"
-                                            >
-                                                <span class="text">Cancel</span>
-                                            </div>
                                         </template>
+                                        <div
+                                            v-if="
+                                                order.status == 0 ||
+                                                    order.status == 99
+                                            "
+                                            class="button button-order_cancel button-effect2"
+                                            @click="
+                                                order_cannel(
+                                                    order.id,
+                                                    order.order_sn
+                                                )
+                                            "
+                                        >
+                                            <span class="text">Delete</span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -721,8 +730,8 @@
                                                 class="order-item_total-price flex flex-sb"
                                             >
                                                 <div class="left">
-                                                    TOTAL(including freight and
-                                                    tax)
+                                                    <!-- TOTAL(including freight and
+                                                    tax) -->
                                                 </div>
                                                 <div class="right">
                                                     ${{
@@ -961,6 +970,18 @@
             :address="edit_address_data"
             @address_save="address_save"
         ></add-address-dialog>
+
+        <c-dialog
+            ref="dialog"
+            :is_show="cancelPanel"
+            @confirm="cancelOrder"
+            @cancel="cancelPanel = false"
+            :options="cancelPanelOption"
+        >
+            <div class="cancelPanelHeader" slot="header">
+                <span class="text">Delete Order</span>
+            </div>
+        </c-dialog>
     </div>
 </template>
 <script lang="ts">
@@ -993,6 +1014,22 @@ import draggable from "vuedraggable";
 export default Vue.extend({
     data() {
         return {
+            cancelPanelOption: {
+                type: "warn",
+                orderId: "",
+                dialog_body: "",
+                only_show: true,
+                dialog_pos: "center",
+                wrapper_option: {
+                    style: "z-index: 999;"
+                },
+                dialogClass: "state-cancel-panel",
+                dialog_body_style: "padding: 20px;text-align:center",
+                mask: {
+                    color: "rgba(255, 255, 255, 0.4)"
+                }
+            },
+            cancelPanel: false,
             sidebar_active: "security",
             setting_panel: "base",
             setting: {
@@ -1038,10 +1075,6 @@ export default Vue.extend({
                     {
                         label: "completed",
                         value: "completed"
-                    },
-                    {
-                        label: "cancelled",
-                        value: "cancelled"
                     }
                 ]
             },
@@ -1101,6 +1134,14 @@ export default Vue.extend({
         }
     },
     methods: {
+        cancelOrder() {
+            order_cannel({
+                id: this.cancelPanelOption.orderId
+            }).then(res => {
+                this.cancelPanel = false;
+                this.updateOrderList();
+            });
+        },
         orderStatusChange(value) {
             this.updateOrderList({ order_status: value });
         },
@@ -1110,12 +1151,11 @@ export default Vue.extend({
                 this.order_list = res.data;
             });
         },
-        order_cannel(id) {
-            order_cannel({
-                id
-            }).then(res => {
-                this.updateOrderList();
-            });
+        order_cannel(id, sn) {
+            this.cancelPanelOption.dialog_body =
+                "Confirm to delete the order：" + sn;
+            this.cancelPanelOption.orderId = id;
+            this.cancelPanel = true;
         },
         plus(num, num2) {
             return new BigNumber(num).plus(new BigNumber(num2)).toFixed(2);
