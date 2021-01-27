@@ -471,6 +471,43 @@ export default Vue.extend({
                 this.is_open = true;
             });
         }
+        setTimeout(() => {
+            const layerBox = this.$el;
+            var targetY = null;
+            layerBox.addEventListener("touchstart", function(e) {
+                //clientY-客户区坐标Y 、pageY-页面坐标Y
+                targetY = Math.floor(e.targetTouches[0].clientY);
+            });
+            layerBox.addEventListener(
+                "touchmove",
+                function(e) {
+                    // 检测可滚动区域的滚动事件，如果滑到了顶部或底部，阻止默认事件
+                    var NewTargetY = Math.floor(e.targetTouches[0].clientY), //本次移动时鼠标的位置，用于计算
+                        sTop = layerBox.scrollTop, //当前滚动的距离
+                        sH = layerBox.scrollHeight, //可滚动区域的高度
+                        lyBoxH = layerBox.clientHeight; //可视区域的高度
+                    if (
+                        sTop <= 0 &&
+                        NewTargetY - targetY > 0 &&
+                        "鼠标方向向下-到顶"
+                    ) {
+                        // console.log('条件1成立：下拉页面到顶');
+                        e.preventDefault();
+                    } else if (
+                        sTop >= sH - lyBoxH &&
+                        NewTargetY - targetY < 0 &&
+                        "鼠标方向向上-到底"
+                    ) {
+                        // console.log('条件2成立：上翻页面到底');
+                        e.preventDefault();
+                    }
+                },
+                false
+            );
+        }, 100);
+    },
+    beforeDestroy() {
+        $(this.$el).off();
     }
 });
 </script>
@@ -538,7 +575,7 @@ export default Vue.extend({
     }
     .carts_body {
         overflow: auto;
-
+        overscroll-behavior: contain;
         height: calc(100% - 450px);
     }
     .carts_header {

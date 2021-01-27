@@ -382,7 +382,7 @@ export default Vue.extend({
         }
     },
     mounted() {
-        this.updateAddressList().finally(() => {
+        this.updateAddressList().then(() => {
             this.openNoticePanel();
         });
     }

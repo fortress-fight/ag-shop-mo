@@ -9,6 +9,7 @@ import C_Tab_Card_Box from "@/components/c-tab-card-box.vue";
 import C_Telephone from "@/components/c-telephone.vue";
 import C_Telephone_Pre from "@/components/c-telephone_pre.vue";
 import mask_handle from "@/components/mask_handle";
+import C_Dialog from "@/components/c-dialog.vue";
 import {
     Button,
     Checkbox,
@@ -45,6 +46,7 @@ Vue.component("c-telephone-pre", C_Telephone_Pre);
 Vue.component("c-input-number", C_InputNumber);
 Vue.component("c-tab-card-box", C_Tab_Card_Box);
 Vue.component("c-send-code", C_Send_Code);
+Vue.component("c-dialog", C_Dialog);
 
 // 设置语言
 // locale.use(lang);
